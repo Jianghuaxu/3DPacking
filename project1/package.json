@@ -9,7 +9,9 @@
         "sapui5"
     ],
     "main": "webapp/index.html",
-    "dependencies": {},
+    "dependencies": {
+        "scandit-sdk": "^5.9.3"
+    },
     "devDependencies": {
         "@ui5/cli": "^2.14.1",
         "@sap/ux-ui5-tooling": "1",

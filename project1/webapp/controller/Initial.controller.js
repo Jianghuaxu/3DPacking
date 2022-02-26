@@ -64,6 +64,7 @@ sap.ui.define([
                     //this.barcodePicker.pauseScanning();
                     //this.barcodePicker.setVisible(false);
                 });
+                //test github
 
 
 
