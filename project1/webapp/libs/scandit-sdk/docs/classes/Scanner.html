@@ -1,0 +1,811 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Scanner | Scandit Barcode Scanner SDK for the Web</title>
+	<meta name="description" content="Documentation for Scandit Barcode Scanner SDK for the Web">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Scandit Barcode Scanner SDK for the Web</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">Scandit Barcode Scanner SDK for the Web</a>
+				</li>
+				<li>
+					<a href="Scanner.html">Scanner</a>
+				</li>
+			</ul>
+			<h1>Class Scanner</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A low-level scanner interacting with the external Scandit Data Capture library.
+						Used to set up scan / image settings and to process single image frames.</p>
+					</div>
+					<p>The loading of the external Scandit Data Capture library can take some time, the <a href="Scanner.html#on">on</a> method targeting the
+						<a href="Scanner.html#ready">ready</a> event can be used to set up a listener function to be called when the library is loaded and the <a href="Scanner.html#isReady">isReady</a>
+					method can return the current status. The scanner will be ready to start scanning when the library is fully loaded.</p>
+					<p>By default the external Scandit Data Capture library is preloaded in order to reduce the initialization time as much
+					as possible.</p>
+					<p>In the special case where a single <a href="Scanner.html">Scanner</a> instance is shared between multiple active <a href="BarcodePicker.html">BarcodePicker</a>
+					instances, the fairness in resource allocation for processing images between the different pickers is not guaranteed.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Scanner</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="Scanner.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Events</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="Scanner.html#ready" class="tsd-kind-icon">ready</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#addListener" class="tsd-kind-icon">add<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#applyImageSettings" class="tsd-kind-icon">apply<wbr>Image<wbr>Settings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#applyScanSettings" class="tsd-kind-icon">apply<wbr>Scan<wbr>Settings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#clearSession" class="tsd-kind-icon">clear<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#createParserForFormat" class="tsd-kind-icon">create<wbr>Parser<wbr>For<wbr>Format</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#destroy" class="tsd-kind-icon">destroy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#getImageSettings" class="tsd-kind-icon">get<wbr>Image<wbr>Settings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#getScanSettings" class="tsd-kind-icon">get<wbr>Scan<wbr>Settings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#isBusyProcessing" class="tsd-kind-icon">is<wbr>Busy<wbr>Processing</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#isReady" class="tsd-kind-icon">is<wbr>Ready</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#processImage" class="tsd-kind-icon">process<wbr>Image</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#removeAllListeners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Scanner.html#removeListener" class="tsd-kind-icon">remove<wbr>Listener</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class" >
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Scanner<span class="tsd-signature-symbol">(</span>parameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>imageSettings<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a><span class="tsd-signature-symbol">; </span>scanSettings<span class="tsd-signature-symbol">?: </span><a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a Scanner instance.</p>
+								</div>
+								<p>It is required to having configured the library via <a href="../modules.html#configure">configure</a> before this object can be created.</p>
+								<p>Before processing an image the relative settings must also have been set.</p>
+								<p>Depending on library configuration, browser features and user permissions for camera access, any of the following
+								errors could be thrown:</p>
+								<ul>
+									<li><code>LibraryNotConfiguredError</code></li>
+									<li><code>UnsupportedBrowserError</code></li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>parameters: <span class="tsd-signature-symbol">{ </span>imageSettings<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a><span class="tsd-signature-symbol">; </span>scanSettings<span class="tsd-signature-symbol">?: </span><a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = {}</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> image<wbr>Settings<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a></h5>
+											<div class="tsd-comment tsd-typography">
+												<div class="tsd-signature-symbol">Default =&nbsp;undefined</div>
+												The configuration object to define the properties of an image to be scanned.
+											</div>
+										</li>
+										<li class="tsd-parameter">
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> scan<wbr>Settings<span class="tsd-signature-symbol">?: </span><a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a></h5>
+											<div class="tsd-comment tsd-typography">
+												<div class="tsd-signature-symbol">Default =&nbsp;new ScanSettings()</div>
+												The configuration object for scanning options (all symbologies disabled by default).
+											</div>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Events</h2>
+				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static" >
+					<a name="ready" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> ready</h3>
+					<ul class="tsd-signatures tsd-kind-event tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">ready<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Fired when the external Scandit Data Capture library has been loaded and the scanner can thus start to scan
+									barcodes/texts.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="addListener" class="tsd-anchor"></a>
+					<h3>add<wbr>Listener</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventName</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><em>See the <a href="Scanner.html#on">on</a> method.</em></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">EventName</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the event to listen to.</p>
+									</div>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The listener function.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="applyImageSettings" class="tsd-anchor"></a>
+					<h3>apply<wbr>Image<wbr>Settings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Image<wbr>Settings<span class="tsd-signature-symbol">(</span>imageSettings<span class="tsd-signature-symbol">: </span><a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Apply a new set of image settings to the scanner (replacing old settings).</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>imageSettings: <a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The image configuration object to be applied to the scanner.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="applyScanSettings" class="tsd-anchor"></a>
+					<h3>apply<wbr>Scan<wbr>Settings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Scan<wbr>Settings<span class="tsd-signature-symbol">(</span>scanSettings<span class="tsd-signature-symbol">: </span><a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Apply a new set of scan settings to the scanner (replacing old settings).</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>scanSettings: <a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The scan configuration object to be applied to the scanner.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="clearSession" class="tsd-anchor"></a>
+					<h3>clear<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Clear the scanner session.</p>
+								</div>
+								<p>This removes all recognized barcodes/texts from the scanner session and allows them to be scanned again in case a
+								custom <em>codeDuplicateFilter</em> and/or <em>textDuplicateFilter</em> option was set in the <a href="ScanSettings.html">ScanSettings</a>.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="createParserForFormat" class="tsd-anchor"></a>
+					<h3>create<wbr>Parser<wbr>For<wbr>Format</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Parser<wbr>For<wbr>Format<span class="tsd-signature-symbol">(</span>dataFormat<span class="tsd-signature-symbol">: </span><a href="../enums/Parser.DataFormat.html" class="tsd-signature-type" data-tsd-kind="Enumeration">DataFormat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Parser.html" class="tsd-signature-type" data-tsd-kind="Class">Parser</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new parser object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dataFormat: <a href="../enums/Parser.DataFormat.html" class="tsd-signature-type" data-tsd-kind="Enumeration">DataFormat</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The format of the input data for the parser.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Parser.html" class="tsd-signature-type" data-tsd-kind="Class">Parser</a></h4>
+							<p>The newly created parser.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Stop/reset the internal WebWorker and destroy the scanner itself; ensuring complete cleanup.</p>
+								</div>
+								<p>This method should be called after you don&#39;t plan to use the scanner anymore,
+									before the object is automatically cleaned up by JavaScript.
+								The scanner must not be used in any way after this call.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="getImageSettings" class="tsd-anchor"></a>
+					<h3>get<wbr>Image<wbr>Settings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Image<wbr>Settings<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the current image settings.</p>
+								</div>
+								<p>Note that modifying this object won&#39;t directly apply these settings: the <a href="Scanner.html#applyImageSettings">applyImageSettings</a> method must be
+								called with the updated object.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ImageSettings.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageSettings</a></h4>
+							<p>The current image settings.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="getScanSettings" class="tsd-anchor"></a>
+					<h3>get<wbr>Scan<wbr>Settings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Scan<wbr>Settings<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the current scan settings.</p>
+								</div>
+								<p>Note that modifying this object won&#39;t directly apply these settings: the <a href="Scanner.html#applyScanSettings">applyScanSettings</a> method must be
+								called with the updated object.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="ScanSettings.html" class="tsd-signature-type" data-tsd-kind="Class">ScanSettings</a></h4>
+							<p>The current scan settings.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="isBusyProcessing" class="tsd-anchor"></a>
+					<h3>is<wbr>Busy<wbr>Processing</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Busy<wbr>Processing<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Whether the scanner is currently busy processing an image.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="isReady" class="tsd-anchor"></a>
+					<h3>is<wbr>Ready</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Ready<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Whether the scanner has loaded the external Scandit Data Capture library and is ready to scan.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="on" class="tsd-anchor"></a>
+					<h3>on</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventName</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;ready&quot;</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add the listener function to the listeners array for an event.</p>
+								</div>
+								<p>No checks are made to see if the listener has already been added.
+								Multiple calls passing the same listener will result in the listener being added, and called, multiple times.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">EventName</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the event to listen to.</p>
+									</div>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The listener function.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add the listener function to the listeners array for the <a href="Scanner.html#ready">ready</a> event, fired only once when the external
+										Scandit Data Capture library has been loaded and the scanner can thus start to scan barcodes/texts.
+									If the external Scandit Data Capture library has already been loaded the listener is called immediately.</p>
+								</div>
+								<p>No checks are made to see if the listener has already been added.
+								Multiple calls passing the same listener will result in the listener being added, and called, multiple times.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">&quot;ready&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the event to listen to.</p>
+									</div>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The listener function.</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="processImage" class="tsd-anchor"></a>
+					<h3>process<wbr>Image</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">process<wbr>Image<span class="tsd-signature-symbol">(</span>imageData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLImageElement</span>, highQualitySingleFrameMode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ScanResult.html" class="tsd-signature-type" data-tsd-kind="Class">ScanResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Process a given image using the previously set scanner and image settings,
+									recognizing codes/texts and retrieving the result as a list of barcodes/texts (if any).</p>
+								</div>
+								<p>Multiple requests done without waiting for previous results will be queued and handled in order.</p>
+								<p>If <em>highQualitySingleFrameMode</em> is enabled the image will be processed with really accurate barcode internal
+									settings, resulting in much slower but more precise scanning results. This should be used only for single images
+								not part of a continuous video stream.</p>
+								<p>Passing image data as a <em>Uint8Array</em> is the fastest option, passing a <em>HTMLImageElement</em>
+								will incur in additional operations.</p>
+								<p>Data passed to this function is &quot;detached&quot;/&quot;neutered&quot; becoming unusable as it&#39;s being passed to the external
+									Scandit Data Capture library. You can access the same data once it&#39;s returned in the <a href="ScanResult.html#imageData">ScanResult.imageData</a>
+								property.</p>
+								<p>Depending on the current image settings, given <em>imageData</em> and scanning execution, any of the following errors
+								could be the rejected result of the returned promise:</p>
+								<ul>
+									<li><code>NoImageSettings</code></li>
+									<li><code>ImageSettingsDataMismatch</code></li>
+									<li><code>ScanditEngineError</code></li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>imageData: <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLImageElement</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The image data given as byte array or image element, complying with the previously set
+										image settings.</p>
+									</div>
+								</li>
+								<li>
+									<h5>highQualitySingleFrameMode: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Whether to process the image as a high quality single frame.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="ScanResult.html" class="tsd-signature-type" data-tsd-kind="Class">ScanResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise resolving to the <a href="ScanResult.html">ScanResult</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="removeAllListeners" class="tsd-anchor"></a>
+					<h3>remove<wbr>All<wbr>Listeners</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>All<wbr>Listeners<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventName</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove all listeners from the given event&#39;s listener array.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">EventName</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the event from which to remove all listeners.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="removeListener" class="tsd-anchor"></a>
+					<h3>remove<wbr>Listener</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove the specified listener from the given event&#39;s listener array.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the event from which to remove the listener.</p>
+									</div>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The listener function to be removed.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="Scanner.html" class="tsd-signature-type" data-tsd-kind="Class">Scanner</a></h4>
+							<p>The updated <a href="Scanner.html">Scanner</a> object.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="BarcodePicker.html" class="tsd-kind-icon">Barcode<wbr>Picker</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Parser.html" class="tsd-kind-icon">Parser</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ScanResult.html" class="tsd-kind-icon">Scan<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ScanSettings.html" class="tsd-kind-icon">Scan<wbr>Settings</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="Scanner.html" class="tsd-kind-icon">Scanner</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="Scanner.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+								<a href="Scanner.html#ready" class="tsd-kind-icon">ready</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#addListener" class="tsd-kind-icon">add<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#applyImageSettings" class="tsd-kind-icon">apply<wbr>Image<wbr>Settings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#applyScanSettings" class="tsd-kind-icon">apply<wbr>Scan<wbr>Settings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#clearSession" class="tsd-kind-icon">clear<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#createParserForFormat" class="tsd-kind-icon">create<wbr>Parser<wbr>For<wbr>Format</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#destroy" class="tsd-kind-icon">destroy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#getImageSettings" class="tsd-kind-icon">get<wbr>Image<wbr>Settings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#getScanSettings" class="tsd-kind-icon">get<wbr>Scan<wbr>Settings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#isBusyProcessing" class="tsd-kind-icon">is<wbr>Busy<wbr>Processing</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#isReady" class="tsd-kind-icon">is<wbr>Ready</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#on" class="tsd-kind-icon">on</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#processImage" class="tsd-kind-icon">process<wbr>Image</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#removeAllListeners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Scanner.html#removeListener" class="tsd-kind-icon">remove<wbr>Listener</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="SymbologySettings.html" class="tsd-kind-icon">Symbology<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="TextRecognitionSettings.html" class="tsd-kind-icon">Text<wbr>Recognition<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Barcode.html" class="tsd-kind-icon">Barcode</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BarcodeEncodingRange.html" class="tsd-kind-icon">Barcode<wbr>Encoding<wbr>Range</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BrowserCompatibility.html" class="tsd-kind-icon">Browser<wbr>Compatibility</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Camera.html" class="tsd-kind-icon">Camera</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/CameraSettings.html" class="tsd-kind-icon">Camera<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ImageSettings.html" class="tsd-kind-icon">Image<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ParserField.html" class="tsd-kind-icon">Parser<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ParserResult.html" class="tsd-kind-icon">Parser<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Point.html" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Quadrilateral.html" class="tsd-kind-icon">Quadrilateral</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/RecognizedText.html" class="tsd-kind-icon">Recognized<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SearchArea.html" class="tsd-kind-icon">Search<wbr>Area</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SingleImageModePlatformSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Platform<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SingleImageModeSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#configure" class="tsd-kind-icon">configure</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-23556890-7', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
