@@ -1,0 +1,65 @@
+<mvc:View
+    controllerName="project1.controller.Initial"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns="sap.m"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+>
+<html:div id="scandit-barcode-picker"></html:div>  
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content >
+                    <Button id="triggerScanInputButton"
+                        icon="sap-icon://bar-code"
+                        press=".onScanInputButton"
+                        text="Scan"
+                        type="Emphasized"/>
+                    		<Table id="idProductsTable"
+                                inset="false"
+                                items="{
+                                    path: '/WhsePhysicalInventoryItem'
+                                }">
+                                
+                                <infoToolbar>
+                                    <OverflowToolbar>
+                                        <Label text="PI Items"/>
+                                        
+                                    </OverflowToolbar>
+                                </infoToolbar>
+                                <columns>
+                                    <Column width="auto">
+                                        <Text text="PI Number" />
+                                    </Column>
+                                    <Column width="auto">
+                                        <Text text="PI Item Number" />
+                                    </Column>
+                                    <Column
+                                        hAlign="End">
+                                        <Text text="Warehouse Order" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            
+                                            <Text
+                                                text="{PhysicalInventoryDocNumber}" />
+                                            <Text
+                                                text="{PhysicalInventoryItemNumber}" />
+                                            <Text
+                                                text="{WarehouseOrder}" />
+                                            
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

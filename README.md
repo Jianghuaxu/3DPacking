@@ -1,2 +1,2 @@
 # 3DPacking
-Innovation for EWM Shanghai: 3D Packing in BTP
+Innovation of EWM Shanghai: 3D Packing
