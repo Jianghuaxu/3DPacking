@@ -178,8 +178,8 @@ sap.ui.define([
                                 // result
                                 var vPackResult = data.PackResult;
 
-                                // Assogn the result to model
-                                //PackProductsHelper.setProductSequence(vPackResult.)
+                                // Assign the result to model
+                                // PackProductsHelper.setProductSequence(vPackResult)
 
                                 // Input to 3D visualization
 
@@ -203,8 +203,79 @@ sap.ui.define([
                                 return;
                             }
                         };
+                        var vPackResult = [{
+                            // "CalculatePack_ac": "",
+                            "ProductSequence":"1",
+                            "Product": "PROD-S01",
+                            "PackSequence": "1",
+                            "ProductLength": "22",
+                            "ProductWidth": "12",
+                            "ProductHeight": "8",
+                            // "ProductMeasurementUnit": "",
+                            // "Orientation": "",
+                            "XPosition": "-4",
+                            "YPosition": "-4",
+                            "ZPosition": "-7.25",
+                            "PackProductLength": "30",
+                            "PackProductWidth": "20",
+                            "PackProductHeight": "22.5",
+                            // "PackProductMeasurementUnit": ""
+                        },{
+                            // "CalculatePack_ac": "",
+                            "ProductSequence":"2",
+                            "Product": "PROD-S02",
+                            "PackSequence": "2",
+                            "ProductLength": "16",
+                            "ProductWidth": "6",
+                            "ProductHeight": "14.4",
+                            // "ProductMeasurementUnit": "",
+                            // "Orientation": "",
+                            "XPosition": "-7",
+                            "YPosition": "-7",
+                            "ZPosition": "4.05",
+                            "PackProductLength": "30",
+                            "PackProductWidth": "20",
+                            "PackProductHeight": "22.5",
+                            // "PackProductMeasurementUnit": ""
+                        },{
+                            // "CalculatePack_ac": "",
+                            "ProductSequence":"3",
+                            "Product": "PROD-S03",
+                            "PackSequence": "3",
+                            "ProductLength": "6.5",
+                            "ProductWidth": "10",
+                            "ProductHeight": "13.8",
+                            // "ProductMeasurementUnit": "",
+                            // "Orientation": "",
+                            "XPosition": "4.35",
+                            "YPosition": "-5",
+                            "ZPosition": "3.75",
+                            "PackProductLength": "30",
+                            "PackProductWidth": "20",
+                            "PackProductHeight": "22.5",
+                            // "PackProductMeasurementUnit": ""
+                        },{
+                            // "CalculatePack_ac": "",
+                            "ProductSequence":"4",
+                            "Product": "PROD-S04",
+                            "PackSequence": "4",
+                            "ProductLength": "7.3",
+                            "ProductWidth": "8",
+                            "ProductHeight": "15",
+                            // "ProductMeasurementUnit": "",
+                            // "Orientation": "",
+                            "XPosition": "11.35",
+                            "YPosition": "-6",
+                            "ZPosition": "-3.75",
+                            "PackProductLength": "30",
+                            "PackProductWidth": "20",
+                            "PackProductHeight": "22.5",
+                            // "PackProductMeasurementUnit": ""
+                        },]
 
-                        oEvent.getSource().getModel().callFunction("/Calculate", oPara);
+                        PackProductsHelper.setPackProductsModelData(vPackResult)
+
+                        oEvent.getSource().getModel().callFunction("/TriggerCalculate", oPara);
 
                     }
 

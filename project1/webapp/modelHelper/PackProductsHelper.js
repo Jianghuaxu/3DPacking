@@ -1,7 +1,7 @@
 sap.ui.define([
 	"project1/model/PackProducts"
 ], function(oModel) {
-	"use strict";
+	"use strict";    
 	return {
 		getModel: function() {
 			return oModel;
