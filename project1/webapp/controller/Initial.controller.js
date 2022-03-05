@@ -1,13 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "project1/modelHelper/PackProductsHelper",
-    "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency
+    "project1/modelHelper/PackProductsHelper",    
 	"sap/ui/vk/ContentResource",
 	"sap/ui/vk/ContentConnector",
 	"sap/ui/vk/thirdparty/three",
 	"sap/ui/vk/Camera",
-    "../utils/Util"
+    "../utils/Util",
+    "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -30,8 +30,9 @@ sap.ui.define([
             onInit: function () {
                 this.initThreejsModel();
                 this.fontLoader();
+                this.initScan();
             },
-            onInit: async function () {
+            initScan: async function () {                
                 this.getView().setModel(this._scanListModel, "scan");
 
                 // Initialize pack product model
@@ -80,8 +81,7 @@ sap.ui.define([
                     this.barcodePicker.pauseScanning();
                     this.barcodePicker.setVisible(false);
                 });
-                //test github
-
+                //test github        
             },
 
             onScanInputButton: function () {
@@ -238,27 +238,27 @@ sap.ui.define([
                 }
                 this.addProducts(aProduct);
             },
-            onCalculate: function () {
-                var sDimension = this.byId("dimension").getValue();
-                var oDimensionModel = Util.isEmpty(sDimension) ? {} : JSON.parse(sDimension);
-                $.ajax({
-                    url: "https://ldai7er9.wdf.sap.corp:44300/z3dpacking?sap-client=003",
-                    type: "POST",
-                    data: sDimension,
-                    contentType: "application/json;charset=utf-8",
-                    dataType: "json",
-                    crossDomain: true,
-                    success: function (data) {
-                        alert(data); // Object 
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus);
-                    },
-                    complete: function (XMLHttpRequest, textStatus) {}
-                });
-            },
+            // onCalculate: function () {
+            //     var sDimension = this.byId("dimension").getValue();
+            //     var oDimensionModel = Util.isEmpty(sDimension) ? {} : JSON.parse(sDimension);
+            //     $.ajax({
+            //         url: "https://ldai7er9.wdf.sap.corp:44300/z3dpacking?sap-client=003",
+            //         type: "POST",
+            //         data: sDimension,
+            //         contentType: "application/json;charset=utf-8",
+            //         dataType: "json",
+            //         crossDomain: true,
+            //         success: function (data) {
+            //             alert(data); // Object 
+            //         },
+            //         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //             alert(XMLHttpRequest.status);
+            //             alert(XMLHttpRequest.readyState);
+            //             alert(textStatus);
+            //         },
+            //         complete: function (XMLHttpRequest, textStatus) {}
+            //     });
+            // },
             findMaxLength: function (iLength, iWidth, iHeight) {
                 if (iLength > iWidth) {
                     if (iLength > iHeight) {

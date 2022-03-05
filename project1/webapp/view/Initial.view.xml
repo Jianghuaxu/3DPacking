@@ -9,13 +9,18 @@
     xmlns:l="sap.ui.layout"
     xmlns:vk="sap.ui.vk"
 >
-<html:div id="scandit-barcode-picker" style="max-width: 480px; max-height: 240px;"></html:div>  
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>title}">
                     <content >
-                        <Button id="triggerScanInputButton"
+						<l:Grid class="sapUiTinyMargin" id="main-grid">
+                        <VBox>
+                            <layoutData>
+								<l:GridData span="XL6 L6 M6 S6"></l:GridData>
+							</layoutData>
+                            <html:div id="scandit-barcode-picker" style="max-width: 480px; max-height: 240px;"></html:div>  
+                            <Button id="triggerScanInputButton"
                             icon="sap-icon://bar-code"
                             press=".onScanInputButton"
                             text="Scan"
@@ -24,8 +29,7 @@
                             inset="false"
                             items="{
                                 path: '/WhsePhysicalInventoryItem'
-                            }">
-                            
+                            }">                            
                             <infoToolbar>
                                 <OverflowToolbar>
                                     <Label text="PI Items"/>
@@ -46,15 +50,13 @@
                             </columns>
                             <items>
                                 <ColumnListItem vAlign="Middle">
-                                    <cells>
-                                        
+                                    <cells>                                        
                                         <Text
                                             text="{PhysicalInventoryDocNumber}" />
                                         <Text
                                             text="{PhysicalInventoryItemNumber}" />
                                         <Text
-                                            text="{WarehouseOrder}" />
-                                        
+                                            text="{WarehouseOrder}" />                                        
                                     </cells>
                                 </ColumnListItem>
                             </items>
@@ -81,7 +83,6 @@
                                     </OverflowToolbar>
                                 </infoToolbar>
                                 <columns>
-
                                     <Column
                                         minScreenWidth="Tablet"
                                         demandPopin="true">
@@ -118,47 +119,47 @@
                                     <ColumnListItem>
                                         <cells>
                                             <Text
-                                                text="{scan>Result}" />
-                                            
+                                                text="{scan>Result}" />                                            
                                             <Text
-                                                text="{scan>bl}" />
-                                            
+                                                text="{scan>bl}" />                                            
                                             <Text
                                                 text="{scan>br}" />
-
                                             <Text
-                                                text="{scan>tl}" />
-                                            
+                                                text="{scan>tl}" />                                            
                                             <Text
                                                 text="{scan>tr}" />
-
                                         </cells>
                                     </ColumnListItem>
                                 </items>
                             </Table>
                         </VBox>
-						<l:Grid class="sapUiTinyMargin" id="main-grid">
-							<VBox>
-								<layoutData>
-									<l:GridData span="XL6 L6 M6 S6"></l:GridData>
-								</layoutData>
-								<HBox>
-									<Input id="length" placeholder="length"></Input>
-									<Input id="width" placeholder="width"></Input>
-									<Input id="height" placeholder="height"></Input>
-								</HBox>
-								<TextArea id="dimension" cols="60" rows="10" placeholder="Dimension"></TextArea>
-								<TextArea id="position" cols="60" rows="10" placeholder="Position"></TextArea>
-								<HBox>
-									<Button id="display" text="Display" press="onDisplay"></Button>
-									<Button id="calculate" text="Calculate" press="onCalculate"></Button>
-								</HBox>
-							</VBox>
+                        </VBox>
+                       <VBox>
+                                  <layoutData>
+                           <l:GridData span="XL6 L6 M6 S6"></l:GridData>
+                           </layoutData>
+                           <HBox> 
+                            <Text id="handlingUnitText" text="{i18n>packHandlingUnit}">
+                            </Text>
+                           <Text id="packagingMaterialText" text="{i18n>packagingMaterial}">                     
+                           </Text>
+                           </HBox>
 							<vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop">
-								<vk:layoutData>
+								<!-- <vk:layoutData>
 									<l:GridData span="XL6 L6 M6 S6"></l:GridData>
-								</vk:layoutData>
+								</vk:layoutData> -->
 							</vk:Viewer>
+                            <HBox alignItems="Center" alignContent="SpaceAround"> 
+                            <!-- <l:Grid> -->
+                                <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView"/>
+                                <Button id="frontViewButton" text="{i18n>frontView}" press="onDisplayFrontView"/>
+                                <Button id="topViewButton" text="{i18n>topView}" press="onDisplayTopView"/>
+                                <Button id="rightViewButton" text="{i18n>rightView}" press="onDisplayRightView"/>
+                                <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView"/>
+                           </HBox>
+                           <!-- </l:Grid> -->
+                           <Button id="closeButton" text="{i18n>closePackHandlingUnit}" press="onCloseHU"/>
+                           </VBox>
 						</l:Grid>
                     </content>
                 </Page>
