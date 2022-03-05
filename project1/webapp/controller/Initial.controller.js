@@ -93,7 +93,7 @@ sap.ui.define([
                 console.log();
             },
 
-            onCalculate: function (bcalculate) {
+            onCalculatePack: function (bcalculate) {
                 var vPackProductList;
                 if (bcalculate){
                     var aScanResultList = this._scanListModel.getData();
@@ -128,6 +128,10 @@ sap.ui.define([
                                 //    "");
                                 //var sUrl = origin + "/sap/opu/odata/SAP/CA_OC_OUTPUT_REQUEST_SRV/" + "Roots(ApplObjectType='" + 'EWM_PHYSICAL_INVENTORY' +
                                 //    "',ApplObjectId='" + vAppObjId + "')/" + "Preview/$value";
+
+                                // Define URL
+                                // According to: https://ldai7er9.wdf.sap.corp:44300/sap/opu/odata4/sap/api_whse_physinvtryitem_2/srvd_a2x/sap/whsephysicalinventorydoc/0001/$batch
+
                                 //sap.m.URLHelper.redirect(sUrl, true);
                             },
                             error: function(err) {
@@ -141,7 +145,7 @@ sap.ui.define([
                             }
                         };
     
-                        oEvent.getSource().getModel().callFunction("/TriggerCalculate", oPara);
+                        oEvent.getSource().getModel().callFunction("/Calculate", oPara);
 
                     }
                               

@@ -3,15 +3,21 @@ sap.ui.define([
 ], function(JSONModel) {
 	"use strict";
 	return new JSONModel({
-        "ProductSequence":"",
+        "CalculatePack_ac": "",
+        "ProductSequence": "",
 		"Product": "",
         "PackSequence": "",
         "ProductLength": "",
         "ProductWidth": "",
         "ProductHeight": "",
+        "ProductMeasurementUnit": "",
         "Orientation": "",
         "XPosition": "",
         "YPosition": "",
         "ZPosition": "",
+        "PackProductLength": "",
+        "PackProductWidth": "",
+        "PackProductHeight": "",
+        "PackProductMeasurementUnit": ""
 	});
 });
