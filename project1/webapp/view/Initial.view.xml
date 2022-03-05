@@ -19,7 +19,8 @@
                             <layoutData>
 								<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 							</layoutData>
-                            <html:div id="scandit-barcode-picker" style="max-width: 480px; max-height: 240px;"></html:div>  
+                            <html:div id="scandit-barcode-picker" style="max-width: 40%; max-height: 40%;"></html:div>  
+                            <html:canvas id="myCanvas1" width="512" height="288"> </html:canvas>
                             <Button id="triggerScanInputButton"
                             icon="sap-icon://bar-code"
                             press=".onScanInputButton"
