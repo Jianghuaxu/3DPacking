@@ -26,6 +26,7 @@
                             press=".onScanInputButton"
                             text="Scan"
                             type="Emphasized"/>
+                            <Button id="calculate" text="Calculate" press="onCalculate"/>
                         <Table id="idProductsTable"
                             inset="false"
                             items="{
@@ -153,9 +154,10 @@
                             <HBox alignItems="Center" alignContent="SpaceAround"> 
                             <!-- <l:Grid> -->
                                 <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView"/>
-                                <Button id="frontViewButton" text="{i18n>frontView}" press="onDisplayFrontView"/>
+                                <Button id="backViewButton" text="{i18n>backView}" press="onDisplayBackView"/>
                                 <Button id="topViewButton" text="{i18n>topView}" press="onDisplayTopView"/>
                                 <Button id="rightViewButton" text="{i18n>rightView}" press="onDisplayRightView"/>
+                                <Button id="leftViewButton" text="{i18n>leftView}" press="onDisplayLeftView"/>
                                 <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView"/>
                            </HBox>
                            <!-- </l:Grid> -->
