@@ -11,12 +11,11 @@
         "description": "{{appDescription}}",
         "dataSources": {
             "mainService": {
-                "uri": "s4hanacloud/sap/opu/odata/sap/API_WHSE_PHYSINVENTORYITEM/",
+                "uri": "sap/opu/odata/sap/API_WHSE_INBOUND_DELIVERY/",
                 "type": "OData",
                 "settings": {
-                    "annotations": [],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "2.0"
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
                 }
             }
         },
@@ -77,12 +76,9 @@
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {
-                    "metadataUrlParams": {
-                        "sap-documentation": "heading"
-                    },
-                    "headers": {
-                        "APIKey": "Wchx4JYhGCaWfWLlQnZD6roNV5igUy3S"
-                    }
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false
                 }
             }
         },

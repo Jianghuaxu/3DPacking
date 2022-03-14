@@ -29,7 +29,7 @@
                         <Table id="idProductsTable"
                             inset="false"
                             items="{
-                                path: '/WhsePhysicalInventoryItem'
+                                path: '/WhseInboundDeliveryHead'
                             }">                            
                             <infoToolbar>
                                 <OverflowToolbar>
@@ -39,25 +39,25 @@
                             </infoToolbar>
                             <columns>
                                 <Column width="auto">
-                                    <Text text="PI Number" />
+                                    <Text text="InboundDelivery" />
                                 </Column>
                                 <Column width="auto">
-                                    <Text text="PI Item Number" />
+                                    <Text text="Warehouse Number" />
                                 </Column>
                                 <Column
                                     hAlign="End">
-                                    <Text text="Warehouse Order" />
+                                    <Text text="ShipFromParty" />
                                 </Column>
                             </columns>
                             <items>
                                 <ColumnListItem vAlign="Middle">
                                     <cells>                                        
                                         <Text
-                                            text="{PhysicalInventoryDocNumber}" />
+                                            text="{InboundDelivery}" />
                                         <Text
-                                            text="{PhysicalInventoryItemNumber}" />
+                                            text="{Warehouse}" />
                                         <Text
-                                            text="{WarehouseOrder}" />                                        
+                                            text="{ShipFromParty}" />                                        
                                     </cells>
                                 </ColumnListItem>
                             </items>

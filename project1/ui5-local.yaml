@@ -30,14 +30,15 @@ server:
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
-          - apiHub: true
-            path: /s4hanacloud
-            url: https://sandbox.api.sap.com
+          - path: /sap
+            url: https://er9:44300
+            client: '003'
+            destination: ER9_CLONING
     - name: sap-fe-mockserver
       beforeMiddleware: fiori-tools-proxy
       configuration:
         service:
-          urlBasePath: /s4hanacloud/sap/opu/odata/sap/API_WHSE_PHYSINVENTORYITEM
+          urlBasePath: /sap/opu/odata/sap/API_WHSE_INBOUND_DELIVERY
           name: ''
           metadataXmlPath: ./webapp/localService/metadata.xml
           mockdataRootPath: ./webapp/localService/data

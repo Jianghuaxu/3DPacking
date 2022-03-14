@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.Camera=void 0;var Camera;(function(e){var r;(function(e){e["FRONT"]="front";e["BACK"]="back"})(r=e.Type||(e.Type={}))})(Camera=exports.Camera||(exports.Camera={}));

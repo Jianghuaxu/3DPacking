@@ -1,0 +1,1 @@
+sap.ui.define(["sap/ui/model/json/JSONModel"],function(t){"use strict";return new t({CalculatePack_ac:"",ProductSequence:"",Product:"",PackSequence:"",ProductLength:"",ProductWidth:"",ProductHeight:"",ProductMeasurementUnit:"",Orientation:"",XPosition:"",YPosition:"",ZPosition:"",PackProductLength:"",PackProductWidth:"",PackProductHeight:"",PackProductMeasurementUnit:""})});

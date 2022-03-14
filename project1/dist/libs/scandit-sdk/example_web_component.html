@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scandit Web Component Example Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="build/browser/index.min.js"></script>
+
+    <!-- The following is only an example style for the container element and other demo elements, it's not required -->
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      }
+
+      scandit-barcode-picker {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        max-width: 1280px;
+        max-height: 80%;
+      }
+
+      .result-text {
+        padding: 1rem;
+        font-size: 18pt;
+        text-align: center;
+        white-space: pre;
+        font-family: monospace;
+      }
+
+      /* Hide any picker that is not defined yet (class definition not executed yet) to avoid any flash of
+      unstyled element in the page */
+      :not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <scandit-barcode-picker
+      configure.licenseKey="YOUR_LICENSE_KEY_IS_NEEDED_HERE"
+      configure.engineLocation="/build/"
+      playSoundOnScan="true"
+      scanSettings.codeDuplicateFilter="1000"
+      scanSettings.enabledSymbologies='["ean8", "ean13", "upca", "upce"]'
+    >
+    </scandit-barcode-picker>
+
+    <div id="scandit-barcode-result" class="result-text"></div>
+  </body>
+
+  <script>
+    const barcodePickerElement = document.querySelector("scandit-barcode-picker");
+    barcodePickerElement.addEventListener("ready", () => {
+      console.log(`Barcode picker ready`);
+    });
+    barcodePickerElement.addEventListener("scan", (event) => {
+      const scanResult = event.detail;
+      document.getElementById("scandit-barcode-result").innerHTML =
+        scanResult.barcodes.reduce((string, barcode) => {
+          return `${string}${ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology)}: ${barcode.data}<br/>`;
+        }, "") +
+        scanResult.texts.reduce((string, text) => {
+          return `${string}${text.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")} (${
+            text.location
+          })<br/>`;
+        }, "");
+    });
+  </script>
+</html>

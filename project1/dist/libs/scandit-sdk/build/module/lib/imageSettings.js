@@ -1,0 +1,1 @@
+export var ImageSettings;(function(t){let e;(function(t){t[t["GRAY_8U"]=0]="GRAY_8U";t[t["RGB_8U"]=1]="RGB_8U";t[t["RGBA_8U"]=2]="RGBA_8U"})(e=t.Format||(t.Format={}))})(ImageSettings||(ImageSettings={}));

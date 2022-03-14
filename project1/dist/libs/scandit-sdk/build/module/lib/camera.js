@@ -1,0 +1,1 @@
+export var Camera;(function(a){let e;(function(a){a["FRONT"]="front";a["BACK"]="back"})(e=a.Type||(a.Type={}))})(Camera||(Camera={}));

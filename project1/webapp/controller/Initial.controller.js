@@ -20,13 +20,7 @@ sap.ui.define([
             root: new THREE.Group(),
             font: undefined,
             ratio: 20,
-            _scanListModel: new JSONModel([{
-                "Result": 1234,
-                "bl": "X: 24, Y: 78",
-                "br": "X: 82, Y: 91",
-                "tl": "X:98, Y:101",
-                "tr": "X: 10, Y: 81"
-            }]),
+            _scanListModel: new JSONModel([]),
             _scannedProd: [],
             onInit: function () {
                 this.initThreejsModel();
@@ -65,57 +59,51 @@ sap.ui.define([
 
                     var scanResultLoc = scanResult.barcodes[0].location;
                     // sap.m.MessageBox.show(toSearch);
+                    var aScanResultList = this._scanListModel.getData();
 
                     var tmp = {
                         "Result": scanRes,
+                        "product_sequence": aScanResultList.length + 1,
                         "bl": "X: " + scanResultLoc.bottomLeft.x + ", Y: " + scanResultLoc.bottomLeft.y,
                         "br": "X: " + scanResultLoc.bottomRight.x + ", Y: " + scanResultLoc.bottomRight.y,
                         "tl": "X: " + scanResultLoc.topLeft.x + ", Y: " + scanResultLoc.topLeft.y,
                         "tr": "X: " + scanResultLoc.topRight.x + ", Y: " + scanResultLoc.topRight.y
                     };
-                    var aScanResultList = this._scanListModel.getData();
+
                     aScanResultList.push(tmp);
                     // insert scanned value into searchField
                     this._scanListModel.setData(aScanResultList);
 
-
-                    //image modifications
-                    var vid = document.getElementsByTagName("video")[0];
-                    var can = document.getElementById("application-project1-display-component---Initial--myCanvas1");
-                    //var canBtp = document.getElementById("container-project1---Initial--myCanvas1");
-                    var ctx = can.getContext("2d");
                     var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * 512 / 1280;
                     var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * 288 / 720;
 
-
-                    ctx.drawImage(vid, 0, 0, 512, 288);
-                    ctx.strokeStyle = "green";
-                    if (this._scannedProd.indexOf)
+                    //in _scannedProd, we use x and y to represent the topleft point, from this we will draw a highlight around the barcode, and by calculating the bottom left point, we shall draw a yellow rect with the packing sequence
+                    // check if the new scanned product is to be added into the list: we shall compare if the "new product" is the previous scanned one
+                    var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
+                    if (isNewProduct) {
                         this._scannedProd.push({
                             "prod": scanRes,
+                            "product_sequence": this._scannedProd.length + 1,
                             "x": scanResultLoc.topLeft.x * 512 / 1280,
                             "y": scanResultLoc.topLeft.y * 288 / 720,
                             "len": tmpLen,
-                            "hei": tmpHei
+                            "hei": tmpHei,
+                            "pack_sequence": 0,
+                            "scannedOn": new Date().getTime()
                         })
-                    //TODO: need to consider the case that barcode is not placed in horizontal or vertical -> /\/\
-                    //add Packing instructions for each scanned product
-
-
-                    //draw each scanned product in canvas video
-
-                    var _drawedProd = [];
-                    var pack_seq = 1;
-                    for (let index = this._scannedProd.length - 1; index > 0; index--) {
-                        if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
-
-                            ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei);
-                            ctx.fillText("Pack Sequence" + pack_seq, this._scannedProd[index].x, this._scannedProd[index].y + 20 * 288 / 720);
-                            pack_seq++;
-                        }
-                        _drawedProd.push(this._scannedProd[index].prod)
-
                     }
+
+
+
+                    if (this._scannedProd.length > 2) {
+                        console.log(this._scannedProd.length);
+                        //save the picture in local model. 
+
+                        // pause scanning
+                        this.barcodePicker.pauseScanning();
+                        this.barcodePicker.setVisible(false);
+                    }
+
                     /*
                     ctx.strokeRect(scanResultLoc.topLeft.x*512/1280, scanResultLoc.topLeft.y*288/720, tmpLen, tmpHei);
 
@@ -132,24 +120,85 @@ sap.ui.define([
                     */
 
 
-                    // pause scanning
-                    //this.barcodePicker.pauseScanning();
-                    //this.barcodePicker.setVisible(false);
                 });
-                //test github by Kimi
 
                 this.barcodePicker.processVideoFrame(function (frame) {
                     console.log(frame)
                 })
             },
 
+            _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
+                //this is to be compared with the this._scannedProd;
+                //Check 1: product name
+                var vIndex = this._scannedProd.findIndex(function (item) {
+                    return item.prod == scannedProduct;
+                });
+                var vIsNewProduct = true;
+                if (vIndex > -1) {
+                    //check 2: pos_x and pos_y -> no overlap
+                    this._scannedProd.forEach(function (item) {
+                        if (item.prod == scannedProduct) {
+                            if (Math.abs(item.x - pos_x) < len && Math.abs(item.y - pos_y) < hei) {
+                                vIsNewProduct = false;
+                            }
+                        }
+                    });
+
+                }
+                return vIsNewProduct;
+
+            },
+
+            _drawPackSequence: function () {
+                //this is called when API return results from oData
+                //image modifications
+                var vid = document.getElementsByTagName("video")[0];
+                var can = document.getElementById("application-project1-display-component---Initial--myCanvas1");
+                //var canBtp = document.getElementById("container-project1---Initial--myCanvas1");
+                var ctx = can.getContext("2d");
+
+
+
+                ctx.drawImage(vid, 0, 0, 512, 288);
+                ctx.strokeStyle = "green";
+
+
+                //TODO: need to consider the case that barcode is not placed in horizontal or vertical -> /\/\
+                //add Packing instructions for each scanned product
+
+
+                //draw each scanned product in canvas video
+
+                var _drawedProd = [];
+                var pack_seq = 1; // TODO: to be removed
+                for (let index = this._scannedProd.length - 1; index > -1; index--) {
+                    if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
+                        //assume that the pack sequence is retrieved from backend
+                        this._scannedProd[index].pack_sequence = pack_seq; //TODO: to be removed
+                        ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
+                        ctx.fillStyle = "yellow";
+                        ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, this._scannedProd[index].len * 2, this._scannedProd[index].hei * 1.5)
+                        ctx.fillStyle = "black";
+                        ctx.font = "30px Georgia";
+                        ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei * 1.75); //draw yellow rect below with the packing sequence 
+                        pack_seq++;
+                    }
+                    _drawedProd.push(this._scannedProd[index].prod)
+
+                }
+            },
+
             onScanInputButton: function () {
                 this.barcodePicker.setVisible(true);
                 this.barcodePicker.resumeScanning();
+
+                //reset model 
+                this._scannedProd = [];
+                this._scanListModel.setData([]);
             },
 
             onSelect: function () {
-                console.log();
+                this._drawPackSequence();
             },
 
             onCalculatePack: function (bcalculate) {

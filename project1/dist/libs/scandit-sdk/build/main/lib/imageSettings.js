@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.ImageSettings=void 0;var ImageSettings;(function(e){var t;(function(e){e[e["GRAY_8U"]=0]="GRAY_8U";e[e["RGB_8U"]=1]="RGB_8U";e[e["RGBA_8U"]=2]="RGBA_8U"})(t=e.Format||(e.Format={}))})(ImageSettings=exports.ImageSettings||(exports.ImageSettings={}));

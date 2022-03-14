@@ -1,0 +1,1 @@
+export class CustomError extends Error{constructor({name:r="",message:t=""}={}){super(t);Object.setPrototypeOf(this,CustomError.prototype);this.name=r}}

@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.CameraSettings=void 0;var CameraSettings;(function(e){var t;(function(e){e["ULTRA_HD"]="ultra-hd";e["FULL_HD"]="full-hd";e["HD"]="hd"})(t=e.ResolutionPreference||(e.ResolutionPreference={}))})(CameraSettings=exports.CameraSettings||(exports.CameraSettings={}));

@@ -17,9 +17,10 @@ server:
           url: https://ui5.sap.com
           version: 1.98.0 # The UI5 version, for instance, 1.78.1. Empty string means latest version
         backend:
-          - apiHub: true
-            path: /s4hanacloud
-            url: https://sandbox.api.sap.com
+          - path: /sap
+            url: https://er9:44300
+            client: '003'
+            destination: ER9_CLONING
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

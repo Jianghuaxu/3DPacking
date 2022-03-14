@@ -1,0 +1,1 @@
+import{CustomError}from"./customError";export class UnsupportedBrowserError extends CustomError{data;constructor(r){super({name:"UnsupportedBrowserError",message:`This OS / browser has one or more missing features preventing it from working correctly (${r.missingFeatures.join(", ")})`});this.data=r}}

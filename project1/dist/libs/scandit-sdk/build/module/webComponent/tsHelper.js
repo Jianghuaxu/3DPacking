@@ -1,0 +1,1 @@
+export function assertUnreachable(e){throw new Error(`Unexpected object: ${e}`)}

@@ -6,57 +6,162 @@
 	xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns="sap.m"
     xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l="sap.ui.layout"
+    xmlns:vk="sap.ui.vk"
 >
-<html:div id="scandit-barcode-picker"></html:div>  
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>title}">
                     <content >
-                    <Button id="triggerScanInputButton"
-                        icon="sap-icon://bar-code"
-                        press=".onScanInputButton"
-                        text="Scan"
-                        type="Emphasized"/>
-                    		<Table id="idProductsTable"
+						<l:Grid class="sapUiTinyMargin" id="main-grid">
+                        <VBox>
+                            <layoutData>
+								<l:GridData span="XL6 L6 M6 S6"></l:GridData>
+							</layoutData>
+                            <html:div id="scandit-barcode-picker" style="max-width: 40%; max-height: 40%;"></html:div>  
+                            <html:canvas id="myCanvas1" width="512" height="288"> </html:canvas>
+                            <Button id="triggerScanInputButton"
+                            icon="sap-icon://bar-code"
+                            press=".onScanInputButton"
+                            text="Scan"
+                            type="Emphasized"/>
+                        <Table id="idProductsTable"
+                            inset="false"
+                            items="{
+                                path: '/WhseInboundDeliveryHead'
+                            }">                            
+                            <infoToolbar>
+                                <OverflowToolbar>
+                                    <Label text="PI Items"/>
+                                    
+                                </OverflowToolbar>
+                            </infoToolbar>
+                            <columns>
+                                <Column width="auto">
+                                    <Text text="InboundDelivery" />
+                                </Column>
+                                <Column width="auto">
+                                    <Text text="Warehouse Number" />
+                                </Column>
+                                <Column
+                                    hAlign="End">
+                                    <Text text="ShipFromParty" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem vAlign="Middle">
+                                    <cells>                                        
+                                        <Text
+                                            text="{InboundDelivery}" />
+                                        <Text
+                                            text="{Warehouse}" />
+                                        <Text
+                                            text="{ShipFromParty}" />                                        
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        <VBox>
+                            <Table id="scanResultTable"
                                 inset="false"
                                 items="{
-                                    path: '/WhsePhysicalInventoryItem'
+                                    path: 'scan>/'
                                 }">
-                                
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <content>
+                                            <Title text="Scan Result" level="H2"/>
+                                            <ToolbarSpacer />
+                                            <CheckBox text="InfoToolbar"
+                                                select="onSelect"/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
                                 <infoToolbar>
                                     <OverflowToolbar>
-                                        <Label text="PI Items"/>
-                                        
+                                        <Label text="Scan Result List"/>
                                     </OverflowToolbar>
                                 </infoToolbar>
                                 <columns>
-                                    <Column width="auto">
-                                        <Text text="PI Number" />
-                                    </Column>
-                                    <Column width="auto">
-                                        <Text text="PI Item Number" />
-                                    </Column>
                                     <Column
-                                        hAlign="End">
-                                        <Text text="Warehouse Order" />
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true">
+                                        <Text text="Product" />
                                     </Column>
+
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true">
+                                        <Text text="Loc: bottom left" />
+                                    </Column>
+
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true">
+                                        <Text text="Loc: bottom right" />
+                                    </Column>
+
+
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true">
+                                        <Text text="Loc: top left" />
+                                    </Column>
+
+                                    <Column
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true">
+                                        <Text text="Loc: top right" />
+                                    </Column>
+
                                 </columns>
                                 <items>
-                                    <ColumnListItem vAlign="Middle">
+                                    <ColumnListItem>
                                         <cells>
-                                            
                                             <Text
-                                                text="{PhysicalInventoryDocNumber}" />
+                                                text="{scan>Result}" />                                            
                                             <Text
-                                                text="{PhysicalInventoryItemNumber}" />
+                                                text="{scan>bl}" />                                            
                                             <Text
-                                                text="{WarehouseOrder}" />
-                                            
+                                                text="{scan>br}" />
+                                            <Text
+                                                text="{scan>tl}" />                                            
+                                            <Text
+                                                text="{scan>tr}" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>
                             </Table>
+                        </VBox>
+                        </VBox>
+                       <VBox>
+                                  <layoutData>
+                           <l:GridData span="XL6 L6 M6 S6"></l:GridData>
+                           </layoutData>
+                           <HBox> 
+                            <Text id="handlingUnitText" text="{i18n>packHandlingUnit}">
+                            </Text>
+                           <Text id="packagingMaterialText" text="{i18n>packagingMaterial}">                     
+                           </Text>
+                           </HBox>
+							<vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop">
+								<!-- <vk:layoutData>
+									<l:GridData span="XL6 L6 M6 S6"></l:GridData>
+								</vk:layoutData> -->
+							</vk:Viewer>
+                            <HBox alignItems="Center" alignContent="SpaceAround"> 
+                            <!-- <l:Grid> -->
+                                <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView"/>
+                                <Button id="frontViewButton" text="{i18n>frontView}" press="onDisplayFrontView"/>
+                                <Button id="topViewButton" text="{i18n>topView}" press="onDisplayTopView"/>
+                                <Button id="rightViewButton" text="{i18n>rightView}" press="onDisplayRightView"/>
+                                <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView"/>
+                           </HBox>
+                           <!-- </l:Grid> -->
+                           <Button id="closeButton" text="{i18n>closePackHandlingUnit}" press="onCloseHU"/>
+                           </VBox>
+						</l:Grid>
                     </content>
                 </Page>
             </pages>

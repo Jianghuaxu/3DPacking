@@ -1,0 +1,808 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Scandit Barcode Scanner SDK for the Web</title>
+	<meta name="description" content="Documentation for Scandit Barcode Scanner SDK for the Web">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Scandit Barcode Scanner SDK for the Web</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>Scandit Barcode Scanner SDK for the Web</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#scandit-barcode-scanner-sdk-for-the-web" id="scandit-barcode-scanner-sdk-for-the-web" style="color: inherit; text-decoration: none;">
+					<h1>Scandit Barcode Scanner SDK for the Web<!-- omit in toc --></h1>
+				</a>
+				<p>Enterprise barcode/text scanning performance in your browser via JavaScript and WebAssembly.</p>
+				<p><em>Made by <a href="https://www.scandit.com/">Scandit</a></em></p>
+				<p><img src="https://img.shields.io/npm/v/scandit-sdk.svg" alt="npm"> <img src="https://img.shields.io/npm/dm/scandit-sdk.svg" alt="npm"> <img src="https://img.shields.io/jsdelivr/npm/hm/scandit-sdk.svg" alt="jsDelivr hits (npm)"> <img src="https://img.shields.io/snyk/vulnerabilities/npm/scandit-sdk.svg" alt="Snyk Vulnerabilities for npm package"></p>
+				<p><img src="https://img.badgesize.io/https://cdn.jsdelivr.net/npm/scandit-sdk/build/browser/index.min.js.svg?compression=gzip&label=Main%20Library%20Size" alt="main library size">
+					<img src="https://img.badgesize.io/https://cdn.jsdelivr.net/npm/scandit-sdk/build/scandit-engine-sdk.min.js.svg?compression=gzip&label=Scandit%20Data%20Capture%20JS%20Size" alt="scandit data capture js size">
+				<img src="https://img.badgesize.io/https://cdn.jsdelivr.net/npm/scandit-sdk/build/scandit-engine-sdk.wasm.svg?compression=gzip&label=Scandit%20Data%20Capture%20WASM%20Size" alt="scandit data capture wasm size"></p>
+				<p>Access cameras available on the devices for video input, display a picker interface, configure in-depth settings for barcodes, text and performance, and let users easily scan barcodes and text in your web application.</p>
+				<p>Try out our live demo <a href="http://websdk.scandit.com">here</a>.</p>
+				<p>Find out more information on our product <a href="https://www.scandit.com/products/sdk-web/">here</a>.</p>
+				<p>To use this library you must possess a valid Scandit account and license key. You can register for a free trial <a href="https://ssl.scandit.com/customers/new?p=test&amp;source=websdk">here</a>.</p>
+				<p>This library is meant to be used natively in a web browser, if you are instead looking for a Cordova/PhoneGap plugin, please go <a href="https://github.com/Scandit/barcodescanner-sdk-cordova">here</a>.</p>
+				<p><strong>Table of Contents:</strong></p>
+				<ul>
+					<li><a href="#quick-start-web-application">Quick Start: Web Application</a></li>
+					<li><a href="#getting-started-web-application">Getting Started: Web Application</a></li>
+					<li><a href="#getting-started-local-development">Getting Started: Local Development</a></li>
+					<li><a href="#configuration">Configuration</a></li>
+					<li><a href="#usage">Usage</a></li>
+					<li><a href="#example-applications">Example Applications</a></li>
+					<li><a href="#web-component-integration">Web Component Integration</a></li>
+					<li><a href="#advanced-components-and-sample-apps">Advanced Components and Sample Apps</a></li>
+					<li><a href="#browser-support-and-requirements">Browser Support and Requirements</a></li>
+					<li><a href="#documentation">Documentation</a></li>
+					<li><a href="#faq">FAQ</a></li>
+					<li><a href="#important-notes">Important Notes</a></li>
+					<li><a href="#support">Support</a></li>
+					<li><a href="#project-commands">Project Commands</a></li>
+					<li><a href="#changelog--release-notes-and-versioning">Changelog / Release Notes and Versioning</a></li>
+					<li><a href="#built-tested-and-documented-with">Built, Tested and Documented With</a></li>
+					<li><a href="#authors">Authors</a></li>
+					<li><a href="#license">License</a></li>
+				</ul>
+				<a href="#quick-start-web-application" id="quick-start-web-application" style="color: inherit; text-decoration: none;">
+					<h2>Quick Start: Web Application</h2>
+				</a>
+				<p>Import the library first:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/scandit-sdk@5.x&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>Add an HTML element to host barcode picker UI:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;scandit-barcode-picker&quot;</span><span style="color: #800000">&gt;&lt;/div&gt;</span>
+</code></pre>
+				<p>Configure the library and start scanning:</p>
+				<pre><code class="language-js"><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">configure</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;YOUR_LICENSE_KEY_IS_NEEDED_HERE&quot;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">engineLocation:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #001080">BarcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scandit-barcode-picker&quot;</span><span style="color: #000000">), {</span>
+<span style="color: #000000">      </span><span style="color: #008000">// enable some common symbologies</span>
+<span style="color: #000000">      </span><span style="color: #001080">scanSettings:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">ScanSettings</span><span style="color: #000000">({ </span><span style="color: #001080">enabledSymbologies:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;ean8&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;ean13&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;upca&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;upce&quot;</span><span style="color: #000000">] }),</span>
+<span style="color: #000000">    });</span>
+<span style="color: #000000">  })</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">barcodePicker</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// barcodePicker is ready here, show a message every time a barcode is scanned</span>
+<span style="color: #000000">    </span><span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scan&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">scanResult</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #795E26">alert</span><span style="color: #000000">(</span><span style="color: #001080">scanResult</span><span style="color: #000000">.</span><span style="color: #001080">barcodes</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">].</span><span style="color: #001080">data</span><span style="color: #000000">);</span>
+<span style="color: #000000">    });</span>
+<span style="color: #000000">  });</span>
+</code></pre>
+				<p>Alternatively you can use our Web Component (currently beta), please check the <a href="#integrate-with-the-web-component">Integrate with the Web Component</a> section.</p>
+				<p>That&#39;s it! You will find below more details about library <a href="#getting-started-web-application">loading/setup</a>, <a href="#configuration">configuration</a> and <a href="#usage">usage</a>.</p>
+				<a href="#getting-started-web-application" id="getting-started-web-application" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started: Web Application</h2>
+				</a>
+				<p>These instructions will help you set up the library for a quick and simple deployment as a JavaScript script included in your webpage / web application.</p>
+				<p>You can use the <a href="https://jsdelivr.com">jsDelivr</a> or <a href="https://unpkg.com">UNPKG</a> CDN to easily <a href="https://semver.npmjs.com">specify a certain version (range)</a> and include our library as follows (example for <code>5.9.2</code>: the current version automatically retrieved when specifying a <code>5.x</code> version; check our latest available library <a href="https://docs.scandit.com/stable/web/CHANGELOG.md">here</a>):</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/scandit-sdk@5.x&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>or</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/scandit-sdk@5.x&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>Or download the library with <a href="https://github.com/npm/npm">npm</a> / <a href="https://github.com/yarnpkg/yarn">Yarn</a>, save it and include it from your local files.</p>
+				<p>Via NPM:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install scandit-sdk --save</span>
+</code></pre>
+				<p>Via Yarn:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add scandit-sdk</span>
+</code></pre>
+				<p>Include as <a href="https://github.com/umdjs/umd">UMD module</a> (this is most probably what you need):</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;/node_modules/scandit-sdk/build/browser/index.min.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>Include as <a href="https://jakearchibald.com/2017/es-modules-in-browsers/">ES module</a>:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;/node_modules/scandit-sdk/build/browser/index.esm.min.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>Non-minified modules are also available if needed: just include the non-&quot;.min&quot; file.</p>
+				<p>The library will then be accessible via the global <code>ScanditSDK</code> object.</p>
+				<a href="#getting-started-local-development" id="getting-started-local-development" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started: Local Development</h2>
+				</a>
+				<p>These instructions will help you set up the library for local development and testing purposes, include it in a more complex JavaScript or TypeScript project and make it part of your final deployed code later built and bundled via tools like <a href="https://github.com/webpack/webpack">Webpack</a>, <a href="https://github.com/rollup/rollup">Rollup</a> or <a href="https://github.com/browserify/browserify">Browserify</a>.</p>
+				<p>Download the library with <a href="https://github.com/npm/npm">npm</a> / <a href="https://github.com/yarnpkg/yarn">Yarn</a>.</p>
+				<p>Via NPM:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install scandit-sdk --save</span>
+</code></pre>
+				<p>Via Yarn:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add scandit-sdk</span>
+</code></pre>
+				<p>We provide two different bundled versions of the library depending on your needs:</p>
+				<ul>
+					<li><a href="http://www.commonjs.org/specs/modules/1.0/">CommonJS module</a> (with type definitions) - <code>build/main</code></li>
+					<li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import">ES6 module</a> (with type definitions) - <code>build/module</code></li>
+				</ul>
+				<p>For reference, you also have the following browser bundles:</p>
+				<ul>
+					<li><a href="https://github.com/umdjs/umd">UMD module</a> - <code>build/browser/index.js</code></li>
+					<li><a href="https://jakearchibald.com/2017/es-modules-in-browsers/">ES module</a> - <code>build/browser/index.esm.js</code></li>
+				</ul>
+				<p>The library can be included in your code via either CommonJS or ES imports.</p>
+				<p>ES2015 (ES6):</p>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;scandit-sdk&quot;</span><span style="color: #000000">;</span>
+</code></pre>
+				<p>CommonJS:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scandit-sdk&quot;</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>With ES imports it&#39;s also possible to use single components. For example:</p>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Barcode</span><span style="color: #000000">, </span><span style="color: #001080">BarcodePicker</span><span style="color: #000000">, </span><span style="color: #001080">ScanSettings</span><span style="color: #000000">, </span><span style="color: #001080">configure</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;scandit-sdk&quot;</span><span style="color: #000000">;</span>
+</code></pre>
+				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+					<h2>Configuration</h2>
+				</a>
+				<p>The first thing that is needed to use the library is to do an initial configuration of the <code>ScanditSDK</code> object, this is required before instantiating the main library components (<code>BarcodePicker</code> and <code>Scanner</code> objects).</p>
+				<p>For optimal performance, this configuration/initialization should be done as soon as possible in your application (even before scanning is actually required) to ensure needed components are preloaded and initialized ahead of time.</p>
+				<p>The configuration function returns a promise and looks as follows:</p>
+				<pre><code class="language-javascript"><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">configure</span><span style="color: #000000">(</span><span style="color: #001080">licenseKey</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">engineLocation:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;/path&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>The first required configuration option is a valid Scandit license key - this is necessary for the library to work and is verified at configuration time. In order to get your license key you must <a href="https://ssl.scandit.com/customers/new?p=test&amp;source=websdk">register and login to your account</a>. The key will be available (and configurable) in your personal dashboard and is tied to your website / web application.</p>
+				<p>The next (often required) optional configuration option is the location of the Scandit Data Capture library location (external WebAssembly files): <code>scandit-engine-sdk.min.js</code> and <code>scandit-engine-sdk.wasm</code>. WebAssembly requires these separate files which are loaded by our main library at runtime. They can be found inside the <code>build</code> folder in the library you either download or access via a CDN; if you download the library, these files should be put in a path that&#39;s accessible to be downloaded by the running library script. The configuration option that you provide should then point to the folder containing these files, either as a path of your website or an absolute URL (like the CDN one). By default the library will look at the root of your website. If you use a CDN to access the library, you will want to set this to <code>&quot;https://cdn.jsdelivr.net/npm/scandit-sdk/build&quot;</code>, <code>&quot;https://unpkg.com/scandit-sdk/build&quot;</code>, or similar. Please ensure that the version of the main library that you set up in the &quot;Getting Started&quot; section corresponds to the version of the external Scandit Data Capture library retrieved via the <code>engineLocation</code> option, either by ensuring the served files are up-to-date or the path/URL specifies a specific version. In case a common CDN is used here (<em>jsDelivr</em> or <em>UNPKG</em>) the library will automatically internally set up the correct URLs pointing directly at the files needed for the matching library version. It is highly recommended to handle the serving of these files yourself on your website/server, ensuring optimal compression, no request redirections and correct caching headers usage; thus resulting in faster loading.</p>
+				<p>A configuration call could look as follows:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">configure</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;YOUR_LICENSE_KEY_IS_NEEDED_HERE&quot;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">engineLocation:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;build/&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}).</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// ... ready to instantiate a BarcodePicker or Scanner here</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>Here is the same code snippet using <code>async</code>/<code>await</code>:</p>
+				<pre><code class="language-typescript"><span style="color: #008000">// inside an async function</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">configure</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;YOUR_LICENSE_KEY_IS_NEEDED_HERE&quot;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">engineLocation:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;build/&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+<span style="color: #008000">// ... ready to instantiate a BarcodePicker or Scanner here</span>
+</code></pre>
+				<p>Note that camera access requests are done lazily only when needed by a <code>BarcodePicker</code> (or <code>Scanner</code>) object. To make the loading process faster when scanning is actually needed, it is recommended depending on the use case to create in advance a (hidden and paused) <code>BarcodePicker</code> or <code>Scanner</code> object, to later show and unpause it when needed. You can also eagerly ask only for camera access permissions by calling the <code>ScanditSDK.CameraAccess.getCameras()</code> function. An example of this advanced usage can be found in the <code>example_background.html</code> file. More details are also given in the next section.</p>
+				<p>Check the documentation for additional options available on configuration.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>Once the library has been configured, there are two main ways to interact with it: via the <code>BarcodePicker</code> object, providing an easy to use high-level UI and API to setup barcode scanning via cameras, or via the <code>Scanner</code> object, providing only low level methods to process image data.</p>
+				<p>In order to use the <code>BarcodePicker</code>, an HTML element must be provided to act as (parent) container for the UI. You can configure size and other styling properties/restrictions by simply setting rules on this element - the picker will fit inside it. A sample element could look as follows:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;scandit-barcode-picker&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">style</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;max-width: 1280px; max-height: 80%;&quot;</span><span style="color: #800000">&gt;&lt;/div&gt;</span>
+</code></pre>
+				<p>The <code>BarcodePicker</code> can then be created by simply passing the previous HTML element plus optional settings; this will show the UI, access the camera, initialize the Scandit Data Capture library and start scanning.</p>
+				<p>JavaScript:</p>
+				<pre><code class="language-javascript"><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #001080">BarcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scandit-barcode-picker&quot;</span><span style="color: #000000">), {</span>
+<span style="color: #000000">  </span><span style="color: #001080">playSoundOnScan:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">vibrateOnScan:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">}).</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080">barcodePicker</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// barcodePicker is ready here to be used (rest of the tutorial code should go here)</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>Typescript:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">BarcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scandit-barcode-picker&quot;</span><span style="color: #000000">), {</span>
+<span style="color: #000000">  </span><span style="color: #001080">playSoundOnScan:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">vibrateOnScan:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">}).</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">barcodePicker</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// barcodePicker is ready here to be used (rest of the tutorial code should go here)</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>By default, no symbology is enabled for recognition so nothing special will happen; we can now quickly set up <code>ScanSettings</code> to enable wanted symbologies plus other more advanced options if needed (we could and should already have done it via the previous constructor). Setting up some sample configuration looks as follows.</p>
+				<p>JavaScript:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">scanSettings</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">ScanSettings</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">enabledSymbologies:</span><span style="color: #000000"> [</span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #001080">Barcode</span><span style="color: #000000">.</span><span style="color: #001080">Symbology</span><span style="color: #000000">.</span><span style="color: #0070C1">EAN8</span><span style="color: #000000">, </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #001080">Barcode</span><span style="color: #000000">.</span><span style="color: #001080">Symbology</span><span style="color: #000000">.</span><span style="color: #0070C1">EAN13</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #001080">codeDuplicateFilter:</span><span style="color: #000000"> </span><span style="color: #098658">1000</span><span style="color: #000000">, </span><span style="color: #008000">// Minimum delay between duplicate results</span>
+<span style="color: #000000">});</span>
+<span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">applyScanSettings</span><span style="color: #000000">(</span><span style="color: #001080">scanSettings</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>TypeScript:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">scanSettings</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ScanSettings</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">enabledSymbologies:</span><span style="color: #000000"> [</span><span style="color: #001080">Barcode</span><span style="color: #000000">.</span><span style="color: #001080">Symbology</span><span style="color: #000000">.</span><span style="color: #0070C1">EAN8</span><span style="color: #000000">, </span><span style="color: #001080">Barcode</span><span style="color: #000000">.</span><span style="color: #001080">Symbology</span><span style="color: #000000">.</span><span style="color: #0070C1">EAN13</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #001080">codeDuplicateFilter:</span><span style="color: #000000"> </span><span style="color: #098658">1000</span><span style="color: #000000">, </span><span style="color: #008000">// Minimum delay between duplicate results</span>
+<span style="color: #000000">});</span>
+<span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">applyScanSettings</span><span style="color: #000000">(</span><span style="color: #001080">scanSettings</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>The picker is now actively scanning the selected symbologies (detecting the same barcode a maximum of one time per second), if we later want to change the settings we just have to modify the object and apply it again to the picker. In order to react to a successful <code>scan</code> event with your code you can attach one or more listener functions to the picker.</p>
+				<p>JavaScript:</p>
+				<pre><code class="language-javascript"><span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scan&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">scanResult</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #795E26">alert</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #001080">scanResult</span><span style="color: #000000">.</span><span style="color: #001080">barcodes</span><span style="color: #000000">.</span><span style="color: #795E26">reduce</span><span style="color: #000000">((</span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">barcode</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">string</span><span style="color: #000000"> + </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">ScanditSDK</span><span style="color: #000000FF">.</span><span style="color: #001080">Barcode</span><span style="color: #000000FF">.</span><span style="color: #001080">Symbology</span><span style="color: #000000FF">.</span><span style="color: #795E26">toHumanizedName</span><span style="color: #000000FF">(</span><span style="color: #001080">barcode</span><span style="color: #000000FF">.</span><span style="color: #001080">symbology</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">: </span><span style="color: #0000FF">${</span><span style="color: #001080">barcode</span><span style="color: #000000FF">.</span><span style="color: #001080">data</span><span style="color: #0000FF">}</span><span style="color: #EE0000">\n</span><span style="color: #A31515">`</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }, </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">  );</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>TypeScript:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scan&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">scanResult</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #795E26">alert</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #001080">scanResult</span><span style="color: #000000">.</span><span style="color: #001080">barcodes</span><span style="color: #000000">.</span><span style="color: #795E26">reduce</span><span style="color: #000000">((</span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">barcode</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">string</span><span style="color: #000000"> + </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">Barcode</span><span style="color: #000000FF">.</span><span style="color: #001080">Symbology</span><span style="color: #000000FF">.</span><span style="color: #795E26">toHumanizedName</span><span style="color: #000000FF">(</span><span style="color: #001080">barcode</span><span style="color: #000000FF">.</span><span style="color: #001080">symbology</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">: </span><span style="color: #0000FF">${</span><span style="color: #001080">barcode</span><span style="color: #000000FF">.</span><span style="color: #001080">data</span><span style="color: #0000FF">}</span><span style="color: #EE0000">\n</span><span style="color: #A31515">`</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }, </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">  );</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>That&#39;s it!</p>
+				<p>Please refer to the <a href="#documentation">documentation</a> for all the other available configuration options and functions, as well as more advanced <code>ScanSettings</code> and <code>Scanner</code> usage.</p>
+				<a href="#text-recognition-ocr-configuration" id="text-recognition-ocr-configuration" style="color: inherit; text-decoration: none;">
+					<h3>Text Recognition (OCR) Configuration<!-- omit in toc --></h3>
+				</a>
+				<p>Text recognition (OCR) is available for passports and ID cards via their Machine Readable Zone (MRZ); these are also called Machine Readable Travel Documents (MRTD). Note that this functionality is disabled by default and requires specific license features in order to be usable. In order to make use of this functionality, two new and alternative sets of <em>external Scandit Data Capture library</em> JS/WASM (external WebAssembly) files is used: <code>scandit-engine-sdk-ocr.min.js</code>/<code>scandit-engine-sdk-ocr.wasm</code> and <code>scandit-engine-sdk-ocr-simd.min.js</code>/<code>scandit-engine-sdk-ocr-simd.wasm</code>. These files must be set up to be copied from the <code>build</code> folder and be available to be downloaded as needed, similarly to the existing set of files (nothing needs to be done when using a CDN). Depending on the dynamically detected browser features, one of the sets will be used.</p>
+				<p>The following are the changes needed in order to make use of text recognition capabilities.</p>
+				<p>First of all the library has to be initially configured to load the necessary OCR version of the library as follows.</p>
+				<pre><code class="language-javascript"><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">configure</span><span style="color: #000000">(</span><span style="color: #001080">licenseKey</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">engineLocation:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;/path&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">loadTextRecognition:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>Then we create a sample regular expression deciding what will be recognized as text, in this case we are interested in Machine Readable Travel Documents (MRTD) text data:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">mrtdRegex</span><span style="color: #000000"> =</span>
+<span style="color: #000000">  </span><span style="color: #811F3F">/</span><span style="color: #D16969">[</span><span style="color: #811F3F">AIC</span><span style="color: #D16969">][</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{29}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{30}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{30}</span><span style="color: #811F3F">\n</span><span style="color: #000000">?</span><span style="color: #EE0000">|</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{36}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{36}</span><span style="color: #811F3F">\n</span><span style="color: #000000">?</span><span style="color: #EE0000">|</span><span style="color: #811F3F">P</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{43}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{44}</span><span style="color: #811F3F">\n</span><span style="color: #000000">?</span><span style="color: #EE0000">|</span><span style="color: #811F3F">V</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{43}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{44}</span><span style="color: #811F3F">\n</span><span style="color: #000000">?</span><span style="color: #EE0000">|</span><span style="color: #811F3F">V</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{35}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{36}</span><span style="color: #811F3F">\n</span><span style="color: #000000">?</span><span style="color: #EE0000">|</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{7}</span><span style="color: #811F3F">&lt;&lt;\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0-9&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{30}</span><span style="color: #811F3F">\n</span><span style="color: #D16969">[</span><span style="color: #811F3F">A-Z0&lt;</span><span style="color: #D16969">]</span><span style="color: #000000">{30}</span><span style="color: #811F3F">\n</span><span style="color: #000000">?</span><span style="color: #811F3F">/</span><span style="color: #000000">;</span>
+</code></pre>
+				<p>We can now create new <code>TextRecognitionSettings</code> to configure the text recognition behaviour as follows.</p>
+				<p>JavaScript:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">textRecognitionSettings</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">TextRecognitionSettings</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">regex:</span><span style="color: #000000"> </span><span style="color: #001080">mrtdRegex</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>TypeScript:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">textRecognitionSettings</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">TextRecognitionSettings</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">regex:</span><span style="color: #000000"> </span><span style="color: #001080">mrtdRegex</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>Afterwards, <code>ScanSettings</code> need to be set to switch from the default <code>CODE</code> recognition mode to <code>TEXT</code> and the new <code>TextRecognitionSettings</code> are also passed as follows.</p>
+				<p>JavaScript:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">scanSettings</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #795E26">ScanSettings</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">recognitionMode:</span><span style="color: #000000"> </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #001080">ScanSettings</span><span style="color: #000000">.</span><span style="color: #001080">RecognitionMode</span><span style="color: #000000">.</span><span style="color: #0070C1">TEXT</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">textRecognitionSettings:</span><span style="color: #000000"> </span><span style="color: #001080">textRecognitionSettings</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>TypeScript:</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">scanSettings</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ScanSettings</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">recognitionMode:</span><span style="color: #000000"> </span><span style="color: #001080">ScanSettings</span><span style="color: #000000">.</span><span style="color: #001080">RecognitionMode</span><span style="color: #000000">.</span><span style="color: #0070C1">TEXT</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">textRecognitionSettings:</span><span style="color: #000000"> </span><span style="color: #001080">textRecognitionSettings</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>In order to react to obtain the new text recognition results, the <code>scan</code> event listener can be modified as follows:</p>
+				<pre><code class="language-javascript"><span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scan&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">scanResult</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #795E26">alert</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #001080">scanResult</span><span style="color: #000000">.</span><span style="color: #001080">texts</span><span style="color: #000000">.</span><span style="color: #795E26">reduce</span><span style="color: #000000">((</span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">text</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">string</span><span style="color: #0000FF">}${</span><span style="color: #001080">text</span><span style="color: #000000FF">.</span><span style="color: #001080">value</span><span style="color: #0000FF">}</span><span style="color: #EE0000">\n\n</span><span style="color: #A31515">`</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }, </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">  );</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>That&#39;s it!</p>
+				<p>Please refer to the <a href="#documentation">documentation</a> for all the other available configuration options and functions, as well as more advanced <code>ScanSettings</code> and <code>TextRecognitionSettings</code> usage.</p>
+				<a href="#example-applications" id="example-applications" style="color: inherit; text-decoration: none;">
+					<h2>Example Applications</h2>
+				</a>
+				<p>You can have a look at the <code>example.html</code> file for a (almost) ready to use webpage using the library. You only need to serve the folder containing it for it to run. Note that it depends on the <code>build</code> folder contents.</p>
+				<p>You can also find a more advanced sample webpage in the <code>example_background.html</code> file, showing how to create a <code>BarcodePicker</code> object which loads the library in the background and how to start/show it at will. This is the recommended way to use the library in many situations.</p>
+				<p>If you want to see the <a href="#integrate-with-the-web-component">Web Component</a> in action, you can have a look at <code>example_web_component.html</code>.</p>
+				<p>To see an example of text recognition (OCR), check out <code>example_ocr.html</code>.</p>
+				<p>Note that all these examples require a valid license key to be inserted replacing <code>&quot;YOUR_LICENSE_KEY_IS_NEEDED_HERE&quot;</code> in the html file.</p>
+				<p>You can use your own tools to serve the example pages, or the following proposed simple way to quickly set up a local server.</p>
+				<p>Globally install the <code>http-server</code> JavaScript package.</p>
+				<p>Via NPM:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install http-server -g</span>
+</code></pre>
+				<p>Via Yarn:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn global add http-server</span>
+</code></pre>
+				<p>Run the new package from this project&#39;s root folder with:</p>
+				<pre><code class="language-bash"><span style="color: #000000">http-server</span>
+</code></pre>
+				<p><em>Please note that this simple server will not compress files thus resulting in slower loading times than normal.</em></p>
+				<p>Finally, access the webpage via your favourite (and supported) browser at either:</p>
+				<ul>
+					<li><a href="http://127.0.0.1:8080/example.html">http://127.0.0.1:8080/example.html</a></li>
+					<li><a href="http://127.0.0.1:8080/example_background.html">http://127.0.0.1:8080/example_background.html</a></li>
+					<li><a href="http://127.0.0.1:8080/example_ocr.html">http://127.0.0.1:8080/example_ocr.html</a></li>
+					<li><a href="http://127.0.0.1:8080/example_web_component.html">http://127.0.0.1:8080/example_web_component.html</a></li>
+				</ul>
+				<a href="#web-component-integration" id="web-component-integration" style="color: inherit; text-decoration: none;">
+					<h2>Web Component Integration</h2>
+				</a>
+				<p>Please note that the Web Component is still in beta: functionality could change at any time independently from major version changes.</p>
+				<p>Import the library first (see the <a href="#getting-started-web-application">Getting Started: Web Application</a> section for more details):</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/scandit-sdk@5.x&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>The Web Component is now available for use:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;scandit-barcode-picker</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;barcodePicker&quot;</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">configure.licenseKey</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;YOUR_LICENSE_KEY_IS_NEEDED_HERE&quot;</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">configure.engineLocation</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/&quot;</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">playSoundOnScan</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;true&quot;</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">scanSettings.enabledSymbologies</span><span style="color: #000000">=</span><span style="color: #0000FF">&#039;[&quot;ean8&quot;, &quot;ean13&quot;, &quot;upca&quot;, &quot;upce&quot;]&#039;</span>
+<span style="color: #800000">&gt;&lt;/scandit-barcode-picker&gt;</span>
+</code></pre>
+				<p>You can listen to its events like with any other standard DOM element (<a href="https://docs.scandit.com/stable/web/classes/barcodepicker.html">see the BarcodePicker available events</a>). Note that you need to get the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail">event&#39;s &quot;detail&quot; property</a> in order to access the event&#39;s data. This is how you set up a listener for the <a href="https://docs.scandit.com/stable/web/classes/barcodepicker.html#scan"><code>&quot;scan&quot;</code></a> event:</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">barcodePickerElement</span><span style="color: #000000"> = </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementById</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;barcodePicker&quot;</span><span style="color: #000000">);</span>
+<span style="color: #001080">barcodePickerElement</span><span style="color: #000000">.</span><span style="color: #795E26">addEventListener</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;scan&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080">event</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">scanResult</span><span style="color: #000000"> = </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #001080">detail</span><span style="color: #000000">;</span>
+<span style="color: #000000">  </span><span style="color: #795E26">alert</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #001080">scanResult</span><span style="color: #000000">.</span><span style="color: #001080">barcodes</span><span style="color: #000000">.</span><span style="color: #795E26">reduce</span><span style="color: #000000">(</span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080">string</span><span style="color: #000000">, </span><span style="color: #001080">barcode</span><span style="color: #000000">) {</span>
+<span style="color: #000000">      </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">string</span><span style="color: #000000"> + </span><span style="color: #001080">ScanditSDK</span><span style="color: #000000">.</span><span style="color: #001080">Barcode</span><span style="color: #000000">.</span><span style="color: #001080">Symbology</span><span style="color: #000000">.</span><span style="color: #795E26">toHumanizedName</span><span style="color: #000000">(</span><span style="color: #001080">barcode</span><span style="color: #000000">.</span><span style="color: #001080">symbology</span><span style="color: #000000">) + </span><span style="color: #A31515">&quot;: &quot;</span><span style="color: #000000"> + </span><span style="color: #001080">barcode</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> + </span><span style="color: #A31515">&quot;</span><span style="color: #EE0000">\n</span><span style="color: #A31515">&quot;</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }, </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">  );</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>The modification of the attributes will be reflected on the underlying <code>BarcodePicker</code> and its <code>ScanSettings</code> object.</p>
+				<p>These are the available attributes of the <code>BarcodePicker</code>. They match the parameters that you pass to <a href="https://docs.scandit.com/stable/web/classes/barcodepicker.html#create">BarcodePicker.create</a>:</p>
+				<ul>
+					<li>accessCamera</li>
+					<li>camera</li>
+					<li>cameraSettings</li>
+					<li>cameraType</li>
+					<li>enableCameraSwitcher</li>
+					<li>enablePinchToZoom</li>
+					<li>enableTapToFocus</li>
+					<li>enableTorchToggle</li>
+					<li>guiStyle</li>
+					<li>laserArea</li>
+					<li>playSoundOnScan</li>
+					<li>scanningPaused</li>
+					<li>singleImageModeSettings</li>
+					<li>targetScanningFPS</li>
+					<li>vibrateOnScan</li>
+					<li>videoFit</li>
+					<li>viewfinderArea</li>
+					<li>visible</li>
+				</ul>
+				<p>Attributes to configure the library (see details in the <a href="#configuration">Configuration</a> section):</p>
+				<ul>
+					<li>configure.engineLocation</li>
+					<li>configure.licenseKey</li>
+					<li>configure.highQualityBlurryRecognition</li>
+					<li>configure.loadTextRecognition</li>
+					<li>configure.preloadBlurryRecognition</li>
+					<li>configure.preloadEngine</li>
+				</ul>
+				<p>Attributes used by the <code>ScanSettings</code> object of the <code>BarcodePicker</code>:</p>
+				<ul>
+					<li>scanSettings.blurryRecognition</li>
+					<li>scanSettings.codeDirectionHint</li>
+					<li>scanSettings.codeDuplicateFilter</li>
+					<li>scanSettings.deviceName</li>
+					<li>scanSettings.enabledSymbologies</li>
+					<li>scanSettings.gpuAcceleration</li>
+					<li>scanSettings.maxNumberOfCodesPerFrame</li>
+					<li>scanSettings.recognitionMode</li>
+					<li>scanSettings.searchArea</li>
+					<li>scanSettings.textRecognitionSettings</li>
+				</ul>
+				<p>Attribute values not of type string, number or boolean should be passed as a <a href="https://www.json.org/json-en.html">valid JSON string</a> (i.e. with keys surrounded by double quotes):</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;scandit-barcode-picker</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">...</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">scanSettings.searchArea</span><span style="color: #000000">=</span><span style="color: #0000FF">&#039;{&quot;x&quot;:0.2,&quot;y&quot;:0.2,&quot;width&quot;:0.6,&quot;height&quot;:0.6}&#039;</span>
+<span style="color: #800000">&gt;&lt;/scandit-barcode-picker&gt;</span>
+</code></pre>
+				<p>As soon as a <code>&lt;scandit-barcode-picker&gt;</code> is found in the page, the library will automatically load itself. If you need to delay this initialization, use the <code>configure</code> attribute and set its value to <code>false</code>. Setting it later to <code>true</code> will trigger the library initialization.</p>
+				<p>Note that you can also use <code>ScanditSDK.configure()</code> to load the library yourself manually, the Web Component will not repeat the initialization if a previous call was successful. For optimal performance, it is actually recommended to configure the library as soon as possible (even before scanning is actually required or the Web Component is added) in your webpage / web application to ensure needed components are preloaded and initialized ahead of time.</p>
+				<p>If you need more control over the <code>BarcodePicker</code> object used by the Web Component, you can get the <code>barcodePicker</code> property from the element itself:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">barcodePicker</span><span style="color: #000000"> = </span><span style="color: #001080">barcodePickerElement</span><span style="color: #000000">.</span><span style="color: #001080">barcodePicker</span><span style="color: #000000">;</span>
+<span style="color: #008000">// modify barcodePicker settings</span>
+<span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">setPlaySoundOnScanEnabled</span><span style="color: #000000">(</span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+<span style="color: #008000">// access and modify the scan settings</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">scanSettings</span><span style="color: #000000"> = </span><span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">getScanner</span><span style="color: #000000">().</span><span style="color: #795E26">getScanSettings</span><span style="color: #000000">();</span>
+<span style="color: #001080">scanSettings</span><span style="color: #000000">.</span><span style="color: #795E26">setSearchArea</span><span style="color: #000000">({ </span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">0.2</span><span style="color: #000000">, </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">0.2</span><span style="color: #000000">, </span><span style="color: #001080">width:</span><span style="color: #000000"> </span><span style="color: #098658">0.6</span><span style="color: #000000">, </span><span style="color: #001080">height:</span><span style="color: #000000"> </span><span style="color: #098658">0.6</span><span style="color: #000000"> });</span>
+<span style="color: #001080">barcodePicker</span><span style="color: #000000">.</span><span style="color: #795E26">applyScanSettings</span><span style="color: #000000">(</span><span style="color: #001080">scanSettings</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>Changes operated on the <code>barcodePicker</code> will be reflected in the attributes.</p>
+				<p>The Web Component also supports Single Image Mode (see <code>singleImageModeSettings</code> parameters of <a href="https://docs.scandit.com/stable/web/classes/barcodepicker.html#create">BarcodePicker.create</a>) through the <code>singleImageModeSettings</code> attribute. Note that however in HTML you cannot pass a reference to an element in an attribute, to achieve the same result here when a custom element is needed, you need to put the element in the Web Component body, respecting the right name for the <code>slot</code> attribute&#39;s value. Here is an example where <code>buttonElement</code> and <code>informationElement</code> are customized:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;scandit-barcode-picker</span><span style="color: #000000"> </span><span style="color: #FF0000">...</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;svg</span><span style="color: #000000"> </span><span style="color: #FF0000">slot</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;singleImageModeSettings.desktop.buttonElement&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">height</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;100&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">width</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;100&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;circle</span><span style="color: #000000"> </span><span style="color: #FF0000">cx</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;50&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">cy</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;50&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">r</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;40&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">stroke</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;black&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">stroke-width</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;3&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">fill</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;red&quot;</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/svg&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">slot</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;singleImageModeSettings.desktop.informationElement&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Click the red circle</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;/scandit-barcode-picker&gt;</span>
+</code></pre>
+				<a href="#advanced-components-and-sample-apps" id="advanced-components-and-sample-apps" style="color: inherit; text-decoration: none;">
+					<h2>Advanced Components and Sample Apps</h2>
+				</a>
+				<p>For the <em>Angular</em> framework you can either use our <a href="https://www.npmjs.com/package/scandit-sdk-angular">scandit-sdk-angular</a> component, or use the <a href="#integrate-with-the-web-component">Web Component</a>. When choosing the latter, do not forget to add the CUSTOM_ELEMENTS_SCHEMA in your module:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">CUSTOM_ELEMENTS_SCHEMA</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@angular/core&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #000000">@</span><span style="color: #795E26">NgModule</span><span style="color: #000000">({</span>
+<span style="color: #000000">  ...</span>
+<span style="color: #000000">  </span><span style="color: #001080">schemas</span><span style="color: #000000">: [</span><span style="color: #0070C1">CUSTOM_ELEMENTS_SCHEMA</span><span style="color: #000000">],</span>
+<span style="color: #000000">  ...</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<p>For the <em>React</em> framework you can use our <a href="https://www.npmjs.com/package/scandit-sdk-react">scandit-sdk-react</a> component.</p>
+				<p>You can find online further sample applications making use of this library at <a href="https://github.com/Scandit/barcodescanner-sdk-for-web-samples">https://github.com/Scandit/barcodescanner-sdk-for-web-samples</a>.</p>
+				<a href="#browser-support-and-requirements" id="browser-support-and-requirements" style="color: inherit; text-decoration: none;">
+					<h2>Browser Support and Requirements</h2>
+				</a>
+				<p>Due to the advanced features required and some limitations imposed by operating systems, only the browsers listed below are able to correctly use this library.</p>
+				<p>The following is a list of the main required browser features together with links to updated support statistics:</p>
+				<ul>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">Blob</a> - <a href="https://caniuse.com/#feat=blobbuilder">current support?</a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL">URL/createObjectURL</a> - <a href="https://caniuse.com/#feat=bloburls">current support?</a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">Web Workers</a> - <a href="https://caniuse.com/#feat=webworkers">current support?</a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/WebAssembly">WebAssembly</a> - <a href="https://caniuse.com/#feat=wasm">current support?</a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia">MediaDevices/getUserMedia</a> - <a href="https://caniuse.com/#feat=stream">current support?</a> (optional, required for camera video streaming)</li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">WebGL</a> - <a href="https://caniuse.com/#feat=webgl">current support?</a> (optional, allows for GPU acceleration in Web Worker)</li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas">OffscreenCanvas</a> - <a href="https://caniuse.com/#feat=offscreencanvas">current support?</a> (optional, allows for GPU acceleration in Web Worker)</li>
+					<li><a href="https://www.chromestatus.com/feature/6533147810332672">WebAssembly SIMD</a> - (optional, allows for OCR computation acceleration)</li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements">Custom Elements</a> - <a href="https://caniuse.com/#feat=custom-elementsv1">current support?</a> (optional, required for the Web Component)</li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">Shadow DOM v1</a> - <a href="https://caniuse.com/#feat=shadowdomv1">current support?</a> (optional, required for the Web Component)</li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement">Slot element</a> - <a href="https://caniuse.com/#feat=mdn-api_htmlslotelement">current support?</a> (optional, required for the Web Component)</li>
+				</ul>
+				<p>This results in the current browser compatibility list:</p>
+				<ul>
+					<li><p>Desktop</p>
+						<ul>
+							<li>Chrome 57+</li>
+							<li>Firefox 52+ <em>(except ESR 52)</em></li>
+							<li>Opera 44+</li>
+							<li>Safari 11+</li>
+							<li>Edge 16+</li>
+						</ul>
+					</li>
+					<li><p>Mobile - Android</p>
+						<ul>
+							<li>Chrome 59+</li>
+							<li>Firefox 55+</li>
+							<li>Samsung Internet 7+</li>
+							<li>Opera 46+</li>
+						</ul>
+					</li>
+					<li><p>Mobile - iOS</p>
+						<p><em>iOS 13.4+ / 14.3+ required for camera video streaming in PWAs / Chrome, Firefox or webviews</em></p>
+						<ul>
+							<li>Safari 11+</li>
+							<li>Chrome 59+</li>
+							<li>Firefox 55+</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<p>An updated in-depth documentation of all of the libraries&#39; specifications and functionalities can be generated/found in the <code>docs</code> folder or can also be accessed online at <a href="https://docs.scandit.com/stable/web">https://docs.scandit.com/stable/web</a>.</p>
+				<a href="#faq" id="faq" style="color: inherit; text-decoration: none;">
+					<h2>FAQ</h2>
+				</a>
+				<p>You can find answers in our list of <a href="https://support.scandit.com/hc/en-us/categories/115000369292-Barcode-Scanner-SDK-for-the-Web">frequently asked questions (FAQs)</a>.</p>
+				<a href="#important-notes" id="important-notes" style="color: inherit; text-decoration: none;">
+					<h2>Important Notes</h2>
+				</a>
+				<ul>
+					<li><p>File serving</p>
+						<p>You must serve your final web application / website via a web server for correct dynamic retrieval of WebAssembly files by the library, due to browser restrictions this isn&#39;t possible by simply trying to directly opening and loading your local HTML file in the browser.</p>
+					</li>
+					<li><p>HTTPS deployment / Secure context</p>
+						<p>You must serve your final web application / website via a secure HTTPS connection: due to browser security restrictions, camera video streaming access is only granted if a <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">secure context</a> is used. The secure connection requirement does not apply for Single Image Mode (no camera video streaming needed) or if using local IP addresses during development, however note that depending on the browser camera permissions could be asked every time in this case. During development you can also circumvent these restrictions on your own browser by doing the following: on <em>Chrome</em> you can enable the <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code> flag, on <em>Firefox</em> you can enable the <code>media.devices.insecure.enabled</code> and <code>media.getusermedia.insecure.enabled</code> flags, on <em>Safari</em> you can enable the menu item <code>Develop &gt; WebRTC &gt; Allow Media Capture on Insecure Sites</code>.</p>
+					</li>
+					<li><p>WASM file format</p>
+						<p>Please make sure that your webserver serves the <code>scandit-engine-sdk.wasm</code> file with <code>Content-Type: application/wasm</code> (it should be the default correct MIME type), failure to do so will result in some browsers failing to execute the external library or loading it more slowly.</p>
+					</li>
+					<li><p>Cookies for device identification</p>
+						<p>For licensing purposes we use cookies to assign and store/retrieve completely random device IDs of end users of the library. This may change in the future, but currently it cannot be disabled.</p>
+					</li>
+					<li><p>Analytics data</p>
+						<p>Our Scandit Data Capture library makes several different requests at initialization and during usage of the scanning library to our servers, in order to store and provide analytics data about the usage of the SDK. This request/information is the same as what we collect for other SDKs.</p>
+					</li>
+					<li><p>License key</p>
+						<p>A Scandit license key for this particular library is required. The license key is verified at runtime with each library usage and is linked/limited to your specified domain names to prevent abuse. Local addresses and private IPs are also allowed for testing independently from the domain name restriction in a valid license key.</p>
+					</li>
+					<li><p>Camera performance</p>
+						<p>On desktop or Android devices, the Chrome browser provides more advanced camera controls and results in better performance than other browsers. At the moment, it is also the only browser to support manual camera focus operations (via tapping the screen) and mobile torch toggling, where available. More browsers are expected to support these advanced features soon.</p>
+					</li>
+					<li><p>Scanning performance</p>
+						<p>The performance of the scanner depends on the device and camera being used. Nonetheless for optimal speed/quality, please keep in mind the following guidelines/tips:</p>
+						<ul>
+							<li>Enable only the symbologies you really need to scan (1D code scanning is usually faster than 2D code scanning, only having 1D codes enabled is faster).</li>
+							<li>Only increase the maximum amount of codes per single frame from the default of 1 if it&#39;s really needed.</li>
+							<li>If possible, restrict the scanning search area to be less than the default full frame.</li>
+							<li>Depending on your use case, it might be worth to enable Full HD or Ultra HD video quality, resulting in slower frame processing times but higher resolution recognition.</li>
+							<li>Single Image Mode internally uses higher quality settings to scan images, this results in slower but better scanning performance, with the limitation of having to take and provide single pictures from the camera.</li>
+							<li>The first Single Image Mode scan might be slower than subsequent ones depending on the network condition as the Scandit Data Capture Library has to first verify the license key online before proceeding.</li>
+							<li>GPU acceleration allows for faster and more accurate barcode localization at challenging positions and angles but is only available if the browser supports it.</li>
+							<li>Blurry code recognition (enabled by default) allows for accurate scanning capabilities for out-of-focus 1D codes at the expense of more computationally expensive frame analysis: check and adjust scan settings according to your needs.</li>
+						</ul>
+					</li>
+					<li><p>Library performance</p>
+						<p>In order to provide the best possible experience in your web application, please follow these guidelines to guarantee optimal performance of this library:</p>
+						<ul>
+							<li>Configure the library as soon as possible in your webpage / web application to ensure needed components are preloaded and initialized ahead of time.</li>
+							<li>Ensure the JavaScript assets and the <code>scandit-engine-sdk.min.js</code> and <code>scandit-engine-sdk.wasm</code> files are served compressed, without redirections and with caching headers enabled by your web server. Note that some CDN services do not offer compression or, depending on used settings/URLs, implement redirections that don&#39;t allow for correct caching of assets.</li>
+							<li>Ensure that the <code>scandit-engine-sdk.wasm</code> file is served with the <code>Content-Type</code> HTTP header set to <code>application/wasm</code> to ensure the correct and fast loading of the WebAssembly library component.</li>
+							<li>Re-use <code>BarcodePicker</code> instances whenever possible by reassigning, hiding and showing them instead of destroying and recreating them to avoid useless multiple loads of libraries and resources. Ideally only one instance should be used.</li>
+							<li>If possible, create a (hidden and paused) <code>BarcodePicker</code> in the background and simply resume scanning by switching its visibility to <code>&quot;show&quot;</code> when needed, instead of creating it on the fly to provide instant scanning capabilities. You can also set it up to not access the camera immediately (<code>cameraAccess</code> option set to <code>false</code> on creation) and lazily do that later when needed (<code>BarcodePicker.accessCamera()</code> function call), or also pause and resume camera access when necessary. For a sample application, please refer to the <code>example_background.html</code> file.</li>
+							<li>Remember to use <code>destroy()</code> methods on the <code>Scanner</code> or <code>BarcodePicker</code> objects when they are not needed anymore, before they are automatically garbage collected by JavaScript. This will ensure all needed resources are correctly cleaned up.</li>
+							<li>Camera permissions can be asked to the user in advance via this library (background <code>BarcodePicker</code> creation or <code>ScanditSDK.CameraAccess.getCameras()</code> function call) or other external methods to ensure a more fluid experience depending on the situation. Remember that usually these permissions are stored forever and need only to be asked once. As an alternative you can consider Single Image Mode.</li>
+							<li>Blurry code recognition requires data structures to be initialized eagerly, asynchronously at library configuration (by default) or lazily, synchronously at scan time: check configuration options according to your needs and ensure the library and/or barcode picker are initialized as soon as possible.</li>
+						</ul>
+					</li>
+					<li><p>Scandit logo</p>
+						<p>In accordance with our license terms, the Scandit logo displayed in the bottom right corner of the barcode picker must be displayed and cannot be hidden by any method. Workarounds are not allowed.</p>
+					</li>
+					<li><p>iOS 11.2.2 / 11.2.5 / 11.2.6 support</p>
+						<p>Apple released iOS version 11.2.2 on January 8, 2018, as an emergency update meant to mitigate the effects of the widespread <em>Spectre</em> vulnerability. This update also included changes related to <em>WebKit</em> and the <em>Safari</em> browser, as documented <a href="https://webkit.org/blog/8048/what-spectre-and-meltdown-mean-for-webkit/">here</a>. Unfortunately this update also introduced a critical <em>WebAssembly</em> bug, which caused this and many other libraries relying on this technology to randomly crash and fail to access memory with <code>Out of bounds memory access</code> or <code>None: abort(6)</code> errors on iOS versions 11.2.2, 11.2.5 and 11.2.6. This problem cannot be solved by us or other library developers; the issue has already been reported to Apple by multiple sources and a fix for it has been released in iOS 11.3. We suggest to conditionally use the library or show alerts to the affected users by utilizing the OS version information available in the browser via the <em>user agent</em> string.</p>
+					</li>
+					<li><p>iOS camera video streaming</p>
+						<p>Due to operating system restrictions, access to the camera video stream is not given in older iOS version in cases where the library is loaded via a PWA, webview or browser other than Safari. This results in the Single Image Mode fallback being used (unless configured to fail instead). Starting from iOS 13.4 the camera video stream can be correctly accessed in PWAs, while starting from iOS 14.3 also in any other browser or webview as well.</p>
+					</li>
+				</ul>
+				<a href="#support" id="support" style="color: inherit; text-decoration: none;">
+					<h2>Support</h2>
+				</a>
+				<p>For questions or support please use the form you can find <a href="https://support.scandit.com/hc/en-us/requests/new">here</a> or send us an email to <a href="mailto:support@scandit.com">support@scandit.com</a>.</p>
+				<a href="#project-commands" id="project-commands" style="color: inherit; text-decoration: none;">
+					<h2>Project Commands</h2>
+				</a>
+				<p>If you want to work on this project, the following is a list of the most useful <a href="https://github.com/yarnpkg/yarn">Yarn</a> commands you can run in this project (here shown with Yarn).</p>
+				<p>You should use <code>yarn</code> instead of <code>npm</code> to handle project dependencies to make use of the existing <code>yarn.lock</code> file.</p>
+				<p>Build (rebuild) and create all output modules:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn build</span>
+</code></pre>
+				<p>Remove build and test output folders:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn clean</span>
+</code></pre>
+				<p>Lint all source files:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn lint</span>
+</code></pre>
+				<p>Try to automatically fix all linting problems:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn fix</span>
+</code></pre>
+				<p>Build (rebuild) main library and run unit tests:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn </span><span style="color: #795E26">test</span>
+</code></pre>
+				<p>Run tests, generate HTML coverage report, and open it in a browser:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn coverage</span>
+</code></pre>
+				<p>Generate HTML API documentation and open it in a browser:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn docs</span>
+</code></pre>
+				<p>Generate LICENSE file with copyright and licenses of dependencies:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn license</span>
+</code></pre>
+				<p>Delete all untracked files, reset the repo to the last commit and install all needed packages:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn reset</span>
+</code></pre>
+				<p>Build (rebuild) browser UMD library and show bundle size information:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn size-info</span>
+</code></pre>
+				<p>Show all available commands:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn info</span>
+</code></pre>
+				<a href="#changelog--release-notes-and-versioning" id="changelog--release-notes-and-versioning" style="color: inherit; text-decoration: none;">
+					<h2>Changelog / Release Notes and Versioning</h2>
+				</a>
+				<p>We use <a href="https://semver.org/">Semantic Versioning (SemVer)</a> for versioning. A log of the project&#39;s releases over time with their features and changes can be found in the <a href="https://docs.scandit.com/stable/web/CHANGELOG.md">CHANGELOG.md</a> file (also found inside the project).</p>
+				<a href="#built-tested-and-documented-with" id="built-tested-and-documented-with" style="color: inherit; text-decoration: none;">
+					<h2>Built, Tested and Documented With</h2>
+				</a>
+				<ul>
+					<li><a href="https://github.com/postcss/autoprefixer">Autoprefixer</a></li>
+					<li><a href="https://github.com/avajs/ava">AVA</a></li>
+					<li><a href="https://github.com/babel/babel">Babel</a></li>
+					<li><a href="https://github.com/ben-eb/cssnano">cssnano</a></li>
+					<li><a href="https://github.com/gulpjs/gulp">gulp</a></li>
+					<li><a href="https://github.com/istanbuljs/nyc">Istanbul</a></li>
+					<li><a href="https://github.com/jsdom/jsdom">jsdom</a></li>
+					<li><a href="https://github.com/nightwatchjs/nightwatch">Nightwatch</a></li>
+					<li><a href="https://github.com/postcss/postcss">PostCSS</a></li>
+					<li><a href="https://github.com/prettier/prettier">Prettier</a></li>
+					<li><a href="https://github.com/rollup/rollup">Rollup</a></li>
+					<li><a href="https://github.com/sass/sass">Sass</a></li>
+					<li><a href="https://github.com/sinonjs/sinon">Sinon.JS</a></li>
+					<li><a href="https://github.com/stylelint/stylelint">stylelint</a></li>
+					<li><a href="https://github.com/terser-js/terser">Terser</a></li>
+					<li><a href="https://github.com/palantir/tslint">TSLint</a></li>
+					<li><a href="https://github.com/TypeStrong/typedoc">TypeDoc</a></li>
+					<li><a href="https://github.com/bitjson/typescript-starter">TypeScript Starter</a></li>
+					<li><a href="https://github.com/Microsoft/TypeScript">TypeScript</a></li>
+				</ul>
+				<a href="#authors" id="authors" style="color: inherit; text-decoration: none;">
+					<h2>Authors</h2>
+				</a>
+				<ul>
+					<li>Lorenzo Wölckner (Scandit)</li>
+					<li>Sébastien Roch (Scandit)</li>
+				</ul>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>This project is licensed under a custom license - see the <a href="https://docs.scandit.com/stable/web/LICENSE">LICENSE</a> file for details (also found inside the project).</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/Barcode.html">Barcode</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/BarcodePicker.html">Barcode<wbr>Picker</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/BrowserCompatibility.html">Browser<wbr>Compatibility</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/BrowserHelper.html">Browser<wbr>Helper</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/Camera.html">Camera</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/CameraAccess.html">Camera<wbr>Access</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/CameraSettings.html">Camera<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/ImageSettings.html">Image<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/Logger.html">Logger</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/Parser.html">Parser</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/RecognizedText.html">Recognized<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/ScanSettings.html">Scan<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/SingleImageModeSettings.html">Single<wbr>Image<wbr>Mode<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/SymbologySettings.html">Symbology<wbr>Settings</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/BarcodePicker.html" class="tsd-kind-icon">Barcode<wbr>Picker</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/Parser.html" class="tsd-kind-icon">Parser</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/ScanResult.html" class="tsd-kind-icon">Scan<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/ScanSettings.html" class="tsd-kind-icon">Scan<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/Scanner.html" class="tsd-kind-icon">Scanner</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/SymbologySettings.html" class="tsd-kind-icon">Symbology<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/TextRecognitionSettings.html" class="tsd-kind-icon">Text<wbr>Recognition<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/Barcode.html" class="tsd-kind-icon">Barcode</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/BarcodeEncodingRange.html" class="tsd-kind-icon">Barcode<wbr>Encoding<wbr>Range</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/BrowserCompatibility.html" class="tsd-kind-icon">Browser<wbr>Compatibility</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/Camera.html" class="tsd-kind-icon">Camera</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/CameraSettings.html" class="tsd-kind-icon">Camera<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ImageSettings.html" class="tsd-kind-icon">Image<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ParserField.html" class="tsd-kind-icon">Parser<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ParserResult.html" class="tsd-kind-icon">Parser<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/Point.html" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/Quadrilateral.html" class="tsd-kind-icon">Quadrilateral</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/RecognizedText.html" class="tsd-kind-icon">Recognized<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/SearchArea.html" class="tsd-kind-icon">Search<wbr>Area</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/SingleImageModePlatformSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Platform<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/SingleImageModeSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#configure" class="tsd-kind-icon">configure</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-23556890-7', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

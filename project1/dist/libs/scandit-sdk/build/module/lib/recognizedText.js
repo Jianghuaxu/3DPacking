@@ -1,0 +1,1 @@
+export var RecognizedText;(function(o){function t(o){return{location:{topLeft:{x:o.location[0][0],y:o.location[0][1]},topRight:{x:o.location[1][0],y:o.location[1][1]},bottomRight:{x:o.location[2][0],y:o.location[2][1]},bottomLeft:{x:o.location[3][0],y:o.location[3][1]}},value:o.value}}o.createFromWASMResult=t})(RecognizedText||(RecognizedText={}));
