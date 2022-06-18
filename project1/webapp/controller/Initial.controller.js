@@ -7,7 +7,8 @@ sap.ui.define([
     "sap/ui/vk/thirdparty/three",
     "sap/ui/vk/Camera",
     "../utils/Util",
-    "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency
+    "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency,
+    //"../libs/scandit-sdk/build", // include the WebSDK as dependency
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -31,18 +32,19 @@ sap.ui.define([
                 this.getView().setModel(this._scanListModel, "scan");
 
                 //https://ssl.scandit.com/dashboard/sdk/projects: for creating a license key
-                var licenseKey = "AelhPGK0Q/QqARqoEztBkSsu6zcXPYf4cHWg1ysy9Q+kZ7oFpSMvK8NfRsWQJV/FYXLjnBcOZEdyHdejuXmAcgF1GcAGJYRq+ldYsHFrGCk9XP5mnG0wVy9b1c0ReclZdDR0iq8Y7xQHJ7cKwAWdGotEhAG+T0EsV3u81M/zRXWNfd41QLz2hYu0Ie/Bl+SkFPd1rA4wI3hOaT3ob9ZWuul0J+KBb++BMV2+kPmyUOK0yahOQeR6rBage01m0FTcDyQSa5GRBoO0aOdb8IN4nikGTvS1in/8RwNlq1e4AiV6MvN/xsT38lNT5jnr83iWPz4Yt8u0WiDrUC5umOl74vW5Nbd4s0x7MINfN15oslgOO7kDfI2EH76xltFIGYYmjFeVquQ+cXa6tcw9JuyAZav3m1hMdICBFOwJheGDlBNNdzyiuBAWc6rzOmzWb4MAJT1fLdRZ5ImWleUFgx3KVA0xD+kCT5Sy/Pl6TpS5vpIJvjJXtA8xgMHHv1Xno/yyPsqNINKOABzyVgTwgqP4lo6eIyJA6Al61tjWIWUgpDp5f1viAGJU8WYX/ub7F5W16JDIhlIX07+C0P+AFNkgyYjzG7QyWXEuQjbLTwUV4iAnWkS2wuhplWb8G0zAREOwGmNzpxTYnaK/blwHlsG30WzfbbvxcuOmLMvAzHoYJj+utoaG1AiQ7d2j/QUATTidJadOD4QIswIIYNZG9i6O5JIC99kPwwXrNKtXvLMm9VAeSDbjMNrB3R5DW0vdUVRMbVm1v3GDZwHhSSyrkhamcbF8vcV81XZgLg62+os7QMtiPUT9dKkCbSlwBKGMivrgiM1ncTao8WW4S2Xc";
-
+                //var licenseKey = "AelhPGK0Q/QqARqoEztBkSsu6zcXPYf4cHWg1ysy9Q+kZ7oFpSMvK8NfRsWQJV/FYXLjnBcOZEdyHdejuXmAcgF1GcAGJYRq+ldYsHFrGCk9XP5mnG0wVy9b1c0ReclZdDR0iq8Y7xQHJ7cKwAWdGotEhAG+T0EsV3u81M/zRXWNfd41QLz2hYu0Ie/Bl+SkFPd1rA4wI3hOaT3ob9ZWuul0J+KBb++BMV2+kPmyUOK0yahOQeR6rBage01m0FTcDyQSa5GRBoO0aOdb8IN4nikGTvS1in/8RwNlq1e4AiV6MvN/xsT38lNT5jnr83iWPz4Yt8u0WiDrUC5umOl74vW5Nbd4s0x7MINfN15oslgOO7kDfI2EH76xltFIGYYmjFeVquQ+cXa6tcw9JuyAZav3m1hMdICBFOwJheGDlBNNdzyiuBAWc6rzOmzWb4MAJT1fLdRZ5ImWleUFgx3KVA0xD+kCT5Sy/Pl6TpS5vpIJvjJXtA8xgMHHv1Xno/yyPsqNINKOABzyVgTwgqP4lo6eIyJA6Al61tjWIWUgpDp5f1viAGJU8WYX/ub7F5W16JDIhlIX07+C0P+AFNkgyYjzG7QyWXEuQjbLTwUV4iAnWkS2wuhplWb8G0zAREOwGmNzpxTYnaK/blwHlsG30WzfbbvxcuOmLMvAzHoYJj+utoaG1AiQ7d2j/QUATTidJadOD4QIswIIYNZG9i6O5JIC99kPwwXrNKtXvLMm9VAeSDbjMNrB3R5DW0vdUVRMbVm1v3GDZwHhSSyrkhamcbF8vcV81XZgLg62+os7QMtiPUT9dKkCbSlwBKGMivrgiM1ncTao8WW4S2Xc";
+                var licenseKey = "ATNBkDMUEa4GAlYNWibImqkDOXm/Oo+yJ1uIV05DLARbVdEoVkf5KmJW+VMtWgEgMVcMekBX7Mv1biyzMmduI3Fwxb9bKVkYs1fhZbh2gcKWY4UJbS3xbgJ86Ib0d1z5gEMQNoREhInZDxkgxSX4catOFImXUyhHZVoeaKqFPzeTalXdRyHOL6Z1NyyGgUE6n6tGPbEDkotoremBX+1RiZiAvi4mpEa8pTa0AfETKefICP6y7ldF+WmfhlcVMu2nPle9WL9WrW84FS8gFf+lb7ZlryIxGLp9hV5WprcQFsemefWJejUctutU9D+ML5HgjtEp4macvDUU6T9b3tqkB18bSmOPWQ82psKV7DcU+psKX6cxqxijPEfKzb1WW00MZiptQ0vRUfr3X5/cHorA0cYZ0T0fXC8LA58eHHkkOJTb8dCtHSRF18lArnXUR3XURdLKtOGvSCJxcg2F6Q7EGBffQXikOLBpasaXrgrB8MILfXPRxDLpPx6jxQ/wtszVDEtePn/g6urZwtXJoQAOD1EmCJtwMkvI6+TuC0it/FHtU4fDLZ2kbzAs3EKPh3lccFRNFOiWQ5vmsf3Qi3BANigPwhJfRtinZv9/vpxQeonCQA8dr9okn/xJjzcnwgNRne66aKB5nuDR730mAyNth6ozakl8lBxsOxV+PPwaeJa5/vE37NRHbeJkDN6n5fx7Wxfq9jaG/GO2RGLJU4V6GfiEV/G2zu4OaNOTXmhe9BarpYy5MIhxZ3/TvYwHk7F2v0MdbjRq5MMwbJhMYPCs2/4k3285BQhM6S4NOMNw2kr/ZeQAcO1K0eIknoZDpETHN+hjN7iESfOleY1P";
                 //var licenseKey = "AVZx5Tu0GhkhLUEh8A7SdiIJ0uLtD41dZ0R3fNtvNbAESdrUaATie5l1DED0KWsxJ0p6Tr9KTF7EVb02tnbtFDtkL93lM+ed6lS1tFtpVOB0WF8DCUnsKWh9qWU0SElsCF7H8flkAjLERbF5GnmrR00KpP++C/7GNkaW6Kc2hzlFMiJiuGMhKJh7bsWzITocORec3uCyPhV/9NYApXlg/Y8zy1dla6IDtX8s/35szIm0UKRS0rXhyn1scHFS35NeHCni1ULmhJGkYfHYPRRGtqJY+n2ei3ZW8mStkFhuQHULZxsm7MXoOojoF5C/H7PQNOuVVPfdm21wEhqgW7uecELDjEH/xLjp2BPoFINaF/ayjQEbd2SUAnCDZ6Qr8ojlqH/vLEyK6fONkXbTTXMwaHEIAocaU9r4ramWB8t2eUerkyPH8Y06Vb8yhDJBRShK/pCML9wUqVYf60wUFTJ7LeGAvYhjXiI9DhRBFOf2e0ZCcJ+oiIAg8CCy81pslnNIjUA7arDqUw4WwVbn64ZP8q7mDdwP5T8BET63pKkC3YSFWwI0r+6w5S51UhAjqraRvEG0XklOUVxT+8WnJQ9mz0Qx1ZW0ds0RIekjQzRpn1gROTtcmwb1DyQ3MCkNjKv6RqC8Cb59jeBKwgdj2+8hZWsmzAeCj2hVxQ3/r3vZq9zaappFd4qed91dmxG1vp/TjkTbLvel9tm8kZZasljj1b6ciC/FH259SmjNiVAvydVea4XkoeBxTwZBdKrbGJDTPRt8qF5AAtCHeNbYFHc76ZxDjLu48OweW0SQsyvlgW14W36ekKpY9Xf+LD3i4D+i+uYhKw0Pvhd2T3VjEml7eRSeCbdwRily1oiotKqA";
                 await ScanditSDK.configure(licenseKey,
                     {
                         engineLocation: "./libs/scandit-sdk/build/", // path to scan engine
+                        //engineLocation: "./node_modules/scandit-sdk/build/"
                     });
 
                 // create the BarcodePicker element for code128 barcodes
                 this.barcodePicker = await ScanditSDK.BarcodePicker.create(
                     //document.getElementById("container-project1---Initial--scandit-barcode-picker"), { // version for debugging in SAP Business Application Studio (index.html does not exist)
-                    document.getElementById("application-project1-display-component---Initial--scandit-barcode-picker"), {
+                    document.getElementById("application-project1-display-component---Initial--scandit-barcode-picker"), { 
                     scanSettings: new ScanditSDK.ScanSettings({
                         enabledSymbologies: ["code128", "ean8", "ean13", "upca", "upce"],
                         codeDuplicateFilter: 3000, // Minimum delay between duplicate results
@@ -89,7 +91,7 @@ sap.ui.define([
                             "len": tmpLen,
                             "hei": tmpHei,
                             "pack_sequence": 0,
-                            "scannedOn": new Date().getTime()
+                            "scannedDateTime": new Date().getTime()
                         })
                     }
 
@@ -122,9 +124,9 @@ sap.ui.define([
 
                 });
 
-                this.barcodePicker.processVideoFrame(function (frame) {
+               /* this.barcodePicker.processVideoFrame(function (frame) {
                     console.log(frame)
-                })
+                }) */
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {

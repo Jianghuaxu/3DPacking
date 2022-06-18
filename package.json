@@ -9,11 +9,12 @@
         "undeploy": "cf undeploy ThreeDPackingMTA --delete-services --delete-service-keys"
     },
     "devDependencies": {
-        "mbt": "^1.0.15",
+        "mbt": "^1.2.16",
         "rimraf": "3.0.0"
     },
     "dependencies": {
         "eslint": "^8.10.0",
-        "scandit-sdk": "^5.9.3"
+        "scandit-sdk": "^5.11.1",
+        "scandit-web-datacapture-barcode": "^6.13.0-beta.2"
     }
 }

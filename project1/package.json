@@ -42,7 +42,8 @@
             "@sap/ux-ui5-fe-mockserver-middleware",
             "@sap/ui5-builder-webide-extension",
             "ui5-task-zipper",
-            "mbt"
+            "mbt",
+            "scandit-sdk"
         ]
     },
     "sapuxLayer": "CUSTOMER_BASE"

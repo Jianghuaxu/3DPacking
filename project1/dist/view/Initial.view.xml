@@ -26,42 +26,8 @@
                             press=".onScanInputButton"
                             text="Scan"
                             type="Emphasized"/>
-                        <Table id="idProductsTable"
-                            inset="false"
-                            items="{
-                                path: '/WhseInboundDeliveryHead'
-                            }">                            
-                            <infoToolbar>
-                                <OverflowToolbar>
-                                    <Label text="PI Items"/>
-                                    
-                                </OverflowToolbar>
-                            </infoToolbar>
-                            <columns>
-                                <Column width="auto">
-                                    <Text text="InboundDelivery" />
-                                </Column>
-                                <Column width="auto">
-                                    <Text text="Warehouse Number" />
-                                </Column>
-                                <Column
-                                    hAlign="End">
-                                    <Text text="ShipFromParty" />
-                                </Column>
-                            </columns>
-                            <items>
-                                <ColumnListItem vAlign="Middle">
-                                    <cells>                                        
-                                        <Text
-                                            text="{InboundDelivery}" />
-                                        <Text
-                                            text="{Warehouse}" />
-                                        <Text
-                                            text="{ShipFromParty}" />                                        
-                                    </cells>
-                                </ColumnListItem>
-                            </items>
-                        </Table>
+                            <Button id="calculate" text="Calculate" press="onCalculate"/>
+                        
                         <VBox>
                             <Table id="scanResultTable"
                                 inset="false"
@@ -153,9 +119,10 @@
                             <HBox alignItems="Center" alignContent="SpaceAround"> 
                             <!-- <l:Grid> -->
                                 <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView"/>
-                                <Button id="frontViewButton" text="{i18n>frontView}" press="onDisplayFrontView"/>
+                                <Button id="backViewButton" text="{i18n>backView}" press="onDisplayBackView"/>
                                 <Button id="topViewButton" text="{i18n>topView}" press="onDisplayTopView"/>
                                 <Button id="rightViewButton" text="{i18n>rightView}" press="onDisplayRightView"/>
+                                <Button id="leftViewButton" text="{i18n>leftView}" press="onDisplayLeftView"/>
                                 <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView"/>
                            </HBox>
                            <!-- </l:Grid> -->
