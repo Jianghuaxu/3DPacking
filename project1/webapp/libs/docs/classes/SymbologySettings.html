@@ -1,0 +1,606 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SymbologySettings | Scandit Barcode Scanner SDK for the Web</title>
+	<meta name="description" content="Documentation for Scandit Barcode Scanner SDK for the Web">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Scandit Barcode Scanner SDK for the Web</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">Scandit Barcode Scanner SDK for the Web</a>
+				</li>
+				<li>
+					<a href="SymbologySettings.html">SymbologySettings</a>
+				</li>
+			</ul>
+			<h1>Class SymbologySettings</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A symbology-specific configuration object.</p>
+					</div>
+					<p>See <a href="https://docs.scandit.com/stable/c_api/symbologies.html">https://docs.scandit.com/stable/c_api/symbologies.html</a> for more details.</p>
+					<p>Note that modified <a href="ScanSettings.html">ScanSettings</a> (due to <a href="SymbologySettings.html">SymbologySettings</a> changes) need to be applied to a scanner via
+					<a href="BarcodePicker.html#applyScanSettings">BarcodePicker.applyScanSettings</a> or <a href="Scanner.html#applyScanSettings">Scanner.applyScanSettings</a> to take effect.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">SymbologySettings</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#disableChecksums" class="tsd-kind-icon">disable<wbr>Checksums</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#disableExtensions" class="tsd-kind-icon">disable<wbr>Extensions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#enableChecksums" class="tsd-kind-icon">enable<wbr>Checksums</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#enableExtensions" class="tsd-kind-icon">enable<wbr>Extensions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#getActiveSymbolCounts" class="tsd-kind-icon">get<wbr>Active<wbr>Symbol<wbr>Counts</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#getEnabledChecksums" class="tsd-kind-icon">get<wbr>Enabled<wbr>Checksums</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#getEnabledExtensions" class="tsd-kind-icon">get<wbr>Enabled<wbr>Extensions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#isColorInvertedEnabled" class="tsd-kind-icon">is<wbr>Color<wbr>Inverted<wbr>Enabled</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#isEnabled" class="tsd-kind-icon">is<wbr>Enabled</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#setActiveSymbolCounts" class="tsd-kind-icon">set<wbr>Active<wbr>Symbol<wbr>Counts</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#setActiveSymbolCountsRange" class="tsd-kind-icon">set<wbr>Active<wbr>Symbol<wbr>Counts<wbr>Range</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#setColorInvertedEnabled" class="tsd-kind-icon">set<wbr>Color<wbr>Inverted<wbr>Enabled</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="SymbologySettings.html#setEnabled" class="tsd-kind-icon">set<wbr>Enabled</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="disableChecksums" class="tsd-anchor"></a>
+					<h3>disable<wbr>Checksums</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">disable<wbr>Checksums<span class="tsd-signature-symbol">(</span>checksum<span class="tsd-signature-symbol">: </span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Disable an optional checksum or list/set of optional checksums.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>checksum: <a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The single checksum or list/set of checksums to disable.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="disableExtensions" class="tsd-anchor"></a>
+					<h3>disable<wbr>Extensions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">disable<wbr>Extensions<span class="tsd-signature-symbol">(</span>extension<span class="tsd-signature-symbol">: </span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Disable an optional extension or list/set of optional extensions.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>extension: <a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The single extension or list/set of extensions to disable.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="enableChecksums" class="tsd-anchor"></a>
+					<h3>enable<wbr>Checksums</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">enable<wbr>Checksums<span class="tsd-signature-symbol">(</span>checksum<span class="tsd-signature-symbol">: </span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Enable an optional checksum or list/set of optional checksums.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>checksum: <a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The single checksum or list/set of checksums to enable.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="enableExtensions" class="tsd-anchor"></a>
+					<h3>enable<wbr>Extensions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">enable<wbr>Extensions<span class="tsd-signature-symbol">(</span>extension<span class="tsd-signature-symbol">: </span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Enable an optional extension or list/set of optional extensions</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>extension: <a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The single extension or list/set of extensions to enable.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="getActiveSymbolCounts" class="tsd-anchor"></a>
+					<h3>get<wbr>Active<wbr>Symbol<wbr>Counts</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Active<wbr>Symbol<wbr>Counts<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the current list of active symbol counts.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>The list of active symbol counts.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="getEnabledChecksums" class="tsd-anchor"></a>
+					<h3>get<wbr>Enabled<wbr>Checksums</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Enabled<wbr>Checksums<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the current set of enabled optional checksums.</p>
+								</div>
+								<p>Note that the external Scandit Data Capture library will also use any applicable mandatory checksum for the
+								symbology.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Checksum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Checksum</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The set of enabled checksums.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="getEnabledExtensions" class="tsd-anchor"></a>
+					<h3>get<wbr>Enabled<wbr>Extensions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Enabled<wbr>Extensions<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the current set of enabled optional extensions.</p>
+								</div>
+								<p>Note that the external Scandit Data Capture library will also use any applicable mandatory extension for the
+								symbology.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../enums/SymbologySettings.Extension.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Extension</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The set of enabled extensions.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="isColorInvertedEnabled" class="tsd-anchor"></a>
+					<h3>is<wbr>Color<wbr>Inverted<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Color<wbr>Inverted<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Whether color inverted recognition is enabled.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="isEnabled" class="tsd-anchor"></a>
+					<h3>is<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Whether the symbology enabled for recognition.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="setActiveSymbolCounts" class="tsd-anchor"></a>
+					<h3>set<wbr>Active<wbr>Symbol<wbr>Counts</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Active<wbr>Symbol<wbr>Counts<span class="tsd-signature-symbol">(</span>activeSymbolCounts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set the list of active symbol counts.</p>
+								</div>
+								<p>If an empty or invalid symbol count range is given, the range will be set to its default value.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>activeSymbolCounts: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The list of active symbol counts.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="setActiveSymbolCountsRange" class="tsd-anchor"></a>
+					<h3>set<wbr>Active<wbr>Symbol<wbr>Counts<wbr>Range</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Active<wbr>Symbol<wbr>Counts<wbr>Range<span class="tsd-signature-symbol">(</span>minCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, maxCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set the (inclusive) range of active symbol counts.</p>
+								</div>
+								<p>If an empty or invalid symbol count range is given, the range will be set to its default value.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>minCount: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The minimum accepted number of symbols.</p>
+									</div>
+								</li>
+								<li>
+									<h5>maxCount: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The maximum accepted number of symbols.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="setColorInvertedEnabled" class="tsd-anchor"></a>
+					<h3>set<wbr>Color<wbr>Inverted<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Color<wbr>Inverted<wbr>Enabled<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Enable or disable recognition of inverted-color symbology (in addition to normal colors).</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enabled: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Whether color inverted recognition is enabled.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="setEnabled" class="tsd-anchor"></a>
+					<h3>set<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Enabled<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Enable or disable recognition of the symbology.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enabled: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Whether the symbology is enabled for recognition.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="SymbologySettings.html" class="tsd-signature-type" data-tsd-kind="Class">SymbologySettings</a></h4>
+							<p>The updated <a href="SymbologySettings.html">SymbologySettings</a> object.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="BarcodePicker.html" class="tsd-kind-icon">Barcode<wbr>Picker</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Parser.html" class="tsd-kind-icon">Parser</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ScanResult.html" class="tsd-kind-icon">Scan<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ScanSettings.html" class="tsd-kind-icon">Scan<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Scanner.html" class="tsd-kind-icon">Scanner</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="SymbologySettings.html" class="tsd-kind-icon">Symbology<wbr>Settings</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#disableChecksums" class="tsd-kind-icon">disable<wbr>Checksums</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#disableExtensions" class="tsd-kind-icon">disable<wbr>Extensions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#enableChecksums" class="tsd-kind-icon">enable<wbr>Checksums</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#enableExtensions" class="tsd-kind-icon">enable<wbr>Extensions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#getActiveSymbolCounts" class="tsd-kind-icon">get<wbr>Active<wbr>Symbol<wbr>Counts</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#getEnabledChecksums" class="tsd-kind-icon">get<wbr>Enabled<wbr>Checksums</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#getEnabledExtensions" class="tsd-kind-icon">get<wbr>Enabled<wbr>Extensions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#isColorInvertedEnabled" class="tsd-kind-icon">is<wbr>Color<wbr>Inverted<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#isEnabled" class="tsd-kind-icon">is<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#setActiveSymbolCounts" class="tsd-kind-icon">set<wbr>Active<wbr>Symbol<wbr>Counts</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#setActiveSymbolCountsRange" class="tsd-kind-icon">set<wbr>Active<wbr>Symbol<wbr>Counts<wbr>Range</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#setColorInvertedEnabled" class="tsd-kind-icon">set<wbr>Color<wbr>Inverted<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="SymbologySettings.html#setEnabled" class="tsd-kind-icon">set<wbr>Enabled</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="TextRecognitionSettings.html" class="tsd-kind-icon">Text<wbr>Recognition<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Barcode.html" class="tsd-kind-icon">Barcode</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BarcodeEncodingRange.html" class="tsd-kind-icon">Barcode<wbr>Encoding<wbr>Range</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BrowserCompatibility.html" class="tsd-kind-icon">Browser<wbr>Compatibility</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Camera.html" class="tsd-kind-icon">Camera</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/CameraSettings.html" class="tsd-kind-icon">Camera<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ImageSettings.html" class="tsd-kind-icon">Image<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ParserField.html" class="tsd-kind-icon">Parser<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ParserResult.html" class="tsd-kind-icon">Parser<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Point.html" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Quadrilateral.html" class="tsd-kind-icon">Quadrilateral</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/RecognizedText.html" class="tsd-kind-icon">Recognized<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SearchArea.html" class="tsd-kind-icon">Search<wbr>Area</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SingleImageModePlatformSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Platform<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SingleImageModeSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#configure" class="tsd-kind-icon">configure</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-23556890-7', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Parser | Scandit Barcode Scanner SDK for the Web</title>
+	<meta name="description" content="Documentation for Scandit Barcode Scanner SDK for the Web">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Scandit Barcode Scanner SDK for the Web</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">Scandit Barcode Scanner SDK for the Web</a>
+				</li>
+				<li>
+					<a href="Parser.html">Parser</a>
+				</li>
+			</ul>
+			<h1>Class Parser</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A data string parser.</p>
+					</div>
+					<p>Parsers are capable of parsing one particular data format, which is passed to them during construction.</p>
+					<p>The parser is created through <a href="BarcodePicker.html#createParserForFormat">BarcodePicker.createParserForFormat</a> or <a href="Scanner.html#createParserForFormat">Scanner.createParserForFormat</a>.</p>
+					<p>Note that you need to have a valid license key with the parsing feature enabled to use the parser functionalities.</p>
+					<p>For documentation on the available formats, check the official parser library documentation here:
+					<a href="https://docs.scandit.com/parser/formats.html">https://docs.scandit.com/parser/formats.html</a>.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Parser</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Parser.html#parseRawData" class="tsd-kind-icon">parse<wbr>Raw<wbr>Data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Parser.html#parseString" class="tsd-kind-icon">parse<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Parser.html#setOptions" class="tsd-kind-icon">set<wbr>Options</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="parseRawData" class="tsd-anchor"></a>
+					<h3>parse<wbr>Raw<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Raw<wbr>Data<span class="tsd-signature-symbol">(</span>rawData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ParserResult.html" class="tsd-signature-type" data-tsd-kind="Interface">ParserResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Process the given raw (byte array) data with the parser, retrieving the result as a <a href="../interfaces/ParserResult.html">ParserResult</a> object.</p>
+								</div>
+								<p>Multiple requests done without waiting for previous results will be queued and handled in order.</p>
+								<p>If parsing of the data fails the returned promise is rejected with a <code>ScanditEngineError</code> error.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rawData: <span class="tsd-signature-type">Uint8Array</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The raw (byte array) data to be parsed.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ParserResult.html" class="tsd-signature-type" data-tsd-kind="Interface">ParserResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise resolving to the <a href="../interfaces/ParserResult.html">ParserResult</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="parseString" class="tsd-anchor"></a>
+					<h3>parse<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>String<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ParserResult.html" class="tsd-signature-type" data-tsd-kind="Interface">ParserResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Process the given string data with the parser, retrieving the result as a <a href="../interfaces/ParserResult.html">ParserResult</a> object.</p>
+								</div>
+								<p>Multiple requests done without waiting for previous results will be queued and handled in order.</p>
+								<p>If parsing of the data fails the returned promise is rejected with a <code>ScanditEngineError</code> error.</p>
+								<p>Note that you should use <a href="Parser.html#parseRawData">parseRawData</a> whenever possible: some codes, such as those found on driving licenses,
+								might have non-printable characters and will need to use <a href="../interfaces/Barcode.html#rawData">Barcode.rawData</a> information to be parsed correctly.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The string data to be parsed.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ParserResult.html" class="tsd-signature-type" data-tsd-kind="Interface">ParserResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise resolving to the <a href="../interfaces/ParserResult.html">ParserResult</a> object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class" >
+					<a name="setOptions" class="tsd-anchor"></a>
+					<h3>set<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Apply the option map to the parser, allowing the user to fine-tune the behaviour of the parser.
+									Available options depend on the data format and are specified in the respective documentation.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">object</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new options to be applied (replacing previous ones, if any).</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="BarcodePicker.html" class="tsd-kind-icon">Barcode<wbr>Picker</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="Parser.html" class="tsd-kind-icon">Parser</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Parser.html#parseRawData" class="tsd-kind-icon">parse<wbr>Raw<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Parser.html#parseString" class="tsd-kind-icon">parse<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Parser.html#setOptions" class="tsd-kind-icon">set<wbr>Options</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="ScanResult.html" class="tsd-kind-icon">Scan<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ScanSettings.html" class="tsd-kind-icon">Scan<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Scanner.html" class="tsd-kind-icon">Scanner</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="SymbologySettings.html" class="tsd-kind-icon">Symbology<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="TextRecognitionSettings.html" class="tsd-kind-icon">Text<wbr>Recognition<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Barcode.html" class="tsd-kind-icon">Barcode</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BarcodeEncodingRange.html" class="tsd-kind-icon">Barcode<wbr>Encoding<wbr>Range</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BrowserCompatibility.html" class="tsd-kind-icon">Browser<wbr>Compatibility</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Camera.html" class="tsd-kind-icon">Camera</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/CameraSettings.html" class="tsd-kind-icon">Camera<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ImageSettings.html" class="tsd-kind-icon">Image<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ParserField.html" class="tsd-kind-icon">Parser<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ParserResult.html" class="tsd-kind-icon">Parser<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Point.html" class="tsd-kind-icon">Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Quadrilateral.html" class="tsd-kind-icon">Quadrilateral</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/RecognizedText.html" class="tsd-kind-icon">Recognized<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SearchArea.html" class="tsd-kind-icon">Search<wbr>Area</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SingleImageModePlatformSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Platform<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/SingleImageModeSettings.html" class="tsd-kind-icon">Single<wbr>Image<wbr>Mode<wbr>Settings</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#configure" class="tsd-kind-icon">configure</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-23556890-7', 'auto');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

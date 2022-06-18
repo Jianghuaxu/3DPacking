@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scandit Example Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="build/browser/index.min.js"></script>
+
+    <!-- The following is only an example style for the container element and other demo elements, it's not required -->
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      }
+
+      .scanner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        max-width: 1280px;
+        max-height: 80%;
+      }
+
+      .result-text {
+        padding: 1rem;
+        font-size: 18pt;
+        text-align: center;
+        white-space: pre;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="scandit-picker" class="scanner"></div>
+    <div id="scandit-text-result" class="result-text"></div>
+
+    <script>
+      ScanditSDK.configure("YOUR_LICENSE_KEY_IS_NEEDED_HERE", {
+        engineLocation: "build",
+        loadTextRecognition: true,
+      })
+        .then(() => {
+          return ScanditSDK.BarcodePicker.create(document.getElementById("scandit-picker"), {
+            playSoundOnScan: true,
+            vibrateOnScan: true,
+            guiStyle: "none",
+            scanSettings: new ScanditSDK.ScanSettings({
+              recognitionMode: "text",
+              textRecognitionSettings: new ScanditSDK.TextRecognitionSettings({
+                textDuplicateFilter: -1,
+                regex:
+                  "[AIC][A-Z0-9<]{29}\n[A-Z0-9<]{30}\n[A-Z0-9<]{30}\n?|[A-Z0-9<]{36}\n[A-Z0-9<]{36}\n?|P[A-Z0-9<]{43}\n[A-Z0-9<]{44}\n?|V[A-Z0-9<]{43}\n[A-Z0-9<]{44}\n?|V[A-Z0-9<]{35}\n[A-Z0-9<]{36}\n?|[A-Z0-9<]{7}<<\n[A-Z0-9<]{30}\n[A-Z0<]{30}\n?",
+              }),
+            }),
+          }).then((barcodePicker) => {
+            barcodePicker
+              .on("scan", (scanResult) => {
+                document.getElementById("scandit-text-result").innerHTML = scanResult.texts.reduce((string, text) => {
+                  return `${string}${text.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")} (${
+                    text.location
+                  })<br/>`;
+                }, "");
+              })
+              .on("scanError", (error) => {
+                console.error(error);
+              });
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          alert(error);
+        });
+    </script>
+  </body>
+</html>
