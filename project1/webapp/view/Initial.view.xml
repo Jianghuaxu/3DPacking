@@ -33,7 +33,7 @@
                             <Table id="scanResultTable"
                                 inset="false"
                                 items="{
-                                    path: 'scan>/'
+                                    path: 'WhseInboundDeliveryHead'
                                 }">
                                 <headerToolbar>
                                     <OverflowToolbar>

@@ -17,6 +17,14 @@
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
         }
+      },
+      "ZEWM_PBO_SRV": {
+        "uri": "/sap/opu/odata/sap/ZEWM_PBO_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
       }
     },
     "crossNavigation": {
@@ -73,7 +81,7 @@
         }
       },
       "": {
-        "dataSource": "mainService",
+        "dataSource": "ZEWM_PBO_SRV",
         "preload": true,
         "settings": {
           "defaultBindingMode": "TwoWay",

@@ -3,255 +3,99 @@
     xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
     xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
     xmlns:sap="http://www.sap.com/Protocols/SAPData">
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="https://er9:44300/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value"
-        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
-    </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema Namespace="cds_api_whse_inbound_delivery" xml:lang="en" sap:schema-version="1"
+        <Schema Namespace="ZEWM_PBO_SRV" xml:lang="en" sap:schema-version="1"
             xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
             <Annotation Term="Core.SchemaVersion" String="1.0.0"
                 xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
-                <EntityType Name="WhseInboundDeliveryHeadType" sap:label="Warehouse Inbound Delivery Head" sap:content-version="1">
+                <EntityType Name="PBOResult" sap:content-version="1">
                     <Key>
-                        <PropertyRef Name="InboundDelivery"/>
+                        <PropertyRef Name="Matnr"/>
+                        <PropertyRef Name="Orientation"/>
+                        <PropertyRef Name="Xpos"/>
+                        <PropertyRef Name="Ypos"/>
+                        <PropertyRef Name="Zpos"/>
+                        <PropertyRef Name="PacSequence"/>
+                        <PropertyRef Name="PMatPack"/>
                     </Key>
-                    <Property Name="InboundDelivery" Type="Edm.String" Nullable="false" MaxLength="35" sap:display-format="UpperCase" sap:label="Document Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="Warehouse" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Warehouse Number" sap:quickinfo="Warehouse Number/Warehouse Complex" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="DeliveryCategory" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Document Category" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="DeliveryType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Document Type" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ShipFromParty" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ShipFromPartyName" Type="Edm.String" MaxLength="40" sap:label="Name 1" sap:quickinfo="Name 1 of organization" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="Carrier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
-                    <Property Name="CarrierName" Type="Edm.String" MaxLength="40" sap:label="Name 1" sap:quickinfo="Name 1 of organization" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="AdvancedShippingNotification" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Document Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="PlannedDeliveryUTCDateTime" Type="Edm.DateTimeOffset" Precision="0" sap:label="Creation Date/Time" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ReceivingOffice" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Location Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="0" sap:label="Short Time Stamp" sap:quickinfo="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)" sap:creatable="false" sap:updatable="false"/>
-                    <NavigationProperty Name="to_WhseInboundDeliveryItem" Relationship="cds_api_whse_inbound_delivery.assoc_380EBD90BD64029EC595EE439A6DD026" FromRole="FromRole_assoc_380EBD90BD64029EC595EE439A6DD026" ToRole="ToRole_assoc_380EBD90BD64029EC595EE439A6DD026"/>
+                    <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Orientation" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="orientation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Xpos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="X position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Ypos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Y position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Zpos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Z position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PacSequence" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Pack sequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PMatPack" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 </EntityType>
-                <EntityType Name="WhseInboundDeliveryItemType" sap:label="Warehouse Inbound Delivery Item" sap:content-version="1">
+                <EntityType Name="PBO" sap:content-version="1">
                     <Key>
-                        <PropertyRef Name="InboundDelivery"/>
-                        <PropertyRef Name="InboundDeliveryItem"/>
+                        <PropertyRef Name="Matnr"/>
+                        <PropertyRef Name="Quant"/>
+                        <PropertyRef Name="DimUoM"/>
+                        <PropertyRef Name="Meins"/>
+                        <PropertyRef Name="PackSequence"/>
+                        <PropertyRef Name="PMatLength"/>
+                        <PropertyRef Name="Orientation"/>
+                        <PropertyRef Name="PMatWidth"/>
+                        <PropertyRef Name="Xpos"/>
+                        <PropertyRef Name="PMatHeight"/>
+                        <PropertyRef Name="Ypos"/>
+                        <PropertyRef Name="PMatDimUoM"/>
+                        <PropertyRef Name="Zpos"/>
+                        <PropertyRef Name="PMat"/>
+                        <PropertyRef Name="MatnrLength"/>
+                        <PropertyRef Name="MatnrWidth"/>
+                        <PropertyRef Name="MatnrHeight"/>
                     </Key>
-                    <Property Name="InboundDelivery" Type="Edm.String" Nullable="false" MaxLength="35" sap:display-format="UpperCase" sap:label="Document Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="InboundDeliveryItem" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Item Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="Warehouse" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Warehouse Number" sap:quickinfo="Warehouse Number/Warehouse Complex" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="DeliveryCategory" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Document Category" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="DeliveryItemCategory" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Item Category" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="InboundDeliveryItemType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Item Type" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="Product" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Char" sap:quickinfo="Character field of length 40" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ProductExternalID" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Char" sap:quickinfo="Character field of length 40" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ProductBatch" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Batch Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="CountryOfOrigin" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Ctry/Reg. of Origin" sap:quickinfo="Country/Region of Origin" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ProductQuantity" Type="Edm.Decimal" Precision="31" Scale="14" sap:unit="QuantityUnit" sap:label="Quantity"/>
-                    <Property Name="QuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
-                    <Property Name="StagingAreaGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Staging Area Group" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StagingArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Staging Area" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StagingBay" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Staging Bay" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="GoodsReceiptStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status Value" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="PlanningPutawayStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status Value" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="PutawayStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status Value" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="CompletionStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status Value" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="WarehouseProcessType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Whse Process Type" sap:quickinfo="Warehouse Process Type" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="GoodsMovementBin" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Stor. Bin GM Posting" sap:quickinfo="Storage Bin of Goods Movement Posting"/>
-                    <Property Name="ProductionSupplyArea" Type="Edm.String" MaxLength="15" sap:display-format="UpperCase" sap:label="PSA" sap:quickinfo="Production Supply Area (PSA)" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="0" sap:label="Short Time Stamp" sap:quickinfo="UTC Time Stamp in Short Form (YYYYMMDDhhmmss)" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="EntitledToDisposeParty" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Disposal Party" sap:quickinfo="Party Entitled to Dispose" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StockUsage" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Stock Usage" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="WarehouseStockCategory" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Stock Type" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StockOwner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Character Field with Length 10" sap:heading="" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="DeliveryItemStockTypeDetnCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Determin. Ind." sap:quickinfo="Value Determination Indicator" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StockDocumentCategory" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Type" sap:quickinfo="Type: Special Reference Stock" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StockDocumentNumber" Type="Edm.String" MaxLength="35" sap:label="Special Ref. Stk" sap:quickinfo="Number of the Special Reference Stock" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="StockItemNumber" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Spe. Ref. Stk Itm" sap:quickinfo="Special Reference Stock Item" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="WBSElementInternalID" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="WBS Internal ID" sap:quickinfo="WBS Element" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="WBSElementExternalID" Type="Edm.String" MaxLength="24" sap:display-format="UpperCase" sap:label="WBS Element" sap:quickinfo="Work Breakdown Structure Element (WBS Element) Edited" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="SpecialStockIdfgSalesOrder" Type="Edm.String" MaxLength="35" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="SpecialStockIdfgSalesOrderItem" Type="Edm.String" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="PurchasingDocument" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Reference Doc." sap:quickinfo="Reference Document Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="PurchasingDocumentItem" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Ref. Item No." sap:quickinfo="Reference Item Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="ManufacturingOrder" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Reference Doc." sap:quickinfo="Reference Document Number" sap:creatable="false" sap:updatable="false"/>
-                    <NavigationProperty Name="to_WhseInboundDeliveryHead" Relationship="cds_api_whse_inbound_delivery.assoc_380EBD90BD64029EC595EE439A6DD026" FromRole="ToRole_assoc_380EBD90BD64029EC595EE439A6DD026" ToRole="FromRole_assoc_380EBD90BD64029EC595EE439A6DD026"/>
-                    <NavigationProperty Name="to_WhseInbDeliveryItemSerialNo" Relationship="cds_api_whse_inbound_delivery.assoc_21D8F2C474B771039B95935A5A28509E" FromRole="FromRole_assoc_21D8F2C474B771039B95935A5A28509E" ToRole="ToRole_assoc_21D8F2C474B771039B95935A5A28509E"/>
+                    <Property Name="Imgsrcurl" Type="Edm.String" Nullable="false" MaxLength="200" sap:unicode="false" sap:label="Char20" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Quant" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="Meins" sap:label="Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="DimUoM" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                    <Property Name="Meins" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Base Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                    <Property Name="Matselectedflag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variable (X = True, - = False, Space = Unknown)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PackSequence" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Pack sequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PMatLength" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="PMatDimUoM" sap:label="Length" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Orientation" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="orientation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PMatWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="PMatDimUoM" sap:label="Width" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Xpos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="X position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PMatHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="PMatDimUoM" sap:label="Height" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Ypos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Y position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PMatDimUoM" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                    <Property Name="Zpos" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Z position" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PMat" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="MatnrLength" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUoM" sap:label="Length" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="MatnrWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUoM" sap:label="Width" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="MatnrHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUoM" sap:label="Height" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 </EntityType>
-                <EntityType Name="WhseInbDelivItemSerialNumberType" sap:label="Whse Inb Delivery Item Serial Number" sap:content-version="1">
+                <EntityType Name="Z3DPack" sap:content-version="1">
                     <Key>
-                        <PropertyRef Name="InboundDelivery"/>
-                        <PropertyRef Name="InboundDeliveryItem"/>
-                        <PropertyRef Name="EWMSerialNumber"/>
+                        <PropertyRef Name="ProductSequence"/>
+                        <PropertyRef Name="Product"/>
                     </Key>
-                    <Property Name="InboundDelivery" Type="Edm.String" Nullable="false" MaxLength="35" sap:display-format="UpperCase" sap:label="Document Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="InboundDeliveryItem" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Item Number" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="EWMSerialNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:creatable="false" sap:updatable="false"/>
-                    <NavigationProperty Name="to_WhseInboundDeliveryItem" Relationship="cds_api_whse_inbound_delivery.assoc_21D8F2C474B771039B95935A5A28509E" FromRole="ToRole_assoc_21D8F2C474B771039B95935A5A28509E" ToRole="FromRole_assoc_21D8F2C474B771039B95935A5A28509E"/>
+                    <Property Name="ProductSequence" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="ProductSequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Product" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductLength" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="ProductLength" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="ProductWidth" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="ProductHeight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="Orientation" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Orientation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="XPosition" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="XPosition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="YPosition" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="YPosition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ZPosition" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ZPosition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PackSequence" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="PackSequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PackProduct" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="PackProduct" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PackProductLength" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="PackProductLength" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PackProductWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="PackProductWidth" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="PackProductHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="PackProductHeight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="ProductUoM" sap:label="ProductQuantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductUoM" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="ProductUoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
                 </EntityType>
-                <ComplexType Name="DummyFunctionImportResult">
-                    <Property Name="IsInvalid" Type="Edm.Boolean" sap:label="TRUE"/>
-                </ComplexType>
-                <Association Name="assoc_21D8F2C474B771039B95935A5A28509E" sap:content-version="1">
-                    <End Type="cds_api_whse_inbound_delivery.WhseInboundDeliveryItemType" Multiplicity="1" Role="FromRole_assoc_21D8F2C474B771039B95935A5A28509E">
-                        <OnDelete Action="Cascade"/>
-                    </End>
-                    <End Type="cds_api_whse_inbound_delivery.WhseInbDelivItemSerialNumberType" Multiplicity="*" Role="ToRole_assoc_21D8F2C474B771039B95935A5A28509E"/>
-                    <ReferentialConstraint>
-                        <Principal Role="FromRole_assoc_21D8F2C474B771039B95935A5A28509E">
-                            <PropertyRef Name="InboundDeliveryItem"/>
-                            <PropertyRef Name="InboundDelivery"/>
-                        </Principal>
-                        <Dependent Role="ToRole_assoc_21D8F2C474B771039B95935A5A28509E">
-                            <PropertyRef Name="InboundDeliveryItem"/>
-                            <PropertyRef Name="InboundDelivery"/>
-                        </Dependent>
-                    </ReferentialConstraint>
-                </Association>
-                <Association Name="assoc_380EBD90BD64029EC595EE439A6DD026" sap:content-version="1">
-                    <End Type="cds_api_whse_inbound_delivery.WhseInboundDeliveryHeadType" Multiplicity="1" Role="FromRole_assoc_380EBD90BD64029EC595EE439A6DD026">
-                        <OnDelete Action="Cascade"/>
-                    </End>
-                    <End Type="cds_api_whse_inbound_delivery.WhseInboundDeliveryItemType" Multiplicity="*" Role="ToRole_assoc_380EBD90BD64029EC595EE439A6DD026"/>
-                    <ReferentialConstraint>
-                        <Principal Role="FromRole_assoc_380EBD90BD64029EC595EE439A6DD026">
-                            <PropertyRef Name="InboundDelivery"/>
-                        </Principal>
-                        <Dependent Role="ToRole_assoc_380EBD90BD64029EC595EE439A6DD026">
-                            <PropertyRef Name="InboundDelivery"/>
-                        </Dependent>
-                    </ReferentialConstraint>
-                </Association>
-                <EntityContainer Name="cds_api_whse_inbound_delivery_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
-                    <EntitySet Name="WhseInboundDeliveryHead" EntityType="cds_api_whse_inbound_delivery.WhseInboundDeliveryHeadType" sap:creatable="false" sap:deletable="false" sap:content-version="1"/>
-                    <EntitySet Name="WhseInboundDeliveryItem" EntityType="cds_api_whse_inbound_delivery.WhseInboundDeliveryItemType" sap:creatable="false" sap:deletable="false" sap:content-version="1"/>
-                    <EntitySet Name="WhseInbDelivItemSerialNumber" EntityType="cds_api_whse_inbound_delivery.WhseInbDelivItemSerialNumberType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
-                    <AssociationSet Name="assoc_21D8F2C474B771039B95935A5A28509E" Association="cds_api_whse_inbound_delivery.assoc_21D8F2C474B771039B95935A5A28509E" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                        <End EntitySet="WhseInboundDeliveryItem" Role="FromRole_assoc_21D8F2C474B771039B95935A5A28509E"/>
-                        <End EntitySet="WhseInbDelivItemSerialNumber" Role="ToRole_assoc_21D8F2C474B771039B95935A5A28509E"/>
-                    </AssociationSet>
-                    <AssociationSet Name="assoc_380EBD90BD64029EC595EE439A6DD026" Association="cds_api_whse_inbound_delivery.assoc_380EBD90BD64029EC595EE439A6DD026" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                        <End EntitySet="WhseInboundDeliveryHead" Role="FromRole_assoc_380EBD90BD64029EC595EE439A6DD026"/>
-                        <End EntitySet="WhseInboundDeliveryItem" Role="ToRole_assoc_380EBD90BD64029EC595EE439A6DD026"/>
-                    </AssociationSet>
-                    <FunctionImport Name="PostGoodsReceipt" ReturnType="cds_api_whse_inbound_delivery.DummyFunctionImportResult" m:HttpMethod="POST" sap:action-for="cds_api_whse_inbound_delivery.WhseInboundDeliveryHeadType">
-                        <Parameter Name="InboundDelivery" Type="Edm.String" Mode="In" MaxLength="35" sap:label="Document Number"/>
-                    </FunctionImport>
-                    <FunctionImport Name="ReverseGoodsReceipt" ReturnType="cds_api_whse_inbound_delivery.DummyFunctionImportResult" m:HttpMethod="POST" sap:action-for="cds_api_whse_inbound_delivery.WhseInboundDeliveryHeadType">
-                        <Parameter Name="InboundDelivery" Type="Edm.String" Mode="In" MaxLength="35" sap:label="Document Number"/>
-                    </FunctionImport>
-                    <FunctionImport Name="AdjustDeliveryItemQuantity" ReturnType="cds_api_whse_inbound_delivery.DummyFunctionImportResult" m:HttpMethod="POST" sap:action-for="cds_api_whse_inbound_delivery.WhseInboundDeliveryItemType">
-                        <Parameter Name="InboundDelivery" Type="Edm.String" Mode="In" MaxLength="35" sap:label="Document Number"/>
-                        <Parameter Name="InboundDeliveryItem" Type="Edm.String" Mode="In" MaxLength="10" sap:label="Item Number"/>
-                    </FunctionImport>
+                <EntityContainer Name="ZEWM_PBO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                    <EntitySet Name="PBOResultSet" EntityType="ZEWM_PBO_SRV.PBOResult" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                    <EntitySet Name="PBOSet" EntityType="ZEWM_PBO_SRV.PBO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                    <EntitySet Name="Z3DPackCollection" EntityType="ZEWM_PBO_SRV.Z3DPack" sap:content-version="1"/>
                 </EntityContainer>
-                <Annotations Target="cds_api_whse_inbound_delivery.cds_api_whse_inbound_delivery_Entities"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
-                </Annotations>
-                <Annotations Target="cds_api_whse_inbound_delivery.WhseInboundDeliveryHeadType/to_WhseInboundDeliveryItem"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="Common.Composition"/>
-                </Annotations>
-                <Annotations Target="cds_api_whse_inbound_delivery.WhseInboundDeliveryItemType/to_WhseInbDeliveryItemSerialNo"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="Common.Composition"/>
-                </Annotations>
-                <Annotations Target="cds_api_whse_inbound_delivery.cds_api_whse_inbound_delivery_Entities/WhseInboundDeliveryHead"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="Capabilities.FilterRestrictions">
-                        <Record>
-                            <PropertyValue Property="NonFilterableProperties">
-                                <Collection/>
-                            </PropertyValue>
-                        </Record>
-                    </Annotation>
-                    <Annotation Term="SAP__core.OptimisticConcurrency">
-                        <Collection>
-                            <PropertyPath>LastChangeDateTime</PropertyPath>
-                        </Collection>
-                    </Annotation>
-                    <Annotation Term="Capabilities.SortRestrictions">
-                        <Record>
-                            <PropertyValue Property="NonSortableProperties">
-                                <Collection/>
-                            </PropertyValue>
-                        </Record>
-                    </Annotation>
-                </Annotations>
-                <Annotations Target="cds_api_whse_inbound_delivery.cds_api_whse_inbound_delivery_Entities/WhseInboundDeliveryItem"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="Capabilities.FilterRestrictions">
-                        <Record>
-                            <PropertyValue Property="NonFilterableProperties">
-                                <Collection/>
-                            </PropertyValue>
-                        </Record>
-                    </Annotation>
-                    <Annotation Term="SAP__core.OptimisticConcurrency">
-                        <Collection>
-                            <PropertyPath>LastChangeDateTime</PropertyPath>
-                        </Collection>
-                    </Annotation>
-                    <Annotation Term="Capabilities.SortRestrictions">
-                        <Record>
-                            <PropertyValue Property="NonSortableProperties">
-                                <Collection/>
-                            </PropertyValue>
-                        </Record>
-                    </Annotation>
-                </Annotations>
-                <Annotations Target="cds_api_whse_inbound_delivery.cds_api_whse_inbound_delivery_Entities/WhseInbDelivItemSerialNumber"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="SAP__core.OptimisticConcurrency">
-                        <Collection/>
-                    </Annotation>
-                </Annotations>
-                <Annotations Target="cds_api_whse_inbound_delivery.cds_api_whse_inbound_delivery_Entities"
-                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                    <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
-                        <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
-                            <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
-                        </Record>
-                    </Annotation>
-                </Annotations>
-                <atom:link rel="self" href="https://er9:44300/sap/opu/odata/sap/API_WHSE_INBOUND_DELIVERY/$metadata"
+                <atom:link rel="self" href="https://er9:44300/sap/opu/odata/sap/ZEWM_PBO_SRV/$metadata"
                     xmlns:atom="http://www.w3.org/2005/Atom"/>
-                    <atom:link rel="latest-version" href="https://er9:44300/sap/opu/odata/sap/API_WHSE_INBOUND_DELIVERY/$metadata"
+                    <atom:link rel="latest-version" href="https://er9:44300/sap/opu/odata/sap/ZEWM_PBO_SRV/$metadata"
                         xmlns:atom="http://www.w3.org/2005/Atom"/>
                     </Schema>
                 </edmx:DataServices>
