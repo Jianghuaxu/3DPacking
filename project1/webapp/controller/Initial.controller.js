@@ -44,7 +44,7 @@ sap.ui.define([
                 // create the BarcodePicker element for code128 barcodes
                 this.barcodePicker = await ScanditSDK.BarcodePicker.create(
                     //document.getElementById("container-project1---Initial--scandit-barcode-picker"), { // version for debugging in SAP Business Application Studio (index.html does not exist)
-                    document.getElementById("application-project1-display-component---Initial--scandit-barcode-picker"), { 
+                    document.getElementById("application-project1-display-component---Initial--scandit-barcode-picker"), {
                     scanSettings: new ScanditSDK.ScanSettings({
                         enabledSymbologies: ["code128", "ean8", "ean13", "upca", "upce"],
                         codeDuplicateFilter: 3000, // Minimum delay between duplicate results
@@ -104,6 +104,10 @@ sap.ui.define([
                         // pause scanning
                         this.barcodePicker.pauseScanning();
                         this.barcodePicker.setVisible(false);
+
+                        //start to call backend oData service for calculation: ZEWM_PBO_SRV
+                        // this is to be done by using local JSON Model: _scannedProd
+                        this._calculatePMAT();
                     }
 
                     /*
@@ -124,9 +128,110 @@ sap.ui.define([
 
                 });
 
-               /* this.barcodePicker.processVideoFrame(function (frame) {
-                    console.log(frame)
-                }) */
+                /* this.barcodePicker.processVideoFrame(function (frame) {
+                     console.log(frame)
+                 }) */
+            },
+
+            _calculatePMAT: function () {
+                var oModel = this.getView().getModel();
+                var oPayLoad1 = {
+                    // "CalculatePack_ac": "",
+                    "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+                        var r = Math.random() * 16 | 0,
+                            v = c === "x" ? r : (r & 0x3 | 0x8);
+                        return v.toString(16);
+                    }),
+                    "Product": "PROD-S02G",
+                    "PackSequence": 1,
+                    "ProductLength": "440",
+                    "ProductWidth": "240",
+                    "ProductHeight": "10",
+                    "ProductMeasurementUnit": "MM",
+                    "ProductQuantity": "1",
+                    "ProductUoM": "EA"
+                    // "Orientation": "",
+                    //"XPosition": "-4",
+                    //"YPosition": "-4",
+                    //"ZPosition": "-7.25",
+                    //"PackProductLength": "",
+                    //"PackProductWidth": "",
+                    //"PackProductHeight": "",
+                    // "PackProductMeasurementUnit": ""
+                };
+                var oPayLoad2 = {
+                    // "CalculatePack_ac": "",
+                    "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+                        var r = Math.random() * 16 | 0,
+                            v = c === "x" ? r : (r & 0x3 | 0x8);
+                        return v.toString(16);
+                    }),
+                    "Product": "PROD-S02G",
+                    "PackSequence": 2,
+                    "ProductLength": "16",
+                    "ProductWidth": "6",
+                    "ProductHeight": "14.4",
+                    "ProductMeasurementUnit": "MM",
+                    "ProductQuantity": "1",
+                    "ProductUoM": "EA"
+                    // "Orientation": "",
+                    //"XPosition": "-7",
+                    //"YPosition": "-7",
+                    //"ZPosition": "4.05",
+                    //"PackProductLength": "",
+                    //"PackProductWidth": "",
+                    //"PackProductHeight": "",
+                    // "PackProductMeasurementUnit": ""
+                };
+                var oPayLoad3 = {
+                    // "CalculatePack_ac": "",
+                    "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+                        var r = Math.random() * 16 | 0,
+                            v = c === "x" ? r : (r & 0x3 | 0x8);
+                        return v.toString(16);
+                    }),
+                    "Product": "PROD-S02G",
+                    "PackSequence": 3,
+                    "ProductLength": "440",
+                    "ProductWidth": "240",
+                    "ProductHeight": "12",
+                    "ProductMeasurementUnit": "MM",
+                    "ProductQuantity": "1", 
+                    "ProductUoM": "EA"
+                    // "Orientation": "",
+                    //"XPosition": "-7",
+                    //"YPosition": "-7",
+                    //"ZPosition": "4.05",
+                    //"PackProductLength": "",
+                    //"PackProductWidth": "",
+                    //"PackProductHeight": "",
+                    // "PackProductMeasurementUnit": ""
+                };
+                oModel.create("/EWM3DPackSet", oPayLoad1, {
+                    success: function () {
+
+                    },
+                    error: function () {
+
+                    }
+                });
+                oModel.create("/EWM3DPackSet", oPayLoad2, {
+                    success: function () {
+
+                    },
+                    error: function () {
+
+                    }
+                });
+
+                oModel.create("/EWM3DPackSet", oPayLoad3, {
+                    success: function () {
+
+                    },
+                    error: function () {
+
+                    }
+                });
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
@@ -201,9 +306,10 @@ sap.ui.define([
 
             onSelect: function () {
                 this._drawPackSequence();
+                this._calculatePMAT();
             },
 
-            onCalculate: function (bcalculate) {                
+            onCalculate: function (bcalculate) {
                 var vPackProductList;
                 if (bcalculate) {
                     var aScanResultList = this._scanListModel.getData();
@@ -233,16 +339,6 @@ sap.ui.define([
                                 // PackProductsHelper.setProductSequence(vPackResult)
 
                                 // Input to 3D visualization
-
-                                //var origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? (":" + window.location.port) :
-                                //    "");
-                                //var sUrl = origin + "/sap/opu/odata/SAP/CA_OC_OUTPUT_REQUEST_SRV/" + "Roots(ApplObjectType='" + 'EWM_PHYSICAL_INVENTORY' +
-                                //    "',ApplObjectId='" + vAppObjId + "')/" + "Preview/$value";
-
-                                // Define URL
-                                // According to: https://ldai7er9.wdf.sap.corp:44300/sap/opu/odata4/sap/api_whse_physinvtryitem_2/srvd_a2x/sap/whsephysicalinventorydoc/0001/$batch
-
-                                //sap.m.URLHelper.redirect(sUrl, true);
                             },
                             error: function (err) {
                                 var oJsonError = JSON.parse(err.responseText);
@@ -253,7 +349,7 @@ sap.ui.define([
                                 that.getMessageHandler().displayMessageBox(oMessage, that.getResourceBundle());
                                 return;
                             }
-                        };                     
+                        };
 
                         oEvent.getSource().getModel().callFunction("/TriggerCalculate", oPara);
 
@@ -261,7 +357,7 @@ sap.ui.define([
 
                     var vPackResult = [{
                         // "CalculatePack_ac": "",
-                        "ProductSequence":"1",
+                        "ProductSequence": "1",
                         "Product": "PROD-S01",
                         "PackSequence": "1",
                         "ProductLength": "22",
@@ -276,9 +372,9 @@ sap.ui.define([
                         "PackProductWidth": "20",
                         "PackProductHeight": "22.5",
                         // "PackProductMeasurementUnit": ""
-                    },{
+                    }, {
                         // "CalculatePack_ac": "",
-                        "ProductSequence":"2",
+                        "ProductSequence": "2",
                         "Product": "PROD-S02",
                         "PackSequence": "2",
                         "ProductLength": "16",
@@ -293,9 +389,9 @@ sap.ui.define([
                         "PackProductWidth": "20",
                         "PackProductHeight": "22.5",
                         // "PackProductMeasurementUnit": ""
-                    },{
+                    }, {
                         // "CalculatePack_ac": "",
-                        "ProductSequence":"3",
+                        "ProductSequence": "3",
                         "Product": "PROD-S03",
                         "PackSequence": "3",
                         "ProductLength": "6.5",
@@ -310,9 +406,9 @@ sap.ui.define([
                         "PackProductWidth": "20",
                         "PackProductHeight": "22.5",
                         // "PackProductMeasurementUnit": ""
-                    },{
+                    }, {
                         // "CalculatePack_ac": "",
-                        "ProductSequence":"4",
+                        "ProductSequence": "4",
                         "Product": "PROD-S04",
                         "PackSequence": "4",
                         "ProductLength": "7.3",
@@ -331,7 +427,7 @@ sap.ui.define([
 
                     PackProductsHelper.setPackProductsModelData(vPackResult)
                     var oTempProduct = vPackResult[0];
-                    this.addHU(oTempProduct.PackProductLength,oTempProduct.PackProductWidth,oTempProduct.PackProductHeight);
+                    this.addHU(oTempProduct.PackProductLength, oTempProduct.PackProductWidth, oTempProduct.PackProductHeight);
                     this.addProduct(oTempProduct);
                     return;
 
@@ -513,7 +609,7 @@ sap.ui.define([
                 var length = oProduct.ProductLength / this.ratio;
                 var width = oProduct.ProductWidth / this.ratio;
                 var height = oProduct.ProductHeight / this.ratio;
-    
+
                 //var geometry = new THREE.BoxGeometry(length, width, height);
                 var geometry = new THREE.BoxGeometry(length, height, width);
                 var material = new THREE.MeshBasicMaterial({
@@ -523,9 +619,9 @@ sap.ui.define([
                     side: THREE.DoubleSide
                 });
                 var cube = new THREE.Mesh(geometry, material);
-    
+
                 this.initPosition(cube, "product", oProduct.XPosition / this.ratio + length / 2, oProduct.ZPosition / this.ratio + height / 2, oProduct.YPosition /
-                    this.ratio + width / 2, "S" +  oProduct.PackSequence);
+                    this.ratio + width / 2, "S" + oProduct.PackSequence);
                 this.axes.add(cube);
 
                 this.getView().byId("viewer").addContentResource(
@@ -538,36 +634,36 @@ sap.ui.define([
             },
             adjustOrienation: function (oProduct) {
                 var temp;
-              switch (oProduct.Orientation) {
-                case 2:
-                    temp = oProduct.ProductLength;
-                    oProduct.ProductLength = oProduct.ProductWidth;
-                    oProduct.ProductWidth = temp;
-                    return oProduct;
-                case 3:
-                    temp = oProduct.ProductWidth;
-                    oProduct.ProductWidth = oProduct.ProductHeight;
-                    oProduct.ProductHeight = temp;
-                    return oProduct;
-                case 4:
-                    temp = oProduct.ProductLength;
-                    oProduct.ProductLength = oProduct.ProductHeight;
-                    oProduct.ProductHeight = oProduct.ProductWidth;
-                    oProduct.ProductWidth = temp;
-                    return oProduct;
-                case 5:
-                    temp = oProduct.ProductLength;
-                    oProduct.ProductLength = oProduct.ProductHeight;
-                    oProduct.ProductHeight = temp;
-                    return oProduct;
-                case 6:
-                    temp = oProduct.ProductLength;
-                    oProduct.ProductLength = oProduct.ProductWidth;
-                    oProduct.ProductWidth = oProduct.ProductHeight;
-                    oProduct.ProductHeight = temp;
-                    return oProduct;
-                default:
-                    return oProduct;
+                switch (oProduct.Orientation) {
+                    case 2:
+                        temp = oProduct.ProductLength;
+                        oProduct.ProductLength = oProduct.ProductWidth;
+                        oProduct.ProductWidth = temp;
+                        return oProduct;
+                    case 3:
+                        temp = oProduct.ProductWidth;
+                        oProduct.ProductWidth = oProduct.ProductHeight;
+                        oProduct.ProductHeight = temp;
+                        return oProduct;
+                    case 4:
+                        temp = oProduct.ProductLength;
+                        oProduct.ProductLength = oProduct.ProductHeight;
+                        oProduct.ProductHeight = oProduct.ProductWidth;
+                        oProduct.ProductWidth = temp;
+                        return oProduct;
+                    case 5:
+                        temp = oProduct.ProductLength;
+                        oProduct.ProductLength = oProduct.ProductHeight;
+                        oProduct.ProductHeight = temp;
+                        return oProduct;
+                    case 6:
+                        temp = oProduct.ProductLength;
+                        oProduct.ProductLength = oProduct.ProductWidth;
+                        oProduct.ProductWidth = oProduct.ProductHeight;
+                        oProduct.ProductHeight = temp;
+                        return oProduct;
+                    default:
+                        return oProduct;
                 }
             },
             addSequence: function (aProduct) {
@@ -602,7 +698,7 @@ sap.ui.define([
                     });
                     textObj = new THREE.Mesh(gem, mat);
                     //	textObj.castShadow = true;
-   
+
                     this.initPosition(textObj, "sequence", oProduct.XPosition / this.ratio + length / 2, oProduct.ZPosition / this.ratio + height / 2,
                         oProduct.YPosition / this.ratio + width / 2, "Se" + oProduct.PackSequence);
 
@@ -617,7 +713,7 @@ sap.ui.define([
                     })
                 );
             },
-            onDisplayDefaultView:function(){
+            onDisplayDefaultView: function () {
                 this.getView().byId("viewer").addContentResource(
                     new ContentResource({
                         source: this.root,
@@ -626,7 +722,7 @@ sap.ui.define([
                     })
                 );
             },
-            onDisplayBackView:function(){
+            onDisplayBackView: function () {
                 this.root.rotateY(2);
                 this.getView().byId("viewer").addContentResource(
                     new ContentResource({
@@ -636,7 +732,7 @@ sap.ui.define([
                     })
                 );
             },
-            onDisplayTopView:function(){
+            onDisplayTopView: function () {
                 this.root.rotateX(90);
                 this.getView().byId("viewer").addContentResource(
                     new ContentResource({
