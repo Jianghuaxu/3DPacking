@@ -135,6 +135,30 @@ sap.ui.define([
 
             _calculatePMAT: function () {
                 var oModel = this.getView().getModel();
+                oModel.setDeferredGroups(["myGroupId"]);
+                oModel.setChangeGroups({
+                    "*": {
+                        groupId: "myGroupId"
+                    }
+                });
+                var oPayload;
+                /*
+                this._scannedProd.forEach(function(item) {
+                    oPayload = {
+                        "ProductSequence": item.product_sequence,
+                        "Product": "PROD-S02G", //shall be replaced by item.prod from the actually scanned product ,
+                        //"PackSequence": 1,
+                        "ProductLength": "440",
+                        "ProductWidth": "240",
+                        "ProductHeight": "10",
+                        "ProductMeasurementUnit": "MM",
+                        "ProductQuantity": "1",
+                        "ProductUoM": "EA"
+                    };
+                    oModel.create("/EWM3DPackSet", oPayload);
+                }); */
+
+                //following are mock data for testing 
                 var oPayLoad1 = {
                     // "CalculatePack_ac": "",
                     "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
@@ -143,7 +167,7 @@ sap.ui.define([
                         return v.toString(16);
                     }),
                     "Product": "PROD-S02G",
-                    "PackSequence": 1,
+                    //"PackSequence": 1,
                     "ProductLength": "440",
                     "ProductWidth": "240",
                     "ProductHeight": "10",
@@ -167,7 +191,7 @@ sap.ui.define([
                         return v.toString(16);
                     }),
                     "Product": "PROD-S02G",
-                    "PackSequence": 2,
+                    //"PackSequence": 2,
                     "ProductLength": "16",
                     "ProductWidth": "6",
                     "ProductHeight": "14.4",
@@ -191,12 +215,12 @@ sap.ui.define([
                         return v.toString(16);
                     }),
                     "Product": "PROD-S02G",
-                    "PackSequence": 3,
+                    //"PackSequence": 3,
                     "ProductLength": "440",
                     "ProductWidth": "240",
                     "ProductHeight": "12",
                     "ProductMeasurementUnit": "MM",
-                    "ProductQuantity": "1", 
+                    "ProductQuantity": "1",
                     "ProductUoM": "EA"
                     // "Orientation": "",
                     //"XPosition": "-7",
@@ -207,29 +231,16 @@ sap.ui.define([
                     //"PackProductHeight": "",
                     // "PackProductMeasurementUnit": ""
                 };
-                oModel.create("/EWM3DPackSet", oPayLoad1, {
-                    success: function () {
+                oModel.create("/EWM3DPackSet", oPayLoad1);
+                oModel.create("/EWM3DPackSet", oPayLoad2);
 
-                    },
-                    error: function () {
+                oModel.create("/EWM3DPackSet", oPayLoad3);
 
-                    }
-                });
-                oModel.create("/EWM3DPackSet", oPayLoad2, {
-                    success: function () {
-
-                    },
-                    error: function () {
-
-                    }
-                });
-
-                oModel.create("/EWM3DPackSet", oPayLoad3, {
-                    success: function () {
-
-                    },
-                    error: function () {
-
+                oModel.submitChanges({
+                    groupId: "myGroupId", success: function (res) {
+                        console.log("Success")
+                    }, error: function (err) {
+                        console.log("Error")
                     }
                 });
             },
