@@ -66,16 +66,19 @@
                     <Property Name="MatnrWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUoM" sap:label="Width" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                     <Property Name="MatnrHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="DimUoM" sap:label="Height" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 </EntityType>
-                <EntityType Name="Z3DPack" sap:content-version="1">
+                <EntityType Name="EWM3DPack" sap:content-version="1">
                     <Key>
                         <PropertyRef Name="ProductSequence"/>
                         <PropertyRef Name="Product"/>
                     </Key>
+                    <Property Name="Matselectedflag" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variable (X = True, - = False, Space = Unknown)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                     <Property Name="ProductSequence" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="ProductSequence" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductMeasurementUnit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="ProductMeasurementUnit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                    <Property Name="ProductUrl" Type="Edm.String" Nullable="false" MaxLength="200" sap:unicode="false" sap:label="Product Url" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                     <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Product" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="ProductLength" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="ProductLength" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="ProductWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="ProductWidth" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="ProductHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="ProductHeight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductLength" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="ProductMeasurementUnit" sap:label="ProductLength" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductWidth" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="ProductMeasurementUnit" sap:label="ProductWidth" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                    <Property Name="ProductHeight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="ProductMeasurementUnit" sap:label="ProductHeight" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                     <Property Name="Orientation" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Orientation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                     <Property Name="XPosition" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="XPosition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                     <Property Name="YPosition" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="YPosition" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -91,11 +94,11 @@
                 <EntityContainer Name="ZEWM_PBO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                     <EntitySet Name="PBOResultSet" EntityType="ZEWM_PBO_SRV.PBOResult" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                     <EntitySet Name="PBOSet" EntityType="ZEWM_PBO_SRV.PBO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                    <EntitySet Name="Z3DPackCollection" EntityType="ZEWM_PBO_SRV.Z3DPack" sap:content-version="1"/>
+                    <EntitySet Name="EWM3DPackSet" EntityType="ZEWM_PBO_SRV.EWM3DPack" sap:deletable="false" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
                 </EntityContainer>
-                <atom:link rel="self" href="https://er9:44300/sap/opu/odata/sap/ZEWM_PBO_SRV/$metadata"
+                <atom:link rel="self" href="https://ldcier9.wdf.sap.corp:44300/sap/opu/odata/sap/ZEWM_PBO_SRV/$metadata"
                     xmlns:atom="http://www.w3.org/2005/Atom"/>
-                    <atom:link rel="latest-version" href="https://er9:44300/sap/opu/odata/sap/ZEWM_PBO_SRV/$metadata"
+                    <atom:link rel="latest-version" href="https://ldcier9.wdf.sap.corp:44300/sap/opu/odata/sap/ZEWM_PBO_SRV/$metadata"
                         xmlns:atom="http://www.w3.org/2005/Atom"/>
                     </Schema>
                 </edmx:DataServices>

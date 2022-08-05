@@ -18,7 +18,7 @@ server:
           version: 1.98.0 # The UI5 version, for instance, 1.78.1. Empty string means latest version
         backend:
           - path: /sap
-            url: https://er9:44300
+            url: http://ldcier9.wdf.sap.corp:44300
             client: '003'
             destination: ER9_CLONING
     - name: fiori-tools-appreload

@@ -6,7 +6,7 @@
       "authenticationType": "xsuaa",
       "csrfProtection": false,
       "source": "^/sap/opu/odata/sap/ZEWM_PBO_SRV/",
-      "destination": "ER9-003"
+      "destination": "ER9_CLONING"
     },
     {
       "authenticationType": "xsuaa",

@@ -31,7 +31,7 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: https://er9:44300
+            url: http://ldcier9.wdf.sap.corp:44300
             client: '003'
             destination: ER9_CLONING
     - name: sap-fe-mockserver
