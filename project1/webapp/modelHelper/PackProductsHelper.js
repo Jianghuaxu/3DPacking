@@ -100,15 +100,22 @@ sap.ui.define([
 		setPackProductsModelData: function(oProduct) {
 			this.setProductSequence(oProduct.ProductSequence);
 			this.setProduct(oProduct.Product);
-			this.setPackSequence(oProduct.PackSequence);
+			
 			this.setProductLength(oProduct.ProductLength);
 			this.setProductWidth(oProduct.ProductWidth);
             this.setProductHeight(oProduct.ProductHeight);
+
             this.setOrientation(oProduct.Orientation);
             this.setXPosition(oProduct.XPosition);
             this.setYPosition(oProduct.YPosition);
             this.setZPosition(oProduct.ZPosition);
 
+            this.setPackSequence(oProduct.PackProduct);
+            this.setPackSequence(oProduct.PackSequence);
+            this.setPackSequence(oProduct.PackProductLength);
+            this.setPackSequence(oProduct.PackProductWidth);
+            this.setPackSequence(oProduct.PackProductHeight);
+            
 		},
 
 		clearSelectedData: function() {

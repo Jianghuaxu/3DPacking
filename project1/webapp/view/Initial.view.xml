@@ -28,6 +28,7 @@
                             text="Scan"
                             type="Emphasized"/>
                             <Button id="calculate" text="Calculate" press="onCalculate"/>
+                            <Button id="nextProduct" text="NextProduct" press="onNextProduct"/>
                         
                         <VBox>
                             <Table id="scanResultTable"

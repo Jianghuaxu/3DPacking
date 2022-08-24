@@ -8,7 +8,8 @@ sap.ui.define([
     "sap/ui/vk/Camera",
     "../utils/Util",
     "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency,
-    //"../libs/scandit-sdk/build", // include the WebSDK as dependency
+    //"../libs2/dist/handtrack"
+    //"../libs/scandit-sdk/build", // include the WebSDK as dependencyhttps://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -27,13 +28,19 @@ sap.ui.define([
                 this.initThreejsModel();
                 this.fontLoader();
                 this.initScan();
+
+                //this.initHandtrack();
+            },
+
+            initHandtrack: async function() {
+                const model =  await handTrack.load();
             },
             initScan: async function () {
                 this.getView().setModel(this._scanListModel, "scan");
 
                 //https://ssl.scandit.com/dashboard/sdk/projects: for creating a license key
                 //var licenseKey = "AelhPGK0Q/QqARqoEztBkSsu6zcXPYf4cHWg1ysy9Q+kZ7oFpSMvK8NfRsWQJV/FYXLjnBcOZEdyHdejuXmAcgF1GcAGJYRq+ldYsHFrGCk9XP5mnG0wVy9b1c0ReclZdDR0iq8Y7xQHJ7cKwAWdGotEhAG+T0EsV3u81M/zRXWNfd41QLz2hYu0Ie/Bl+SkFPd1rA4wI3hOaT3ob9ZWuul0J+KBb++BMV2+kPmyUOK0yahOQeR6rBage01m0FTcDyQSa5GRBoO0aOdb8IN4nikGTvS1in/8RwNlq1e4AiV6MvN/xsT38lNT5jnr83iWPz4Yt8u0WiDrUC5umOl74vW5Nbd4s0x7MINfN15oslgOO7kDfI2EH76xltFIGYYmjFeVquQ+cXa6tcw9JuyAZav3m1hMdICBFOwJheGDlBNNdzyiuBAWc6rzOmzWb4MAJT1fLdRZ5ImWleUFgx3KVA0xD+kCT5Sy/Pl6TpS5vpIJvjJXtA8xgMHHv1Xno/yyPsqNINKOABzyVgTwgqP4lo6eIyJA6Al61tjWIWUgpDp5f1viAGJU8WYX/ub7F5W16JDIhlIX07+C0P+AFNkgyYjzG7QyWXEuQjbLTwUV4iAnWkS2wuhplWb8G0zAREOwGmNzpxTYnaK/blwHlsG30WzfbbvxcuOmLMvAzHoYJj+utoaG1AiQ7d2j/QUATTidJadOD4QIswIIYNZG9i6O5JIC99kPwwXrNKtXvLMm9VAeSDbjMNrB3R5DW0vdUVRMbVm1v3GDZwHhSSyrkhamcbF8vcV81XZgLg62+os7QMtiPUT9dKkCbSlwBKGMivrgiM1ncTao8WW4S2Xc";
-                var licenseKey = "ATNBkDMUEa4GAlYNWibImqkDOXm/Oo+yJ1uIV05DLARbVdEoVkf5KmJW+VMtWgEgMVcMekBX7Mv1biyzMmduI3Fwxb9bKVkYs1fhZbh2gcKWY4UJbS3xbgJ86Ib0d1z5gEMQNoREhInZDxkgxSX4catOFImXUyhHZVoeaKqFPzeTalXdRyHOL6Z1NyyGgUE6n6tGPbEDkotoremBX+1RiZiAvi4mpEa8pTa0AfETKefICP6y7ldF+WmfhlcVMu2nPle9WL9WrW84FS8gFf+lb7ZlryIxGLp9hV5WprcQFsemefWJejUctutU9D+ML5HgjtEp4macvDUU6T9b3tqkB18bSmOPWQ82psKV7DcU+psKX6cxqxijPEfKzb1WW00MZiptQ0vRUfr3X5/cHorA0cYZ0T0fXC8LA58eHHkkOJTb8dCtHSRF18lArnXUR3XURdLKtOGvSCJxcg2F6Q7EGBffQXikOLBpasaXrgrB8MILfXPRxDLpPx6jxQ/wtszVDEtePn/g6urZwtXJoQAOD1EmCJtwMkvI6+TuC0it/FHtU4fDLZ2kbzAs3EKPh3lccFRNFOiWQ5vmsf3Qi3BANigPwhJfRtinZv9/vpxQeonCQA8dr9okn/xJjzcnwgNRne66aKB5nuDR730mAyNth6ozakl8lBxsOxV+PPwaeJa5/vE37NRHbeJkDN6n5fx7Wxfq9jaG/GO2RGLJU4V6GfiEV/G2zu4OaNOTXmhe9BarpYy5MIhxZ3/TvYwHk7F2v0MdbjRq5MMwbJhMYPCs2/4k3285BQhM6S4NOMNw2kr/ZeQAcO1K0eIknoZDpETHN+hjN7iESfOleY1P";
+                var licenseKey = "Ad8BtWIeQHr8EvzGlhmkYKc2d4cODT7sH1+/mIs2Zcm1C6uilxRtyZVzUAj6V2rkLGQgOl5lZlvrV5YKo35JMehg+CXGDPROfGnezFthkvaGTSU971dzkZVNn3HGTt57vQDtRwwiHGrBEoGXdmo1ioNnQMCLeeICZ2kRmwNprY05b7aqYTqPw5VFk7HHYG4FMD5AyKBX8ODtYTylOxv5k4JwBn3AXqUWi1cIYSNzpufLQPnxfgjduVNhjrZ/RDJcWElfkrpNI4nOQ8lLekbpvSVQlEbEOebgK2cGRANarYMmLOqOWU9T//h7Rz+cRM0ItX1BmlN+lwbefb1jH0VzBG9v13hSaDE9gUcwwhtWjiISaITDtliEks9dOYHKSGsH43EZJootmqNrRyaVtQdYagl09f8Sbpk2NgEi0PdTKIBhGhHVggv/tHR5ffp8ICoy2Uve7s9+Iig+EmICsyJj98526igLRnQbyHyPIQCnlJEYn+KeFHOSoubeOqaAozmwbalE8MgvI+m0AZqZzOyOr4M3TSRETfgtKbWTDpSvyo4erppSQcQ2iDqDi4oDAyzV3eis5eVcp5xvjBfgq92Z91K1ggNpgHPafaSTtrWb/TcD/9PI7p5lhhZJ+9+WuOCrkUvd19PkPFgOpjtXCsLh97GDJb+NwJ9OR2Ko0WtdPhFkcHdFC9VFQ+96o5OFJXRizNso3G9Viklj8iJX5yCA+nLTYeluuo/jH+cLTzYcF+op1KZ/YXjeTHkVoLkux3siAa7xco4HivWZicjzkoNETChpKOfaZOmQPxNgC9fLDRD9CPdYixwNwFl+aU99Q3l/qrIApiHFX0ysXEFMuoMy8CcrMP08hxZc0vEBhUC3tmaVhDhlYQ3UkinUNTGH+5amAsviGDKxyFVJ+FtNKO6KxZ2g+lD2GCUlUNXkYsLHO9xGAwgmkj6fTqTKdIww04Kqfn9L5VX8iYMZ5gQHK2PCwleiWiLH3edMBJkGE26RawFLijHCXQAYOs+59iyVJ+JjGfBauntzLZyX7F2TxZ+cvvdfy8TQNr10pQi1rzg8wSOItP7EdRa4B03QPZO6sTwB+NBafGN0xvPhBAqeZw9mEsv9/8TTJnEYFY2R4MldtF8so/Ios7XE8b7LqpDHmDPK+W8dco1oNfvdIjYptQ==";
                 //var licenseKey = "AVZx5Tu0GhkhLUEh8A7SdiIJ0uLtD41dZ0R3fNtvNbAESdrUaATie5l1DED0KWsxJ0p6Tr9KTF7EVb02tnbtFDtkL93lM+ed6lS1tFtpVOB0WF8DCUnsKWh9qWU0SElsCF7H8flkAjLERbF5GnmrR00KpP++C/7GNkaW6Kc2hzlFMiJiuGMhKJh7bsWzITocORec3uCyPhV/9NYApXlg/Y8zy1dla6IDtX8s/35szIm0UKRS0rXhyn1scHFS35NeHCni1ULmhJGkYfHYPRRGtqJY+n2ei3ZW8mStkFhuQHULZxsm7MXoOojoF5C/H7PQNOuVVPfdm21wEhqgW7uecELDjEH/xLjp2BPoFINaF/ayjQEbd2SUAnCDZ6Qr8ojlqH/vLEyK6fONkXbTTXMwaHEIAocaU9r4ramWB8t2eUerkyPH8Y06Vb8yhDJBRShK/pCML9wUqVYf60wUFTJ7LeGAvYhjXiI9DhRBFOf2e0ZCcJ+oiIAg8CCy81pslnNIjUA7arDqUw4WwVbn64ZP8q7mDdwP5T8BET63pKkC3YSFWwI0r+6w5S51UhAjqraRvEG0XklOUVxT+8WnJQ9mz0Qx1ZW0ds0RIekjQzRpn1gROTtcmwb1DyQ3MCkNjKv6RqC8Cb59jeBKwgdj2+8hZWsmzAeCj2hVxQ3/r3vZq9zaappFd4qed91dmxG1vp/TjkTbLvel9tm8kZZasljj1b6ciC/FH259SmjNiVAvydVea4XkoeBxTwZBdKrbGJDTPRt8qF5AAtCHeNbYFHc76ZxDjLu48OweW0SQsyvlgW14W36ekKpY9Xf+LD3i4D+i+uYhKw0Pvhd2T3VjEml7eRSeCbdwRily1oiotKqA";
                 await ScanditSDK.configure(licenseKey,
                     {
@@ -85,12 +92,19 @@ sap.ui.define([
                     if (isNewProduct) {
                         this._scannedProd.push({
                             "prod": scanRes,
-                            "product_sequence": this._scannedProd.length + 1,
+                            //"product_sequence": this._scannedProd.length + 1,
+                            product_sequence: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+                                var r = Math.random() * 16 | 0,
+                                    v = c === "x" ? r : (r & 0x3 | 0x8);
+                                return v.toString(16);
+                            }),
                             "x": scanResultLoc.topLeft.x * 512 / 1280,
                             "y": scanResultLoc.topLeft.y * 288 / 720,
                             "len": tmpLen,
                             "hei": tmpHei,
                             "pack_sequence": 0,
+                            "movedIndicator" : false, //means that this product is already moved and in UI it will be mark as green 
+                            "toBePackedInd": false, // means that this product shall be highlighted and packer shall pick this one to the HU
                             "scannedDateTime": new Date().getTime()
                         })
                     }
@@ -142,107 +156,107 @@ sap.ui.define([
                     }
                 });
                 var oPayload;
-                /*
-                this._scannedProd.forEach(function(item) {
+
+                this._scannedProd.forEach(function (item) {
                     oPayload = {
                         "ProductSequence": item.product_sequence,
-                        "Product": "PROD-S02G", //shall be replaced by item.prod from the actually scanned product ,
+                        //"Product": item.prod, //shall be replaced by item.prod from the actually scanned product ,
+                        "Product": "PROD-S02G",
                         //"PackSequence": 1,
-                        "ProductLength": "440",
-                        "ProductWidth": "240",
-                        "ProductHeight": "10",
-                        "ProductMeasurementUnit": "MM",
+
+
                         "ProductQuantity": "1",
                         "ProductUoM": "EA"
                     };
                     oModel.create("/EWM3DPackSet", oPayload);
-                }); */
+                });
 
-                //following are mock data for testing 
-                var oPayLoad1 = {
-                    // "CalculatePack_ac": "",
-                    "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-                        var r = Math.random() * 16 | 0,
-                            v = c === "x" ? r : (r & 0x3 | 0x8);
-                        return v.toString(16);
-                    }),
-                    "Product": "PROD-S02G",
-                    //"PackSequence": 1,
-                    "ProductLength": "440",
-                    "ProductWidth": "240",
-                    "ProductHeight": "10",
-                    "ProductMeasurementUnit": "MM",
-                    "ProductQuantity": "1",
-                    "ProductUoM": "EA"
-                    // "Orientation": "",
-                    //"XPosition": "-4",
-                    //"YPosition": "-4",
-                    //"ZPosition": "-7.25",
-                    //"PackProductLength": "",
-                    //"PackProductWidth": "",
-                    //"PackProductHeight": "",
-                    // "PackProductMeasurementUnit": ""
-                };
-                var oPayLoad2 = {
-                    // "CalculatePack_ac": "",
-                    "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-                        var r = Math.random() * 16 | 0,
-                            v = c === "x" ? r : (r & 0x3 | 0x8);
-                        return v.toString(16);
-                    }),
-                    "Product": "PROD-S02G",
-                    //"PackSequence": 2,
-                    "ProductLength": "16",
-                    "ProductWidth": "6",
-                    "ProductHeight": "14.4",
-                    "ProductMeasurementUnit": "MM",
-                    "ProductQuantity": "1",
-                    "ProductUoM": "EA"
-                    // "Orientation": "",
-                    //"XPosition": "-7",
-                    //"YPosition": "-7",
-                    //"ZPosition": "4.05",
-                    //"PackProductLength": "",
-                    //"PackProductWidth": "",
-                    //"PackProductHeight": "",
-                    // "PackProductMeasurementUnit": ""
-                };
-                var oPayLoad3 = {
-                    // "CalculatePack_ac": "",
-                    "ProductSequence": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-                        var r = Math.random() * 16 | 0,
-                            v = c === "x" ? r : (r & 0x3 | 0x8);
-                        return v.toString(16);
-                    }),
-                    "Product": "PROD-S02G",
-                    //"PackSequence": 3,
-                    "ProductLength": "440",
-                    "ProductWidth": "240",
-                    "ProductHeight": "12",
-                    "ProductMeasurementUnit": "MM",
-                    "ProductQuantity": "1",
-                    "ProductUoM": "EA"
-                    // "Orientation": "",
-                    //"XPosition": "-7",
-                    //"YPosition": "-7",
-                    //"ZPosition": "4.05",
-                    //"PackProductLength": "",
-                    //"PackProductWidth": "",
-                    //"PackProductHeight": "",
-                    // "PackProductMeasurementUnit": ""
-                };
-                oModel.create("/EWM3DPackSet", oPayLoad1);
-                oModel.create("/EWM3DPackSet", oPayLoad2);
-
-                oModel.create("/EWM3DPackSet", oPayLoad3);
+                var that = this;
 
                 oModel.submitChanges({
                     groupId: "myGroupId", success: function (res) {
                         console.log("Success")
+                        //read entity set: 
+                        oModel.read("/EWM3DPackSet", {
+                            success: function (res) {
+                                console.log("read result success")
+                                for(var i = 0; i < res.results.length; i++) {
+                                    PackProductsHelper.setPackProductsModelData(res.results[i])
+                                    //TODO: another thing is to update the _scannedProd model to add the pack sequence 
+                                    // find the array index by matching the product number via pack_sequence & prod
+                                    var ind = that._scannedProd.findIndex ( v => v.prod == res.results[i].Product);
+                                    that._scannedProd[ind].pack_sequence = res.results[i].PackSequence;
+                                    // draw the results in product viewb for the first time.
+                                    that._drawPackSequence();
+                                }
+                            },
+                            error: function () {
+                                console.log("read result failure")
+                            }
+                        });
+
                     }, error: function (err) {
                         console.log("Error")
                     }
                 });
+            },
+
+            onNextProduct: function(oEvent) {
+                //mark next product as highlight and mark the previous one as... 
+                //modify the _scannedProduct model to update the product status by trigger another camera shot. 
+                //define pack normal: if scanning result shows that if the missing product is the one that follow the pack sequence 
+               // var vPackNormal = true;
+                var aOldScannedProd = Object.assign([], this._scannedProd);
+                //TODO: scan again -> update this._scannedProd
+                /* *****         Simulate scanning           *****/
+
+                this._scannedProd = this._scannedProd.filter(item => item.movedIndicator == false);
+                this._scannedProd.splice(0,1); 
+
+                /* *****         End of Simulate scanning           *****/
+                if (this._scannedProd.length == aOldScannedProd.length) {
+                    return; // scanning triggered, while there no product moved -> no change on UI side 
+                }
+                var that = this;
+                //find the missing product by comparing aOldScannedProd with this._scannedProd;
+                var aMissingProd = aOldScannedProd.filter( prod => {
+                    return that._scannedProd.findIndex(item => item.prod == prod.prod) < 0;
+                });
+                //for missing product we shall mark moveIndicator as true; and insert it to the refreshed _scannedProd
+                aMissingProd.every( a => {
+                    a.movedIndicator = true;
+                    a.toBePackedInd = false;
+                    // TODO: update PackProducts
+                });
+                //also we shall update the PackProducts model for ProductMovedInd as well as ProductToBeMovedInd
+                //then find the next product which shall mark as red for packing 
+                this._scannedProd = this._scannedProd.sort((a,b)  => a.pack_sequence - b.pack_sequence);
+              //  var vNextProduct = this._scannedProd[0];
+                this._scannedProd[0].toBePackedInd = true;
+               // TODO: update PackProducts
+                this._scannedProd = this._scannedProd.concat(aMissingProd)
+                this._drawPackSequence(); // trigger redraw again. 
+                
+                
+                /*
+                //check vNextProduct is the one that is missing 
+                if(vNextProduct != oMissingProduct.prod) {
+                    vPackNormal = false;
+                }
+                if (vPackNormal) { 
+                    //check if the scanned result match the expectation. and find the next sequence via movedIndicator
+                    
+                    for (var i = 0; i < this._scannedProd.length; i++) {
+                        if( this._scannedProd[i].movedIndicator && !this._scannedProduct[i+1].movedIndicator ) {
+                            this._scannedProd[i+1].movedIndicator = true;
+                        }
+                    }
+
+                } else {
+                    //else: scanned result is exceptional -> exception handling then 
+                } */
+                
+                
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
@@ -294,8 +308,16 @@ sap.ui.define([
                         //assume that the pack sequence is retrieved from backend
                         this._scannedProd[index].pack_sequence = pack_seq; //TODO: to be removed
                         ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
-                        ctx.fillStyle = "yellow";
+                        if(this._scannedProd[index].movedIndicator) {
+                            ctx.fillStyle = "green";
+                        } else if (this._scannedProd[index].toBePackedInd) {
+                            ctx.fillStyle = "red";
+                        } else {
+                            ctx.fillStyle = "yellow";
+                        }
+                        
                         ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, this._scannedProd[index].len * 2, this._scannedProd[index].hei * 1.5)
+                       // ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 120, 40)
                         ctx.fillStyle = "black";
                         ctx.font = "30px Georgia";
                         ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei * 1.75); //draw yellow rect below with the packing sequence 
@@ -366,7 +388,7 @@ sap.ui.define([
 
                     }
 
-                    var vPackResult = [{
+                   /* var vPackResult = [{
                         // "CalculatePack_ac": "",
                         "ProductSequence": "1",
                         "Product": "PROD-S01",
@@ -440,7 +462,7 @@ sap.ui.define([
                     var oTempProduct = vPackResult[0];
                     this.addHU(oTempProduct.PackProductLength, oTempProduct.PackProductWidth, oTempProduct.PackProductHeight);
                     this.addProduct(oTempProduct);
-                    return;
+                    return; */
 
                 }
             },

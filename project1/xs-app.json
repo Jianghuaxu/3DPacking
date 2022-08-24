@@ -12,7 +12,7 @@
       "authenticationType": "xsuaa",
       "csrfProtection": false,
       "source": "^/sap/opu/odata/sap/API_WHSE_INBOUND_DELIVERY/",
-      "destination": "ER9"
+      "destination": "ER9_CLONING"
     },
     {
       "source": "^/resources/(.*)$",
