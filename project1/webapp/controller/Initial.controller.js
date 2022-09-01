@@ -1,5 +1,6 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast",
     "sap/ui/model/json/JSONModel",
     "project1/modelHelper/PackProductsHelper",
     "sap/ui/vk/ContentResource",
@@ -14,9 +15,9 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, PackProductsHelper, ContentResource, ContentConnector, threejs, Camera, Util) {
+    function (Controller, MessageToast, JSONModel, PackProductsHelper, ContentResource, ContentConnector, threejs, Camera, Util) {
         "use strict";
-
+,
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
             root: new THREE.Group(),
@@ -124,27 +125,8 @@ sap.ui.define([
                         this._calculatePMAT();
                     }
 
-                    /*
-                    ctx.strokeRect(scanResultLoc.topLeft.x*512/1280, scanResultLoc.topLeft.y*288/720, tmpLen, tmpHei);
-
-                    //add Packing instructions for each scanned product
-                    ctx.font = "20px Verdana";
-                    var gradient = ctx.createLinearGradient(0, 0, can.width, 0);
-                    gradient.addColorStop("0", "magenta");
-                    gradient.addColorStop("0.5", "blue");
-                    gradient.addColorStop("1.0", "red");
-                    // Fill with gradient
-                    ctx.fillStyle = gradient;
-                    
-                    ctx.fillText("Pack Sequence 1", (scanResultLoc.bottomLeft.x)*512/1280, (scanResultLoc.bottomLeft.y+20)*288/720);
-                    */
-
 
                 });
-
-                /* this.barcodePicker.processVideoFrame(function (frame) {
-                     console.log(frame)
-                 }) */
             },
 
             _calculatePMAT: function () {
@@ -180,15 +162,32 @@ sap.ui.define([
                         oModel.read("/EWM3DPackSet", {
                             success: function (res) {
                                 console.log("read result success")
+                                
                                 for(var i = 0; i < res.results.length; i++) {
-                                    PackProductsHelper.setPackProductsModelData(res.results[i])
                                     //TODO: another thing is to update the _scannedProd model to add the pack sequence 
                                     // find the array index by matching the product number via pack_sequence & prod
                                     var ind = that._scannedProd.findIndex ( v => v.prod == res.results[i].Product);
-                                    that._scannedProd[ind].pack_sequence = res.results[i].PackSequence;
+                                    if(ind > -1) {
+                                        that._scannedProd[ind].pack_sequence = res.results[i].PackSequence;
+                                    }
+                                    
                                     // draw the results in product viewb for the first time.
                                     that._drawPackSequence();
+
+                                     //initialize two JSON model property ProductMovedInd & ProductToBeMovedInd
+                                     if(res.results[i].PackSequence == 1) {
+                                        res.results[i].ProductToBeMovedInd = true;
+                                        if(ind > -1) {
+                                            that._scannedProd[ind].toBePackedInd = true; 
+                                        }
+                                        
+                                    } else {
+                                        res.results[i].ProductToBeMovedInd = false;
+                                    }
+                                    res.results[i].ProductMovedInd = false;
+                                    
                                 }
+                                PackProductsHelper.setModel(res.results);
                             },
                             error: function () {
                                 console.log("read result failure")
@@ -226,35 +225,18 @@ sap.ui.define([
                 aMissingProd.every( a => {
                     a.movedIndicator = true;
                     a.toBePackedInd = false;
-                    // TODO: update PackProducts
+                    //firstly, match the corresponding PackProducts product and update the JSON Model afterwards
+                    PackProductsHelper.updateMovedIndicator(a.prod, true);
+                    PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
                 });
                 //also we shall update the PackProducts model for ProductMovedInd as well as ProductToBeMovedInd
                 //then find the next product which shall mark as red for packing 
                 this._scannedProd = this._scannedProd.sort((a,b)  => a.pack_sequence - b.pack_sequence);
               //  var vNextProduct = this._scannedProd[0];
                 this._scannedProd[0].toBePackedInd = true;
-               // TODO: update PackProducts
+                PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
                 this._drawPackSequence(); // trigger redraw again. 
-                
-                
-                /*
-                //check vNextProduct is the one that is missing 
-                if(vNextProduct != oMissingProduct.prod) {
-                    vPackNormal = false;
-                }
-                if (vPackNormal) { 
-                    //check if the scanned result match the expectation. and find the next sequence via movedIndicator
-                    
-                    for (var i = 0; i < this._scannedProd.length; i++) {
-                        if( this._scannedProd[i].movedIndicator && !this._scannedProduct[i+1].movedIndicator ) {
-                            this._scannedProd[i+1].movedIndicator = true;
-                        }
-                    }
-
-                } else {
-                    //else: scanned result is exceptional -> exception handling then 
-                } */
                 
                 
             },
@@ -316,11 +298,17 @@ sap.ui.define([
                             ctx.fillStyle = "yellow";
                         }
                         
-                        ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, this._scannedProd[index].len * 2, this._scannedProd[index].hei * 1.5)
-                       // ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 120, 40)
-                        ctx.fillStyle = "black";
-                        ctx.font = "30px Georgia";
-                        ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei * 1.75); //draw yellow rect below with the packing sequence 
+                        //ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, this._scannedProd[index].len * 2, this._scannedProd[index].hei * 1.5)
+                        ctx.fillRect(this._scannedProd[index].x + this._scannedProd[index].len/2 - 40, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 80, 26)
+                        if(this._scannedProd[index].movedIndicator) {
+                            ctx.fillStyle = "white";
+                        } else if (this._scannedProd[index].toBePackedInd) {
+                            ctx.fillStyle = "white";
+                        } else {
+                            ctx.fillStyle = "black";
+                        }
+                        ctx.font = "20px Georgia";
+                        ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len/2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
                         pack_seq++;
                     }
                     _drawedProd.push(this._scannedProd[index].prod)

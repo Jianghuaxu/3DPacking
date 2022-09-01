@@ -7,6 +7,11 @@ sap.ui.define([
 			return oModel;
 		},
 
+        setModel: function(odata) {
+			oModel.setData(odata);
+			return this;
+		},
+
 		setProductSequence: function(sProductSequence) {
 			oModel.setProperty("/sProductSequence", sProductSequence);
 			return this;
@@ -132,7 +137,26 @@ sap.ui.define([
 			this.setZPosition("");
 
 	
-		}
+		},
+
+        updateMovedIndicator: function(prod, movedIndicator) {
+            var oData = this.getModel().getData();
+            var ind = oData.findIndex( v => v.Product == prod);
+            if (ind > -1) {
+                oData[ind].ProductMovedInd = movedIndicator;
+                PackProduct.setData(oData);
+            }
+           
+        },
+
+        updateToBeMovedIndicator: function (prod, toBePackedInd) {
+            var oData = this.getModel().getData();
+            var ind = oData.findIndex( v => v.Product == prod);
+            if (ind > -1) {
+                oData[ind].ProductToBeMovedInd = toBePackedInd;
+                PackProduct.setData(oData);
+            }
+        },
 
 	};
 
