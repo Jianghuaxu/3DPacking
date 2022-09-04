@@ -26,6 +26,36 @@
         "FIORI_TOOLS_UI5_URI": "https://ui5.sap.com",
         "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/s4hanacloud\",\"destination\":\"ER9\"}]"
       }
+    },
+    {
+      "name": "3D packing",
+      "cwd": "${workspaceFolder}/project1",
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "args": [
+        "--open",
+        "index.html",
+        "--config",
+        "ui5-local.yaml",
+        "--framework-version",
+        "1.98.0"
+      ],
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/3DPacking-1/project1\"}",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"destination\":\"ER9-003\",\"path\":\"/sap\"}]",
+        "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
+      }
     }
   ]
 }
