@@ -9,7 +9,6 @@ sap.ui.define([
     "sap/ui/vk/Camera",
     "../utils/Util",
     "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency,
-    //"../libs2/dist/handtrack"
     //"../libs/scandit-sdk/build", // include the WebSDK as dependencyhttps://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js
 ],
     /**
@@ -17,7 +16,6 @@ sap.ui.define([
      */
     function (Controller, MessageToast, JSONModel, PackProductsHelper, ContentResource, ContentConnector, threejs, Camera, Util) {
         "use strict";
-,
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
             root: new THREE.Group(),
@@ -30,11 +28,84 @@ sap.ui.define([
                 this.fontLoader();
                 this.initScan();
 
-                //this.initHandtrack();
+                this.initHandtrack();
             },
 
-            initHandtrack: async function() {
-                const model =  await handTrack.load();
+            initHandtrack: async function () {
+                //const model =  await handTrack.load();
+                if (!('webkitSpeechRecognition' in window)) {
+                    upgrade();
+                } else {
+                    console.log("fine for voice control")
+                    var recognition = new webkitSpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+                    recognition.lang = 'en-IN';
+                    recognition.start();
+
+                    jQuery.sap.delayedCall(5000, this, function () { // this has to be implemented so as the control comes back after 5 seconds
+                        recognition.stop();
+                    });
+                    var finalTranscripts = '';
+                    var oEvent = oEvent;
+                    recognition.onresult = function (event) {
+                        var interimTranscripts = '';
+                        for (var i = event.resultIndex; i < event.results.length; i++) {
+                            var transcript = event.results[i][0].transcript;
+                            transcript.replace("\n", "<br>");
+                            if (event.results[i].isFinal) {
+                                finalTranscripts += transcript;
+                            } else {
+                                interimTranscripts += transcript;
+                            }
+                        }
+                    };
+                    console.log(finalTranscripts)
+                    MessageToast.show(finalTranscripts)
+                }
+            },
+            onSpeek: function () {
+                if (!('webkitSpeechRecognition' in window)) {
+                    upgrade();
+                } else {
+                    console.log("fine for voice control")
+                    var recognition = new webkitSpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+                    recognition.lang = 'en-IN';
+                    recognition.start();
+                    /** 
+                    jQuery.sap.delayedCall(5000, this, function () { // this has to be implemented so as the control comes back after 5 seconds
+                        recognition.stop();
+                    }); */
+                    var finalTranscripts = '';
+                    var oEvent = oEvent;
+                    recognition.onresult = function (event) {
+                        var interimTranscripts = '';
+                        for (var i = event.resultIndex; i < event.results.length; i++) {
+                            var transcript = event.results[i][0].transcript;
+                            transcript.replace("\n", "<br>");
+                            if (event.results[i].isFinal) {
+                                finalTranscripts += transcript;
+                                console.log(finalTranscripts)
+                                MessageToast.show(finalTranscripts)
+                            } else {
+                                interimTranscripts += transcript;
+                                if(interimTranscripts.includes("hello")) {
+                                    recognition.stop();
+                                    console.log(finalTranscripts)
+                                MessageToast.show(finalTranscripts)
+                                }
+                            }
+                        }
+                    };
+                    console.log(finalTranscripts)
+                    
+                }
             },
             initScan: async function () {
                 this.getView().setModel(this._scanListModel, "scan");
@@ -63,70 +134,84 @@ sap.ui.define([
                     visible: false, // hide the BarcodePicker initially (hidden initialization saves startup time when its used later on)
                 });
 
+                //test scanning: 
+                this._beginTime = performance.now()
+
                 // set the callback function for scan results of the BarcodePicker
                 this.barcodePicker.on("scan", (scanResult) => {
-                    var scanRes = scanResult.barcodes[0].data;
-
-                    var scanResultLoc = scanResult.barcodes[0].location;
-                    // sap.m.MessageBox.show(toSearch);
-                    var aScanResultList = this._scanListModel.getData();
-
-                    var tmp = {
-                        "Result": scanRes,
-                        "product_sequence": aScanResultList.length + 1,
-                        "bl": "X: " + scanResultLoc.bottomLeft.x + ", Y: " + scanResultLoc.bottomLeft.y,
-                        "br": "X: " + scanResultLoc.bottomRight.x + ", Y: " + scanResultLoc.bottomRight.y,
-                        "tl": "X: " + scanResultLoc.topLeft.x + ", Y: " + scanResultLoc.topLeft.y,
-                        "tr": "X: " + scanResultLoc.topRight.x + ", Y: " + scanResultLoc.topRight.y
-                    };
-
-                    aScanResultList.push(tmp);
-                    // insert scanned value into searchField
-                    this._scanListModel.setData(aScanResultList);
-
-                    var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * 512 / 1280;
-                    var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * 288 / 720;
-
-                    //in _scannedProd, we use x and y to represent the topleft point, from this we will draw a highlight around the barcode, and by calculating the bottom left point, we shall draw a yellow rect with the packing sequence
-                    // check if the new scanned product is to be added into the list: we shall compare if the "new product" is the previous scanned one
-                    var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
-                    if (isNewProduct) {
-                        this._scannedProd.push({
-                            "prod": scanRes,
-                            //"product_sequence": this._scannedProd.length + 1,
-                            product_sequence: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-                                var r = Math.random() * 16 | 0,
-                                    v = c === "x" ? r : (r & 0x3 | 0x8);
-                                return v.toString(16);
-                            }),
-                            "x": scanResultLoc.topLeft.x * 512 / 1280,
-                            "y": scanResultLoc.topLeft.y * 288 / 720,
-                            "len": tmpLen,
-                            "hei": tmpHei,
-                            "pack_sequence": 0,
-                            "movedIndicator" : false, //means that this product is already moved and in UI it will be mark as green 
-                            "toBePackedInd": false, // means that this product shall be highlighted and packer shall pick this one to the HU
-                            "scannedDateTime": new Date().getTime()
-                        })
-                    }
-
-
-
-                    if (this._scannedProd.length > 2) {
-                        console.log(this._scannedProd.length);
-                        //save the picture in local model. 
-
-                        // pause scanning
-                        this.barcodePicker.pauseScanning();
-                        this.barcodePicker.setVisible(false);
-
-                        //start to call backend oData service for calculation: ZEWM_PBO_SRV
-                        // this is to be done by using local JSON Model: _scannedProd
-                        this._calculatePMAT();
-                    }
-
+                    setTimeout(this._scan(scanResult), 5000);
 
                 });
+            },
+
+            _scan: function (scanResult) {
+                //this happens when Camera initialization or Resume scanning 
+                //TODO: via Timeout to control scanning process or other alternative way?
+                //Option 1: via set timeout 
+
+                var scanRes = scanResult.barcodes[0].data;
+
+                var scanResultLoc = scanResult.barcodes[0].location;
+                // sap.m.MessageBox.show(toSearch);
+                var aScanResultList = this._scanListModel.getData();
+
+                var tmp = {
+                    "Result": scanRes,
+                    "product_sequence": aScanResultList.length + 1,
+                    "bl": "X: " + scanResultLoc.bottomLeft.x + ", Y: " + scanResultLoc.bottomLeft.y,
+                    "br": "X: " + scanResultLoc.bottomRight.x + ", Y: " + scanResultLoc.bottomRight.y,
+                    "tl": "X: " + scanResultLoc.topLeft.x + ", Y: " + scanResultLoc.topLeft.y,
+                    "tr": "X: " + scanResultLoc.topRight.x + ", Y: " + scanResultLoc.topRight.y
+                };
+
+                aScanResultList.push(tmp);
+                // insert scanned value into searchField
+                this._scanListModel.setData(aScanResultList);
+
+                var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * 512 / 1280;
+                var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * 288 / 720;
+
+                //in _scannedProd, we use x and y to represent the topleft point, from this we will draw a highlight around the barcode, and by calculating the bottom left point, we shall draw a yellow rect with the packing sequence
+                // check if the new scanned product is to be added into the list: we shall compare if the "new product" is the previous scanned one
+                var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
+                if (isNewProduct) {
+                    this._scannedProd.push({
+                        "prod": scanRes,
+                        //"product_sequence": this._scannedProd.length + 1,
+                        product_sequence: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+                            var r = Math.random() * 16 | 0,
+                                v = c === "x" ? r : (r & 0x3 | 0x8);
+                            return v.toString(16);
+                        }),
+                        "x": scanResultLoc.topLeft.x * 512 / 1280,
+                        "y": scanResultLoc.topLeft.y * 288 / 720,
+                        "len": tmpLen,
+                        "hei": tmpHei,
+                        "pack_sequence": 0,
+                        "movedIndicator": false, //means that this product is already moved and in UI it will be mark as green 
+                        "toBePackedInd": false, // means that this product shall be highlighted and packer shall pick this one to the HU
+                        "scannedDateTime": new Date().getTime()
+                    })
+                }
+
+
+
+                if (this._scannedProd.length > 2) {
+                    console.log(this._scannedProd.length);
+                    //save the picture in local model. 
+
+                    // pause scanning
+                    this.barcodePicker.pauseScanning();
+                    this.barcodePicker.setVisible(false);
+
+                    var endTime = performance.now()
+
+                    MessageToast.show("Scanning used: " + ((endTime - this._beginTime) / 1000) + " seconds");
+
+                    //start to call backend oData service for calculation: ZEWM_PBO_SRV
+                    // this is to be done by using local JSON Model: _scannedProd
+                    this._calculatePMAT();
+                }
             },
 
             _calculatePMAT: function () {
@@ -162,30 +247,30 @@ sap.ui.define([
                         oModel.read("/EWM3DPackSet", {
                             success: function (res) {
                                 console.log("read result success")
-                                
-                                for(var i = 0; i < res.results.length; i++) {
+
+                                for (var i = 0; i < res.results.length; i++) {
                                     //TODO: another thing is to update the _scannedProd model to add the pack sequence 
                                     // find the array index by matching the product number via pack_sequence & prod
-                                    var ind = that._scannedProd.findIndex ( v => v.prod == res.results[i].Product);
-                                    if(ind > -1) {
+                                    var ind = that._scannedProd.findIndex(v => v.prod == res.results[i].Product);
+                                    if (ind > -1) {
                                         that._scannedProd[ind].pack_sequence = res.results[i].PackSequence;
                                     }
-                                    
+
                                     // draw the results in product viewb for the first time.
                                     that._drawPackSequence();
 
-                                     //initialize two JSON model property ProductMovedInd & ProductToBeMovedInd
-                                     if(res.results[i].PackSequence == 1) {
+                                    //initialize two JSON model property ProductMovedInd & ProductToBeMovedInd
+                                    if (res.results[i].PackSequence == 1) {
                                         res.results[i].ProductToBeMovedInd = true;
-                                        if(ind > -1) {
-                                            that._scannedProd[ind].toBePackedInd = true; 
+                                        if (ind > -1) {
+                                            that._scannedProd[ind].toBePackedInd = true;
                                         }
-                                        
+
                                     } else {
                                         res.results[i].ProductToBeMovedInd = false;
                                     }
                                     res.results[i].ProductMovedInd = false;
-                                    
+
                                 }
                                 PackProductsHelper.setModel(res.results);
                             },
@@ -200,17 +285,17 @@ sap.ui.define([
                 });
             },
 
-            onNextProduct: function(oEvent) {
+            onNextProduct: function (oEvent) {
                 //mark next product as highlight and mark the previous one as... 
                 //modify the _scannedProduct model to update the product status by trigger another camera shot. 
                 //define pack normal: if scanning result shows that if the missing product is the one that follow the pack sequence 
-               // var vPackNormal = true;
+                // var vPackNormal = true;
                 var aOldScannedProd = Object.assign([], this._scannedProd);
                 //TODO: scan again -> update this._scannedProd
                 /* *****         Simulate scanning           *****/
 
                 this._scannedProd = this._scannedProd.filter(item => item.movedIndicator == false);
-                this._scannedProd.splice(0,1); 
+                this._scannedProd.splice(0, 1);
 
                 /* *****         End of Simulate scanning           *****/
                 if (this._scannedProd.length == aOldScannedProd.length) {
@@ -218,11 +303,11 @@ sap.ui.define([
                 }
                 var that = this;
                 //find the missing product by comparing aOldScannedProd with this._scannedProd;
-                var aMissingProd = aOldScannedProd.filter( prod => {
+                var aMissingProd = aOldScannedProd.filter(prod => {
                     return that._scannedProd.findIndex(item => item.prod == prod.prod) < 0;
                 });
                 //for missing product we shall mark moveIndicator as true; and insert it to the refreshed _scannedProd
-                aMissingProd.every( a => {
+                aMissingProd.every(a => {
                     a.movedIndicator = true;
                     a.toBePackedInd = false;
                     //firstly, match the corresponding PackProducts product and update the JSON Model afterwards
@@ -231,14 +316,14 @@ sap.ui.define([
                 });
                 //also we shall update the PackProducts model for ProductMovedInd as well as ProductToBeMovedInd
                 //then find the next product which shall mark as red for packing 
-                this._scannedProd = this._scannedProd.sort((a,b)  => a.pack_sequence - b.pack_sequence);
-              //  var vNextProduct = this._scannedProd[0];
+                this._scannedProd = this._scannedProd.sort((a, b) => a.pack_sequence - b.pack_sequence);
+                //  var vNextProduct = this._scannedProd[0];
                 this._scannedProd[0].toBePackedInd = true;
                 PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
                 this._drawPackSequence(); // trigger redraw again. 
-                
-                
+
+
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
@@ -290,17 +375,17 @@ sap.ui.define([
                         //assume that the pack sequence is retrieved from backend
                         this._scannedProd[index].pack_sequence = pack_seq; //TODO: to be removed
                         ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
-                        if(this._scannedProd[index].movedIndicator) {
+                        if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "green";
                         } else if (this._scannedProd[index].toBePackedInd) {
                             ctx.fillStyle = "red";
                         } else {
                             ctx.fillStyle = "yellow";
                         }
-                        
+
                         //ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, this._scannedProd[index].len * 2, this._scannedProd[index].hei * 1.5)
-                        ctx.fillRect(this._scannedProd[index].x + this._scannedProd[index].len/2 - 40, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 80, 26)
-                        if(this._scannedProd[index].movedIndicator) {
+                        ctx.fillRect(this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 80, 26)
+                        if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "white";
                         } else if (this._scannedProd[index].toBePackedInd) {
                             ctx.fillStyle = "white";
@@ -308,7 +393,7 @@ sap.ui.define([
                             ctx.fillStyle = "black";
                         }
                         ctx.font = "20px Georgia";
-                        ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len/2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
+                        ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len / 2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
                         pack_seq++;
                     }
                     _drawedProd.push(this._scannedProd[index].prod)
@@ -319,6 +404,7 @@ sap.ui.define([
             onScanInputButton: function () {
                 this.barcodePicker.setVisible(true);
                 this.barcodePicker.resumeScanning();
+                this._beginTime = performance.now();
 
                 //reset model 
                 this._scannedProd = [];
@@ -376,81 +462,81 @@ sap.ui.define([
 
                     }
 
-                   /* var vPackResult = [{
-                        // "CalculatePack_ac": "",
-                        "ProductSequence": "1",
-                        "Product": "PROD-S01",
-                        "PackSequence": "1",
-                        "ProductLength": "22",
-                        "ProductWidth": "12",
-                        "ProductHeight": "8",
-                        // "ProductMeasurementUnit": "",
-                        // "Orientation": "",
-                        "XPosition": "-4",
-                        "YPosition": "-4",
-                        "ZPosition": "-7.25",
-                        "PackProductLength": "30",
-                        "PackProductWidth": "20",
-                        "PackProductHeight": "22.5",
-                        // "PackProductMeasurementUnit": ""
-                    }, {
-                        // "CalculatePack_ac": "",
-                        "ProductSequence": "2",
-                        "Product": "PROD-S02",
-                        "PackSequence": "2",
-                        "ProductLength": "16",
-                        "ProductWidth": "6",
-                        "ProductHeight": "14.4",
-                        // "ProductMeasurementUnit": "",
-                        // "Orientation": "",
-                        "XPosition": "-7",
-                        "YPosition": "-7",
-                        "ZPosition": "4.05",
-                        "PackProductLength": "30",
-                        "PackProductWidth": "20",
-                        "PackProductHeight": "22.5",
-                        // "PackProductMeasurementUnit": ""
-                    }, {
-                        // "CalculatePack_ac": "",
-                        "ProductSequence": "3",
-                        "Product": "PROD-S03",
-                        "PackSequence": "3",
-                        "ProductLength": "6.5",
-                        "ProductWidth": "10",
-                        "ProductHeight": "13.8",
-                        // "ProductMeasurementUnit": "",
-                        // "Orientation": "",
-                        "XPosition": "4.35",
-                        "YPosition": "-5",
-                        "ZPosition": "3.75",
-                        "PackProductLength": "30",
-                        "PackProductWidth": "20",
-                        "PackProductHeight": "22.5",
-                        // "PackProductMeasurementUnit": ""
-                    }, {
-                        // "CalculatePack_ac": "",
-                        "ProductSequence": "4",
-                        "Product": "PROD-S04",
-                        "PackSequence": "4",
-                        "ProductLength": "7.3",
-                        "ProductWidth": "8",
-                        "ProductHeight": "15",
-                        // "ProductMeasurementUnit": "",
-                        // "Orientation": "",
-                        "XPosition": "11.35",
-                        "YPosition": "-6",
-                        "ZPosition": "-3.75",
-                        "PackProductLength": "30",
-                        "PackProductWidth": "20",
-                        "PackProductHeight": "22.5",
-                        // "PackProductMeasurementUnit": ""
-                    }]
-
-                    PackProductsHelper.setPackProductsModelData(vPackResult)
-                    var oTempProduct = vPackResult[0];
-                    this.addHU(oTempProduct.PackProductLength, oTempProduct.PackProductWidth, oTempProduct.PackProductHeight);
-                    this.addProduct(oTempProduct);
-                    return; */
+                    /* var vPackResult = [{
+                         // "CalculatePack_ac": "",
+                         "ProductSequence": "1",
+                         "Product": "PROD-S01",
+                         "PackSequence": "1",
+                         "ProductLength": "22",
+                         "ProductWidth": "12",
+                         "ProductHeight": "8",
+                         // "ProductMeasurementUnit": "",
+                         // "Orientation": "",
+                         "XPosition": "-4",
+                         "YPosition": "-4",
+                         "ZPosition": "-7.25",
+                         "PackProductLength": "30",
+                         "PackProductWidth": "20",
+                         "PackProductHeight": "22.5",
+                         // "PackProductMeasurementUnit": ""
+                     }, {
+                         // "CalculatePack_ac": "",
+                         "ProductSequence": "2",
+                         "Product": "PROD-S02",
+                         "PackSequence": "2",
+                         "ProductLength": "16",
+                         "ProductWidth": "6",
+                         "ProductHeight": "14.4",
+                         // "ProductMeasurementUnit": "",
+                         // "Orientation": "",
+                         "XPosition": "-7",
+                         "YPosition": "-7",
+                         "ZPosition": "4.05",
+                         "PackProductLength": "30",
+                         "PackProductWidth": "20",
+                         "PackProductHeight": "22.5",
+                         // "PackProductMeasurementUnit": ""
+                     }, {
+                         // "CalculatePack_ac": "",
+                         "ProductSequence": "3",
+                         "Product": "PROD-S03",
+                         "PackSequence": "3",
+                         "ProductLength": "6.5",
+                         "ProductWidth": "10",
+                         "ProductHeight": "13.8",
+                         // "ProductMeasurementUnit": "",
+                         // "Orientation": "",
+                         "XPosition": "4.35",
+                         "YPosition": "-5",
+                         "ZPosition": "3.75",
+                         "PackProductLength": "30",
+                         "PackProductWidth": "20",
+                         "PackProductHeight": "22.5",
+                         // "PackProductMeasurementUnit": ""
+                     }, {
+                         // "CalculatePack_ac": "",
+                         "ProductSequence": "4",
+                         "Product": "PROD-S04",
+                         "PackSequence": "4",
+                         "ProductLength": "7.3",
+                         "ProductWidth": "8",
+                         "ProductHeight": "15",
+                         // "ProductMeasurementUnit": "",
+                         // "Orientation": "",
+                         "XPosition": "11.35",
+                         "YPosition": "-6",
+                         "ZPosition": "-3.75",
+                         "PackProductLength": "30",
+                         "PackProductWidth": "20",
+                         "PackProductHeight": "22.5",
+                         // "PackProductMeasurementUnit": ""
+                     }]
+ 
+                     PackProductsHelper.setPackProductsModelData(vPackResult)
+                     var oTempProduct = vPackResult[0];
+                     this.addHU(oTempProduct.PackProductLength, oTempProduct.PackProductWidth, oTempProduct.PackProductHeight);
+                     this.addProduct(oTempProduct);
+                     return; */
 
                 }
             },
