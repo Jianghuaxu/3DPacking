@@ -23,16 +23,20 @@ sap.ui.define([
             ratio: 20,
             _scanListModel: new JSONModel([]),
             _scannedProd: [],
+            _nrOfProducts: 4, // TODO: this shall be read from the ODO number
+            _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
                 this.initThreejsModel();
                 this.fontLoader();
                 this.initScan();
 
-                this.initHandtrack();
+                this._audioBtn = this.getView().byId("voice");
+                this._audioWave = this.getView().byId("voice_wave");
             },
-
-            initHandtrack: async function () {
-                //const model =  await handTrack.load();
+            
+            onSpeek: function () {
+                this._audioWave.setVisible(true);
+                this._audioBtn.setVisible(false);
                 if (!('webkitSpeechRecognition' in window)) {
                     upgrade();
                 } else {
@@ -44,47 +48,15 @@ sap.ui.define([
                     recognition.interimResults = true;
                     recognition.lang = 'en-IN';
                     recognition.start();
-
-                    jQuery.sap.delayedCall(5000, this, function () { // this has to be implemented so as the control comes back after 5 seconds
+                    console.log("Audio on")
+                    jQuery.sap.delayedCall(25000, this, function () { // this has to be implemented so as the control comes back after 5 seconds
                         recognition.stop();
+                        console.log("Audio off delay")
                     });
                     var finalTranscripts = '';
                     var oEvent = oEvent;
-                    recognition.onresult = function (event) {
-                        var interimTranscripts = '';
-                        for (var i = event.resultIndex; i < event.results.length; i++) {
-                            var transcript = event.results[i][0].transcript;
-                            transcript.replace("\n", "<br>");
-                            if (event.results[i].isFinal) {
-                                finalTranscripts += transcript;
-                            } else {
-                                interimTranscripts += transcript;
-                            }
-                        }
-                    };
-                    console.log(finalTranscripts)
-                    MessageToast.show(finalTranscripts)
-                }
-            },
-            onSpeek: function () {
-                if (!('webkitSpeechRecognition' in window)) {
-                    upgrade();
-                } else {
-                    console.log("fine for voice control")
-                    var recognition = new webkitSpeechRecognition();
-                    recognition.continuous = true;
-                    recognition.interimResults = true;
-                    recognition.continuous = true;
-                    recognition.interimResults = true;
-                    recognition.lang = 'en-IN';
-                    recognition.start();
-                    /** 
-                    jQuery.sap.delayedCall(5000, this, function () { // this has to be implemented so as the control comes back after 5 seconds
-                        recognition.stop();
-                    }); */
-                    var finalTranscripts = '';
-                    var oEvent = oEvent;
-                    recognition.onresult = function (event) {
+                    var that = this;
+                    recognition.onresult = function(event) {
                         var interimTranscripts = '';
                         for (var i = event.resultIndex; i < event.results.length; i++) {
                             var transcript = event.results[i][0].transcript;
@@ -92,13 +64,20 @@ sap.ui.define([
                             if (event.results[i].isFinal) {
                                 finalTranscripts += transcript;
                                 console.log(finalTranscripts)
+                                console.log("Audio off")
                                 MessageToast.show(finalTranscripts)
                             } else {
                                 interimTranscripts += transcript;
-                                if(interimTranscripts.includes("hello")) {
+                                if(interimTranscripts.includes("next")) {
                                     recognition.stop();
+                                    that._audioWave.setVisible(false);
+                                    that._audioBtn.setVisible(true);
+                                    console.log("Audio off")
                                     console.log(finalTranscripts)
-                                MessageToast.show(finalTranscripts)
+                                    MessageToast.show(finalTranscripts)
+
+                                    //trigger scanning again 
+                                    that.onNextProduct();
                                 }
                             }
                         }
@@ -139,7 +118,10 @@ sap.ui.define([
 
                 // set the callback function for scan results of the BarcodePicker
                 this.barcodePicker.on("scan", (scanResult) => {
-                    setTimeout(this._scan(scanResult), 5000);
+                    //setTimeout(this._scan(scanResult), 5000);
+                    //TODO: how to control the camera? 
+                    // Option 1: set a timeout -> not working, since this is asychronized, this call back function is triggered once the barcodePicker is resumed or started 
+                    // Option 2: predefine number of products? -> this could be retrieved from the Outbound Delivery Orders and make it decreased every time 
 
                 });
             },
@@ -193,10 +175,7 @@ sap.ui.define([
                         "scannedDateTime": new Date().getTime()
                     })
                 }
-
-
-
-                if (this._scannedProd.length > 2) {
+                if (this._scannedProd.length > this._nrOfProducts) {
                     console.log(this._scannedProd.length);
                     //save the picture in local model. 
 
@@ -210,7 +189,9 @@ sap.ui.define([
 
                     //start to call backend oData service for calculation: ZEWM_PBO_SRV
                     // this is to be done by using local JSON Model: _scannedProd
-                    this._calculatePMAT();
+                    if(!this._reScanFlag) {
+                        this._calculatePMAT();
+                    }
                 }
             },
 
@@ -256,9 +237,6 @@ sap.ui.define([
                                         that._scannedProd[ind].pack_sequence = res.results[i].PackSequence;
                                     }
 
-                                    // draw the results in product viewb for the first time.
-                                    that._drawPackSequence();
-
                                     //initialize two JSON model property ProductMovedInd & ProductToBeMovedInd
                                     if (res.results[i].PackSequence == 1) {
                                         res.results[i].ProductToBeMovedInd = true;
@@ -273,6 +251,12 @@ sap.ui.define([
 
                                 }
                                 PackProductsHelper.setModel(res.results);
+
+                                // draw the packing instruction on UI with results returned from oData
+                                that._drawPackSequence();
+                                that.onSpeek();
+
+
                             },
                             error: function () {
                                 console.log("read result failure")
@@ -286,18 +270,24 @@ sap.ui.define([
             },
 
             onNextProduct: function (oEvent) {
+                //decrease the target number of products once we receive the 'Next' command
+                this._nrOfProducts--; 
+
                 //mark next product as highlight and mark the previous one as... 
                 //modify the _scannedProduct model to update the product status by trigger another camera shot. 
                 //define pack normal: if scanning result shows that if the missing product is the one that follow the pack sequence 
                 // var vPackNormal = true;
                 var aOldScannedProd = Object.assign([], this._scannedProd);
-                //TODO: scan again -> update this._scannedProd
+
+                /* ********* Scanning re-trigger *******************************************/
+                this._reScanFlag = false;
+                this.barcodePicker.resumeScanning();
                 /* *****         Simulate scanning           *****/
-
-                this._scannedProd = this._scannedProd.filter(item => item.movedIndicator == false);
-                this._scannedProd.splice(0, 1);
-
+                //this._scannedProd = this._scannedProd.filter(item => item.movedIndicator == false);
+                //this._scannedProd.splice(0, 1);
                 /* *****         End of Simulate scanning           *****/
+                /* *****         End of scanning re-trigger    *****************************/
+
                 if (this._scannedProd.length == aOldScannedProd.length) {
                     return; // scanning triggered, while there no product moved -> no change on UI side 
                 }

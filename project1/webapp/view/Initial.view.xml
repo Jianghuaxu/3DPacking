@@ -1,137 +1,121 @@
-<mvc:View
-    controllerName="project1.controller.Initial"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-    xmlns="sap.m"
-    xmlns:html="http://www.w3.org/1999/xhtml"
-    xmlns:l="sap.ui.layout"
-    xmlns:vk="sap.ui.vk"
->
+<mvc:View controllerName="project1.controller.Initial" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:vk="sap.ui.vk">
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>title}">
-                    <content >
-						<l:Grid class="sapUiTinyMargin" id="main-grid">
-                        <VBox>
-                            <layoutData>
-								<l:GridData span="XL6 L6 M6 S6"></l:GridData>
-							</layoutData>
-                            <!--<html:div id="scandit-barcode-picker" style="max-width: 40%; max-height: 40%;"></html:div>  -->
-                            <html:div id="scandit-barcode-picker" ></html:div>
-                            <html:canvas id="myCanvas1" width="512" height="288"> </html:canvas>
-                            <Button id="triggerScanInputButton"
-                            icon="sap-icon://bar-code"
-                            press=".onScanInputButton"
-                            text="Scan"
-                            type="Emphasized"/>
-                            <Button id="calculate" text="Calculate" press="onCalculate"/>
-                            <Button id="voice" text="Voice" press="onSpeek"/>
-                            <Button id="nextProduct" text="NextProduct" press="onNextProduct"/>
-                        
-                        <VBox>
-                            <Table id="scanResultTable"
-                                inset="false"
-                                items="{
+                    <content>
+                        <l:Grid class="sapUiTinyMargin" id="main-grid">
+                            <VBox>
+                                <layoutData>
+                                    <l:GridData span="XL6 L6 M6 S6" />
+                                </layoutData>
+                                <!--<html:div id="scandit-barcode-picker" style="max-width: 40%; max-height: 40%;"></html:div>  -->
+                                <html:div id="scandit-barcode-picker" />
+                                <html:canvas id="myCanvas1" width="512" height="288" />
+                                <Button id="triggerScanInputButton" icon="sap-icon://bar-code" press=".onScanInputButton" text="Scan" type="Emphasized" />
+                                <Button id="calculate" text="Calculate" press="onCalculate" />
+                                <VBox>
+                                    <Button id="voice" icon="sap-icon://microphone" press="onSpeek" type="Emphasized"/>
+                                    <svg id = "voice_wave" width="auto" height= "25" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <rect x='0' y='0' width='4' height='20' fill='#ff6700'>
+                                            <animate attributeName='height' values="20;10;20" begin='0' dur='0.8s' repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x='7' y='0' width='4' height='20' fill='#ff6700'>
+                                            <animate attributeName='height' values="20;10;20" begin='0.2s' dur='0.8s' repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x='14' y='0' width='4' height='20' fill='#ff6700'>
+                                            <animate attributeName='height' values="20;10;20" begin='0.4s' dur='0.8s' repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x='21' y='0' width='4' height='20' fill='#ff6700'>
+                                            <animate attributeName='height' values="20;10;20" begin='0.6' dur='0.8s' repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x='28' y='0' width='4' height='20' fill='#ff6700'>
+                                            <animate attributeName='height' values="20;10;20" begin='0.8s' dur='0.8s' repeatCount="indefinite" />
+                                        </rect>
+                                    </svg>
+                                </VBox>
+                                <Button id="nextProduct" text="NextProduct" press="onNextProduct" />
+                                <!--第二个小图标 设置高度-->
+
+                                <VBox>
+                                    <Table id="scanResultTable" inset="false" items="{
                                     path: 'WhseInboundDeliveryHead'
                                 }">
-                                <headerToolbar>
-                                    <OverflowToolbar>
-                                        <content>
-                                            <Title text="Scan Result" level="H2"/>
-                                            <ToolbarSpacer />
-                                            <CheckBox text="InfoToolbar"
-                                                select="onSelect"/>
-                                        </content>
-                                    </OverflowToolbar>
-                                </headerToolbar>
-                                <infoToolbar>
-                                    <OverflowToolbar>
-                                        <Label text="Scan Result List"/>
-                                    </OverflowToolbar>
-                                </infoToolbar>
-                                <columns>
-                                    <Column
-                                        minScreenWidth="Tablet"
-                                        demandPopin="true">
-                                        <Text text="Product" />
-                                    </Column>
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <content>
+                                                    <Title text="Scan Result" level="H2" />
+                                                    <ToolbarSpacer />
+                                                    <CheckBox text="InfoToolbar" select="onSelect" />
+                                                </content>
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <infoToolbar>
+                                            <OverflowToolbar>
+                                                <Label text="Scan Result List" />
+                                            </OverflowToolbar>
+                                        </infoToolbar>
+                                        <columns>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Product" />
+                                            </Column>
 
-                                    <Column
-                                        minScreenWidth="Tablet"
-                                        demandPopin="true">
-                                        <Text text="Loc: bottom left" />
-                                    </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Loc: bottom left" />
+                                            </Column>
 
-                                    <Column
-                                        minScreenWidth="Tablet"
-                                        demandPopin="true">
-                                        <Text text="Loc: bottom right" />
-                                    </Column>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Loc: bottom right" />
+                                            </Column>
 
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Loc: top left" />
+                                            </Column>
 
-                                    <Column
-                                        minScreenWidth="Tablet"
-                                        demandPopin="true">
-                                        <Text text="Loc: top left" />
-                                    </Column>
-
-                                    <Column
-                                        minScreenWidth="Tablet"
-                                        demandPopin="true">
-                                        <Text text="Loc: top right" />
-                                    </Column>
-
-                                </columns>
-                                <items>
-                                    <ColumnListItem>
-                                        <cells>
-                                            <Text
-                                                text="{scan>Result}" />                                            
-                                            <Text
-                                                text="{scan>bl}" />                                            
-                                            <Text
-                                                text="{scan>br}" />
-                                            <Text
-                                                text="{scan>tl}" />                                            
-                                            <Text
-                                                text="{scan>tr}" />
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </VBox>
-                        </VBox>
-                       <VBox>
-                                  <layoutData>
-                           <l:GridData span="XL6 L6 M6 S6"></l:GridData>
-                           </layoutData>
-                           <HBox> 
-                            <Text id="handlingUnitText" text="{i18n>packHandlingUnit}">
-                            </Text>
-                           <Text id="packagingMaterialText" text="{i18n>packagingMaterial}">                     
-                           </Text>
-                           </HBox>
-							<vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop">
-								<!-- <vk:layoutData>
+                                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                                <Text text="Loc: top right" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Text text="{scan>Result}" />
+                                                    <Text text="{scan>bl}" />
+                                                    <Text text="{scan>br}" />
+                                                    <Text text="{scan>tl}" />
+                                                    <Text text="{scan>tr}" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </VBox>
+                            </VBox>
+                            <VBox>
+                                <layoutData>
+                                    <l:GridData span="XL6 L6 M6 S6" />
+                                </layoutData>
+                                <HBox>
+                                    <Text id="handlingUnitText" text="{i18n>packHandlingUnit}" />
+                                    <Text id="packagingMaterialText" text="{i18n>packagingMaterial}" />
+                                </HBox>
+                                <vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop">
+                                    <!-- <vk:layoutData>
 									<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 								</vk:layoutData> -->
-							</vk:Viewer>
-                            <HBox alignItems="Center" alignContent="SpaceAround"> 
-                            <!-- <l:Grid> -->
-                                <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView"/>
-                                <Button id="backViewButton" text="{i18n>backView}" press="onDisplayBackView"/>
-                                <Button id="topViewButton" text="{i18n>topView}" press="onDisplayTopView"/>
-                                <Button id="rightViewButton" text="{i18n>rightView}" press="onDisplayRightView"/>
-                                <Button id="leftViewButton" text="{i18n>leftView}" press="onDisplayLeftView"/>
-                                <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView"/>
-                           </HBox>
-                           <!-- </l:Grid> -->
-                           <Button id="closeButton" text="{i18n>closePackHandlingUnit}" press="onCloseHU"/>
-                           </VBox>
-						</l:Grid>
+                                </vk:Viewer>
+                                <HBox alignItems="Center" alignContent="SpaceAround">
+                                    <!-- <l:Grid> -->
+                                    <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView" />
+                                    <Button id="backViewButton" text="{i18n>backView}" press="onDisplayBackView" />
+                                    <Button id="topViewButton" text="{i18n>topView}" press="onDisplayTopView" />
+                                    <Button id="rightViewButton" text="{i18n>rightView}" press="onDisplayRightView" />
+                                    <Button id="leftViewButton" text="{i18n>leftView}" press="onDisplayLeftView" />
+                                    <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView" />
+                                </HBox>
+                                <!-- </l:Grid> -->
+                                <Button id="closeButton" text="{i18n>closePackHandlingUnit}" press="onCloseHU" />
+                            </VBox>
+                        </l:Grid>
                     </content>
                 </Page>
             </pages>
