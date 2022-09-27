@@ -23,6 +23,7 @@ sap.ui.define([
             ratio: 20,
             _scanListModel: new JSONModel([]),
             _scannedProd: [],
+            _OldScannedProd: [],
             _nrOfProducts: 4, // TODO: this shall be read from the ODO number
             _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
@@ -33,7 +34,7 @@ sap.ui.define([
                 this._audioBtn = this.getView().byId("voice");
                 this._audioWave = this.getView().byId("voice_wave");
             },
-            
+
             onSpeek: function () {
                 this._audioWave.setVisible(true);
                 this._audioBtn.setVisible(false);
@@ -56,7 +57,7 @@ sap.ui.define([
                     var finalTranscripts = '';
                     var oEvent = oEvent;
                     var that = this;
-                    recognition.onresult = function(event) {
+                    recognition.onresult = function (event) {
                         var interimTranscripts = '';
                         for (var i = event.resultIndex; i < event.results.length; i++) {
                             var transcript = event.results[i][0].transcript;
@@ -68,7 +69,7 @@ sap.ui.define([
                                 MessageToast.show(finalTranscripts)
                             } else {
                                 interimTranscripts += transcript;
-                                if(interimTranscripts.includes("next")) {
+                                if (interimTranscripts.includes("next")) {
                                     recognition.stop();
                                     that._audioWave.setVisible(false);
                                     that._audioBtn.setVisible(true);
@@ -83,7 +84,7 @@ sap.ui.define([
                         }
                     };
                     console.log(finalTranscripts)
-                    
+
                 }
             },
             initScan: async function () {
@@ -105,7 +106,10 @@ sap.ui.define([
                     document.getElementById("application-project1-display-component---Initial--scandit-barcode-picker"), {
                     scanSettings: new ScanditSDK.ScanSettings({
                         enabledSymbologies: ["code128", "ean8", "ean13", "upca", "upce"],
-                        codeDuplicateFilter: 3000, // Minimum delay between duplicate results
+                        codeDuplicateFilter: 4000, // Minimum delay between duplicate results
+                        maxNumberOfCodesPerFrame: 6,
+                        recognitionMode: 'code',
+                        gpuAcceleration: true
                     }),
                     playSoundOnScan: true,
                     vibrateOnScan: true,
@@ -119,6 +123,7 @@ sap.ui.define([
                 // set the callback function for scan results of the BarcodePicker
                 this.barcodePicker.on("scan", (scanResult) => {
                     //setTimeout(this._scan(scanResult), 5000);
+                    this._scan(scanResult); //tjos scan results may contain multiple results at once
                     //TODO: how to control the camera? 
                     // Option 1: set a timeout -> not working, since this is asychronized, this call back function is triggered once the barcodePicker is resumed or started 
                     // Option 2: predefine number of products? -> this could be retrieved from the Outbound Delivery Orders and make it decreased every time 
@@ -130,52 +135,60 @@ sap.ui.define([
                 //this happens when Camera initialization or Resume scanning 
                 //TODO: via Timeout to control scanning process or other alternative way?
                 //Option 1: via set timeout 
+                for (var i = 0; i < scanResult.barcodes.length ; i++) {
+                    var scanRes = scanResult.barcodes[i].data;
 
-                var scanRes = scanResult.barcodes[0].data;
+                    var scanResultLoc = scanResult.barcodes[i].location;
+                    // sap.m.MessageBox.show(toSearch);
+                    var aScanResultList = this._scanListModel.getData();
 
-                var scanResultLoc = scanResult.barcodes[0].location;
-                // sap.m.MessageBox.show(toSearch);
-                var aScanResultList = this._scanListModel.getData();
+                    var tmp = {
+                        "Result": scanRes,
+                        "product_sequence": aScanResultList.length + 1,
+                        "bl": "X: " + scanResultLoc.bottomLeft.x + ", Y: " + scanResultLoc.bottomLeft.y,
+                        "br": "X: " + scanResultLoc.bottomRight.x + ", Y: " + scanResultLoc.bottomRight.y,
+                        "tl": "X: " + scanResultLoc.topLeft.x + ", Y: " + scanResultLoc.topLeft.y,
+                        "tr": "X: " + scanResultLoc.topRight.x + ", Y: " + scanResultLoc.topRight.y
+                    };
 
-                var tmp = {
-                    "Result": scanRes,
-                    "product_sequence": aScanResultList.length + 1,
-                    "bl": "X: " + scanResultLoc.bottomLeft.x + ", Y: " + scanResultLoc.bottomLeft.y,
-                    "br": "X: " + scanResultLoc.bottomRight.x + ", Y: " + scanResultLoc.bottomRight.y,
-                    "tl": "X: " + scanResultLoc.topLeft.x + ", Y: " + scanResultLoc.topLeft.y,
-                    "tr": "X: " + scanResultLoc.topRight.x + ", Y: " + scanResultLoc.topRight.y
-                };
+                    aScanResultList.push(tmp);
+                    // insert scanned value into searchField
+                    this._scanListModel.setData(aScanResultList);
 
-                aScanResultList.push(tmp);
-                // insert scanned value into searchField
-                this._scanListModel.setData(aScanResultList);
+                    var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * 512 / 1280;
+                    var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * 288 / 720;
 
-                var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * 512 / 1280;
-                var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * 288 / 720;
-
-                //in _scannedProd, we use x and y to represent the topleft point, from this we will draw a highlight around the barcode, and by calculating the bottom left point, we shall draw a yellow rect with the packing sequence
-                // check if the new scanned product is to be added into the list: we shall compare if the "new product" is the previous scanned one
-                var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
-                if (isNewProduct) {
-                    this._scannedProd.push({
-                        "prod": scanRes,
-                        //"product_sequence": this._scannedProd.length + 1,
-                        product_sequence: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-                            var r = Math.random() * 16 | 0,
-                                v = c === "x" ? r : (r & 0x3 | 0x8);
-                            return v.toString(16);
-                        }),
-                        "x": scanResultLoc.topLeft.x * 512 / 1280,
-                        "y": scanResultLoc.topLeft.y * 288 / 720,
-                        "len": tmpLen,
-                        "hei": tmpHei,
-                        "pack_sequence": 0,
-                        "movedIndicator": false, //means that this product is already moved and in UI it will be mark as green 
-                        "toBePackedInd": false, // means that this product shall be highlighted and packer shall pick this one to the HU
-                        "scannedDateTime": new Date().getTime()
-                    })
+                    //in _scannedProd, we use x and y to represent the topleft point, from this we will draw a highlight around the barcode, and by calculating the bottom left point, we shall draw a yellow rect with the packing sequence
+                    // check if the new scanned product is to be added into the list: we shall compare if the "new product" is the previous scanned one
+                    var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
+                    if (isNewProduct) {
+                        var vPackSequence = 0;
+                        if(this._reScanFlag) {
+                            // for scan resume, pack_sequence shall be not changed for each product, since no oData call happens here, we can get it from buffer: _OldScannedProd
+                            var ind = this._OldScannedProd.findIndex(v => v.prod == scanRes);
+                            vPackSequence = this._OldScannedProd[ind].pack_sequence;
+                        }
+                        this._scannedProd.push({
+                            "prod": scanRes,
+                            //"product_sequence": this._scannedProd.length + 1,
+                            product_sequence: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+                                var r = Math.random() * 16 | 0,
+                                    v = c === "x" ? r : (r & 0x3 | 0x8);
+                                return v.toString(16);
+                            }),
+                            "x": scanResultLoc.topLeft.x * 512 / 1280,
+                            "y": scanResultLoc.topLeft.y * 288 / 720,
+                            "len": tmpLen,
+                            "hei": tmpHei,
+                            "pack_sequence": vPackSequence,
+                            "movedIndicator": false, //means that this product is already moved and in UI it will be mark as green 
+                            "toBePackedInd": false, // means that this product shall be highlighted and packer shall pick this one to the HU
+                            "scannedDateTime": new Date().getTime()
+                        })
+                    }
                 }
-                if (this._scannedProd.length > this._nrOfProducts) {
+
+                if (this._scannedProd.length == this._nrOfProducts) {
                     console.log(this._scannedProd.length);
                     //save the picture in local model. 
 
@@ -189,9 +202,13 @@ sap.ui.define([
 
                     //start to call backend oData service for calculation: ZEWM_PBO_SRV
                     // this is to be done by using local JSON Model: _scannedProd
-                    if(!this._reScanFlag) {
+                    if (!this._reScanFlag) {
                         this._calculatePMAT();
+                    } else {
+                        this._onScanResume(this._OldScannedProd);
                     }
+                } else if(this._scannedProd.length > this._nrOfProducts){
+                    this._scannedProd = []; //clear buffer once the scanned product doesn't match to the expected 
                 }
             },
 
@@ -209,7 +226,7 @@ sap.ui.define([
                     oPayload = {
                         "ProductSequence": item.product_sequence,
                         //"Product": item.prod, //shall be replaced by item.prod from the actually scanned product ,
-                        "Product": "PROD-S02G",
+                        "Product": item.prod,
                         //"PackSequence": 1,
 
 
@@ -271,29 +288,42 @@ sap.ui.define([
 
             onNextProduct: function (oEvent) {
                 //decrease the target number of products once we receive the 'Next' command
-                this._nrOfProducts--; 
+                this._nrOfProducts--;
 
                 //mark next product as highlight and mark the previous one as... 
                 //modify the _scannedProduct model to update the product status by trigger another camera shot. 
                 //define pack normal: if scanning result shows that if the missing product is the one that follow the pack sequence 
                 // var vPackNormal = true;
-                var aOldScannedProd = Object.assign([], this._scannedProd);
+                this._OldScannedProd = Object.assign([], this._scannedProd);
+
+                //clear buffer -> make sure the new data comes from the new scan 
+                this._scannedProd = [];
 
                 /* ********* Scanning re-trigger *******************************************/
-                this._reScanFlag = false;
+                this._reScanFlag = true;
                 this.barcodePicker.resumeScanning();
+                this.barcodePicker.setVisible(true);
+
+                //logic for camera resume shall happen asyn. 
+
+                this._beginTime = performance.now();
+
+
+            },
+
+            _onScanResume: function () {
                 /* *****         Simulate scanning           *****/
                 //this._scannedProd = this._scannedProd.filter(item => item.movedIndicator == false);
                 //this._scannedProd.splice(0, 1);
                 /* *****         End of Simulate scanning           *****/
                 /* *****         End of scanning re-trigger    *****************************/
 
-                if (this._scannedProd.length == aOldScannedProd.length) {
+                if (this._scannedProd.length == this._OldScannedProd.length) {
                     return; // scanning triggered, while there no product moved -> no change on UI side 
                 }
                 var that = this;
                 //find the missing product by comparing aOldScannedProd with this._scannedProd;
-                var aMissingProd = aOldScannedProd.filter(prod => {
+                var aMissingProd = this._OldScannedProd.filter(prod => {
                     return that._scannedProd.findIndex(item => item.prod == prod.prod) < 0;
                 });
                 //for missing product we shall mark moveIndicator as true; and insert it to the refreshed _scannedProd
@@ -301,19 +331,18 @@ sap.ui.define([
                     a.movedIndicator = true;
                     a.toBePackedInd = false;
                     //firstly, match the corresponding PackProducts product and update the JSON Model afterwards
-                    PackProductsHelper.updateMovedIndicator(a.prod, true);
-                    PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
+                    
+                    //PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
                 });
+                //PackProductsHelper.updateMovedIndicator('PROD-3D-PACKING-1', true);
                 //also we shall update the PackProducts model for ProductMovedInd as well as ProductToBeMovedInd
                 //then find the next product which shall mark as red for packing 
                 this._scannedProd = this._scannedProd.sort((a, b) => a.pack_sequence - b.pack_sequence);
                 //  var vNextProduct = this._scannedProd[0];
                 this._scannedProd[0].toBePackedInd = true;
-                PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
+                //PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
                 this._drawPackSequence(); // trigger redraw again. 
-
-
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
@@ -359,11 +388,9 @@ sap.ui.define([
                 //draw each scanned product in canvas video
 
                 var _drawedProd = [];
-                var pack_seq = 1; // TODO: to be removed
                 for (let index = this._scannedProd.length - 1; index > -1; index--) {
                     if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
                         //assume that the pack sequence is retrieved from backend
-                        this._scannedProd[index].pack_sequence = pack_seq; //TODO: to be removed
                         ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "green";
@@ -383,8 +410,7 @@ sap.ui.define([
                             ctx.fillStyle = "black";
                         }
                         ctx.font = "20px Georgia";
-                        ctx.fillText(pack_seq, this._scannedProd[index].x + this._scannedProd[index].len / 2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
-                        pack_seq++;
+                        ctx.fillText(this._scannedProd[index].pack_sequence, this._scannedProd[index].x + this._scannedProd[index].len / 2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
                     }
                     _drawedProd.push(this._scannedProd[index].prod)
 
@@ -394,11 +420,16 @@ sap.ui.define([
             onScanInputButton: function () {
                 this.barcodePicker.setVisible(true);
                 this.barcodePicker.resumeScanning();
+                this.barcodePicker.setVisible(true);
                 this._beginTime = performance.now();
 
                 //reset model 
                 this._scannedProd = [];
                 this._scanListModel.setData([]);
+
+                this._nrOfProducts = 4;
+
+                this._reScanFlag = false;
             },
 
             onSelect: function () {
