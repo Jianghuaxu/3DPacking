@@ -22,9 +22,10 @@ sap.ui.define([
             font: undefined,
             ratio: 20,
             _scanListModel: new JSONModel([]),
+            _odoProdModel: new JSONModel([]),
             _scannedProd: [],
             _OldScannedProd: [],
-            _nrOfProducts: 4, // TODO: this shall be read from the ODO number
+            _nrOfProducts: 10, // TODO: this shall be read from the ODO number
             _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
                 this.initThreejsModel();
@@ -33,6 +34,8 @@ sap.ui.define([
 
                 this._audioBtn = this.getView().byId("voice");
                 this._audioWave = this.getView().byId("voice_wave");
+
+                this._initProdList();
             },
 
             onSpeek: function () {
@@ -69,7 +72,7 @@ sap.ui.define([
                                 MessageToast.show(finalTranscripts)
                             } else {
                                 interimTranscripts += transcript;
-                                if (interimTranscripts.includes("next")) {
+                                if (interimTranscripts.toUpperCase().includes("NEXT")) {
                                     recognition.stop();
                                     that._audioWave.setVisible(false);
                                     that._audioBtn.setVisible(true);
@@ -114,7 +117,7 @@ sap.ui.define([
                     playSoundOnScan: true,
                     vibrateOnScan: true,
                     scanningPaused: true,
-                    visible: false, // hide the BarcodePicker initially (hidden initialization saves startup time when its used later on)
+                    visible: true, // hide the BarcodePicker initially (hidden initialization saves startup time when its used later on)
                 });
 
                 //test scanning: 
@@ -131,11 +134,35 @@ sap.ui.define([
                 });
             },
 
+            _initProdList: function () {
+                this.getView().setModel(this._odoProdModel, "odoProd");
+                var aProdList = [{
+                    "Product": 'PROD-S01',
+                    "ProductDesc": "Fast Moving",
+                    "ProductQuantity": "1",
+                    "ProductUoM": "EA",
+                    "ProductBatch": "Batch01"
+                }, {
+                    "Product": 'PROD-S02',
+                    "ProductDesc": "Fast Moving",
+                    "ProductQuantity": "1",
+                    "ProductUoM": "EA",
+                    "ProductBatch": "Batch02"
+                }, {
+                    "Product": 'PROD-M01',
+                    "ProductDesc": "Medium Moving",
+                    "ProductQuantity": "1",
+                    "ProductUoM": "EA",
+                    "ProductBatch": "Batch01"
+                }];
+                this._odoProdModel.setData(aProdList);
+            },
+
             _scan: function (scanResult) {
                 //this happens when Camera initialization or Resume scanning 
                 //TODO: via Timeout to control scanning process or other alternative way?
                 //Option 1: via set timeout 
-                for (var i = 0; i < scanResult.barcodes.length ; i++) {
+                for (var i = 0; i < scanResult.barcodes.length; i++) {
                     var scanRes = scanResult.barcodes[i].data;
 
                     var scanResultLoc = scanResult.barcodes[i].location;
@@ -163,7 +190,7 @@ sap.ui.define([
                     var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
                     if (isNewProduct) {
                         var vPackSequence = 0;
-                        if(this._reScanFlag) {
+                        if (this._reScanFlag) {
                             // for scan resume, pack_sequence shall be not changed for each product, since no oData call happens here, we can get it from buffer: _OldScannedProd
                             var ind = this._OldScannedProd.findIndex(v => v.prod == scanRes);
                             vPackSequence = this._OldScannedProd[ind].pack_sequence;
@@ -195,6 +222,8 @@ sap.ui.define([
                     // pause scanning
                     this.barcodePicker.pauseScanning();
                     this.barcodePicker.setVisible(false);
+                    //set camera invisible and canvas visible 
+                    this._canvas.setVisible(true);
 
                     var endTime = performance.now()
 
@@ -207,7 +236,7 @@ sap.ui.define([
                     } else {
                         this._onScanResume(this._OldScannedProd);
                     }
-                } else if(this._scannedProd.length > this._nrOfProducts){
+                } else if (this._scannedProd.length > this._nrOfProducts) {
                     this._scannedProd = []; //clear buffer once the scanned product doesn't match to the expected 
                 }
             },
@@ -301,6 +330,7 @@ sap.ui.define([
 
                 /* ********* Scanning re-trigger *******************************************/
                 this._reScanFlag = true;
+                this._canvas.setVisible(false);
                 this.barcodePicker.resumeScanning();
                 this.barcodePicker.setVisible(true);
 
@@ -331,7 +361,7 @@ sap.ui.define([
                     a.movedIndicator = true;
                     a.toBePackedInd = false;
                     //firstly, match the corresponding PackProducts product and update the JSON Model afterwards
-                    
+
                     //PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
                 });
                 //PackProductsHelper.updateMovedIndicator('PROD-3D-PACKING-1', true);
@@ -368,13 +398,13 @@ sap.ui.define([
             },
 
             _drawPackSequence: function () {
+                //set camera invisible and canvas visible 
+                this._canvas.setVisible(true);
                 //this is called when API return results from oData
                 //image modifications
                 var vid = document.getElementsByTagName("video")[0];
-                var can = document.getElementById("application-project1-display-component---Initial--myCanvas1");
-                //var canBtp = document.getElementById("container-project1---Initial--myCanvas1");
-                var ctx = can.getContext("2d");
-
+                var canvas = document.getElementById("application-project1-display-component---Initial--myCanvas1");
+                var ctx = canvas.getContext("2d");
 
 
                 ctx.drawImage(vid, 0, 0, 512, 288);
@@ -418,7 +448,10 @@ sap.ui.define([
             },
 
             onScanInputButton: function () {
-                this.barcodePicker.setVisible(true);
+                // this._canvas = document.getElementById("application-project1-display-component---Initial--myCanvas1");
+                this._canvas = this.getView().byId("canvasContainer");
+                this._canvas.setVisible(false);
+
                 this.barcodePicker.resumeScanning();
                 this.barcodePicker.setVisible(true);
                 this._beginTime = performance.now();
@@ -427,7 +460,7 @@ sap.ui.define([
                 this._scannedProd = [];
                 this._scanListModel.setData([]);
 
-                this._nrOfProducts = 4;
+                this._nrOfProducts = 10;
 
                 this._reScanFlag = false;
             },

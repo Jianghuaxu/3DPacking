@@ -1,1 +1,43 @@
 /* Enter your custom styles here */
+.leftScanVbox {
+    margin-right: 3rem;
+}
+
+.sapUiGlobalBackgroundColor, .sapMShellGlobalInnerBackground {
+    background-image: url('../src/background.png');
+}
+
+.sapMPageBgStandard {
+    background-image: url('../src/background.png');
+}
+
+.scanBtn {
+    margin-left: 5%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.scanBtn .sapMBtnInner {
+    color: #fff000;
+    background-color: transparent;
+    border-color: #fff000;
+    font-size: 1rem;
+
+}
+
+.scanBtn .sapMBtnInner.sapMBtnText .sapMBtnIcon {
+    color: #fff000;
+}
+
+.sapMList {
+    padding: 2%;
+}
+
+.sapMListTbl .sapMText {
+    color: #fff000;
+}
+
+.scanResultVBox .sapMVBox {
+    border-left: 1px solid #fff000;
+    border-right: 1px solid #fff000;
+}
