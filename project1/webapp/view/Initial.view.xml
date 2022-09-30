@@ -48,7 +48,7 @@
                             </HBox>
                             <!--第二个小图标 设置高度-->
 
-                            <VBox id = "scanResultVBox">
+                            <VBox id = "scanResultVBox" class =  "scanResultVBox">
                                 <Table id="scanResultTable"  backgroundDesign = "Transparent" inset="false" items="{
                                     path: 'odoProd>/'
                                 }">

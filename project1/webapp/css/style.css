@@ -37,7 +37,49 @@
     color: #fff000;
 }
 
-.scanResultVBox .sapMVBox {
-    border-left: 1px solid #fff000;
+
+.scanResultVBox:after {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    border-top: 1px solid #fff000;
     border-right: 1px solid #fff000;
 }
+
+
+.scanResultVBox:after {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: 1px solid #fff000;
+    border-right: 1px solid #fff000;
+} 
+
+.scanResultVBox:before {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: 1px solid #fff000;
+    border-left: 1px solid #fff000;
+}
+
+
+.scanResultVBox:before {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-top: 1px solid #fff000;
+    border-left: 1px solid #fff000;
+} 
