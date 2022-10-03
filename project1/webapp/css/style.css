@@ -83,3 +83,42 @@
     border-top: 1px solid #fff000;
     border-left: 1px solid #fff000;
 } 
+
+.scandit.scandit-container {
+    width: 96%;
+    height: 96%;
+    padding: 2%;
+   /* border: 1px solid #fff000;*/
+}
+
+/*.scandit.scandit-container:after {
+    display: block;
+    content: "";
+    width: 5%;
+    height: 5%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-top: 1px solid #fff000;
+    border-right: 1px solid #fff000;
+} */
+
+
+.sapMInputBase {
+    background: #737043;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.sapMInputBaseInner {
+    background: #413f37;
+    color: #fff000;
+} 
+
+.sapMLabel {
+    /*background: #737043;*/
+    color: #FFF000;
+    font-size: 1rem;
+}

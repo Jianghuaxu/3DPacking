@@ -28,6 +28,12 @@ sap.ui.define([
             _nrOfProducts: 10, // TODO: this shall be read from the ODO number
             _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
+                this._odoInput = this.getView().byId("odoRefNrInput");
+                var that = this;
+                jQuery.sap.delayedCall(1000, this, function() {
+                    that._odoInput.focus();
+                });
+
                 this.initThreejsModel();
                 this.fontLoader();
                 this.initScan();

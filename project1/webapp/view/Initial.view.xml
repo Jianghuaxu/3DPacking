@@ -7,6 +7,7 @@
     xmlns="sap.m"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:l="sap.ui.layout"
+    xmlns:forms="sap.ui.layout.form"
     xmlns:vk="sap.ui.vk"
     height="100%"
     width="100%"
@@ -21,7 +22,30 @@
                                 <l:GridData span="XL6 L6 M6 S6" />
                             </layoutData>
                             <!--<html:div id="scandit-barcode-picker" style="max-width: 40%; max-height: 40%;"></html:div>  -->
-                            <html:div id="scandit-barcode-picker" />
+                            <html:div id="scandit-barcode-picker" >
+                                <VBox id="recordDetail.layoutVBox">
+								<forms:Form id="recordDetail.layoutForm" editable="true">
+									<forms:layout>
+										<forms:ResponsiveGridLayout id="recordDetail.layoutGridLayout" labelSpanL="4" labelSpanM="6" labelSpanS="4" adjustLabelSpan="true"
+											emptySpanL="0" emptySpanM="0" emptySpanS="4" columnsXL="1" columnsL="1" columnsM="1" columnsS="2" singleContainerFullSize="false"/>
+									</forms:layout>
+									<forms:formContainers>
+										<forms:FormContainer >
+											<forms:formElements>
+												<forms:FormElement >
+													<forms:label class = "refNrlabel">
+														<Label  text="{i18n>refNrLabel}" labelFor="odoRefNrInput"/>
+													</forms:label>
+													<forms:fields>
+														<Input id="odoRefNrInput" change="onODOInput" required="true" placeholder = "80000001"/>
+													</forms:fields>
+												</forms:FormElement>
+											</forms:formElements>
+										</forms:FormContainer>
+									</forms:formContainers>
+								</forms:Form>
+							</VBox>
+                            </html:div>
                             <VBox id='canvasContainer' visible="false" >
                                 <html:canvas id="myCanvas1" width="512" height="288"/>
                             </VBox>
