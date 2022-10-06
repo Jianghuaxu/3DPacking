@@ -36,7 +36,7 @@ sap.ui.define([
 
                 this.initThreejsModel();
                 this.fontLoader();
-                this.initScan();
+                this._initScan();
 
                 this._audioBtn = this.getView().byId("voice");
                 this._audioWave = this.getView().byId("voice_wave");
@@ -44,7 +44,7 @@ sap.ui.define([
                 this._initProdList();
             },
 
-            onSpeek: function () {
+            _detectSpeek: function () {
                 this._audioWave.setVisible(true);
                 this._audioBtn.setVisible(false);
                 if (!('webkitSpeechRecognition' in window)) {
@@ -96,7 +96,7 @@ sap.ui.define([
 
                 }
             },
-            initScan: async function () {
+            _initScan: async function () {
                 this.getView().setModel(this._scanListModel, "scan");
 
                 //https://ssl.scandit.com/dashboard/sdk/projects: for creating a license key
@@ -166,13 +166,10 @@ sap.ui.define([
 
             _scan: function (scanResult) {
                 //this happens when Camera initialization or Resume scanning 
-                //TODO: via Timeout to control scanning process or other alternative way?
-                //Option 1: via set timeout 
                 for (var i = 0; i < scanResult.barcodes.length; i++) {
                     var scanRes = scanResult.barcodes[i].data;
 
                     var scanResultLoc = scanResult.barcodes[i].location;
-                    // sap.m.MessageBox.show(toSearch);
                     var aScanResultList = this._scanListModel.getData();
 
                     var tmp = {
@@ -238,16 +235,16 @@ sap.ui.define([
                     //start to call backend oData service for calculation: ZEWM_PBO_SRV
                     // this is to be done by using local JSON Model: _scannedProd
                     if (!this._reScanFlag) {
-                        this._calculatePMAT();
+                        this._callPBO();
                     } else {
-                        this._onScanResume(this._OldScannedProd);
+                        this._redrawAfterScanResume(this._OldScannedProd);
                     }
                 } else if (this._scannedProd.length > this._nrOfProducts) {
                     this._scannedProd = []; //clear buffer once the scanned product doesn't match to the expected 
                 }
             },
 
-            _calculatePMAT: function () {
+            _callPBO: function () {
                 var oModel = this.getView().getModel();
                 oModel.setDeferredGroups(["myGroupId"]);
                 oModel.setChangeGroups({
@@ -260,11 +257,7 @@ sap.ui.define([
                 this._scannedProd.forEach(function (item) {
                     oPayload = {
                         "ProductSequence": item.product_sequence,
-                        //"Product": item.prod, //shall be replaced by item.prod from the actually scanned product ,
                         "Product": item.prod,
-                        //"PackSequence": 1,
-
-
                         "ProductQuantity": "1",
                         "ProductUoM": "EA"
                     };
@@ -282,8 +275,7 @@ sap.ui.define([
                                 console.log("read result success")
 
                                 for (var i = 0; i < res.results.length; i++) {
-                                    //TODO: another thing is to update the _scannedProd model to add the pack sequence 
-                                    // find the array index by matching the product number via pack_sequence & prod
+                                   // find the array index by matching the product number via pack_sequence & prod
                                     var ind = that._scannedProd.findIndex(v => v.prod == res.results[i].Product);
                                     if (ind > -1) {
                                         that._scannedProd[ind].pack_sequence = res.results[i].PackSequence;
@@ -306,7 +298,7 @@ sap.ui.define([
 
                                 // draw the packing instruction on UI with results returned from oData
                                 that._drawPackSequence();
-                                that.onSpeek();
+                                that._detectSpeek();
 
 
                             },
@@ -322,13 +314,11 @@ sap.ui.define([
             },
 
             onNextProduct: function (oEvent) {
-                //decrease the target number of products once we receive the 'Next' command
+                //decrease the target number of products once we receive the 'Next' voice command
                 this._nrOfProducts--;
 
                 //mark next product as highlight and mark the previous one as... 
                 //modify the _scannedProduct model to update the product status by trigger another camera shot. 
-                //define pack normal: if scanning result shows that if the missing product is the one that follow the pack sequence 
-                // var vPackNormal = true;
                 this._OldScannedProd = Object.assign([], this._scannedProd);
 
                 //clear buffer -> make sure the new data comes from the new scan 
@@ -347,13 +337,7 @@ sap.ui.define([
 
             },
 
-            _onScanResume: function () {
-                /* *****         Simulate scanning           *****/
-                //this._scannedProd = this._scannedProd.filter(item => item.movedIndicator == false);
-                //this._scannedProd.splice(0, 1);
-                /* *****         End of Simulate scanning           *****/
-                /* *****         End of scanning re-trigger    *****************************/
-
+            _redrawAfterScanResume: function () {
                 if (this._scannedProd.length == this._OldScannedProd.length) {
                     return; // scanning triggered, while there no product moved -> no change on UI side 
                 }
@@ -366,15 +350,13 @@ sap.ui.define([
                 aMissingProd.every(a => {
                     a.movedIndicator = true;
                     a.toBePackedInd = false;
-                    //firstly, match the corresponding PackProducts product and update the JSON Model afterwards
-
+                    //TODO: update PackProducts JSON Model
                     //PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
                 });
                 //PackProductsHelper.updateMovedIndicator('PROD-3D-PACKING-1', true);
                 //also we shall update the PackProducts model for ProductMovedInd as well as ProductToBeMovedInd
                 //then find the next product which shall mark as red for packing 
                 this._scannedProd = this._scannedProd.sort((a, b) => a.pack_sequence - b.pack_sequence);
-                //  var vNextProduct = this._scannedProd[0];
                 this._scannedProd[0].toBePackedInd = true;
                 //PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
@@ -418,15 +400,10 @@ sap.ui.define([
 
 
                 //TODO: need to consider the case that barcode is not placed in horizontal or vertical -> /\/\
-                //add Packing instructions for each scanned product
-
-
-                //draw each scanned product in canvas video
-
+                //add Packing instructions for each scanned product & draw each scanned product in canvas video
                 var _drawedProd = [];
                 for (let index = this._scannedProd.length - 1; index > -1; index--) {
                     if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
-                        //assume that the pack sequence is retrieved from backend
                         ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "green";
@@ -436,8 +413,7 @@ sap.ui.define([
                             ctx.fillStyle = "yellow";
                         }
 
-                        //ctx.fillRect(this._scannedProd[index].x, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, this._scannedProd[index].len * 2, this._scannedProd[index].hei * 1.5)
-                        ctx.fillRect(this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 80, 26)
+                       ctx.fillRect(this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 80, 26)
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "white";
                         } else if (this._scannedProd[index].toBePackedInd) {
@@ -454,7 +430,12 @@ sap.ui.define([
             },
 
             onScanInputButton: function () {
-                // this._canvas = document.getElementById("application-project1-display-component---Initial--myCanvas1");
+                /**********   Pack process start **********/
+                /*   
+                1, Open camera and hide canvas
+                2, Turn on camera for scanning 
+                3, reset local JSON model, and reset the target to be scanned products from ODO 
+                */
                 this._canvas = this.getView().byId("canvasContainer");
                 this._canvas.setVisible(false);
 
@@ -465,16 +446,12 @@ sap.ui.define([
                 //reset model 
                 this._scannedProd = [];
                 this._scanListModel.setData([]);
-
                 this._nrOfProducts = 10;
-
                 this._reScanFlag = false;
             },
 
-            onSelect: function () {
-                this._drawPackSequence();
-                this._calculatePMAT();
-            },
+            /********** End of Left side Screen for Scanning Logic *********************/
+/* -------------------------------------------------Kimi--------------------------------------------------------------*/
 
             onCalculate: function (bcalculate) {
                 var vPackProductList;
