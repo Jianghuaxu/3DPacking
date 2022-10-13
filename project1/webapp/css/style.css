@@ -1,1 +1,124 @@
 /* Enter your custom styles here */
+.leftScanVbox {
+    margin-right: 3rem;
+}
+
+.sapUiGlobalBackgroundColor, .sapMShellGlobalInnerBackground {
+    background-image: url('../src/background.png');
+}
+
+.sapMPageBgStandard {
+    background-image: url('../src/background.png');
+}
+
+.scanBtn {
+    margin-left: 5%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.scanBtn .sapMBtnInner {
+    color: #fff000;
+    background-color: transparent;
+    border-color: #fff000;
+    font-size: 1rem;
+
+}
+
+.scanBtn .sapMBtnInner.sapMBtnText .sapMBtnIcon {
+    color: #fff000;
+}
+
+.sapMList {
+    padding: 2%;
+}
+
+.sapMListTbl .sapMText {
+    color: #fff000;
+}
+
+
+.scanResultVBox:after {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    border-top: 1px solid #fff000;
+    border-right: 1px solid #fff000;
+}
+
+
+.scanResultVBox:after {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: 1px solid #fff000;
+    border-right: 1px solid #fff000;
+} 
+
+.scanResultVBox:before {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: 1px solid #fff000;
+    border-left: 1px solid #fff000;
+}
+
+
+.scanResultVBox:before {
+    display: block;
+    content: "";
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-top: 1px solid #fff000;
+    border-left: 1px solid #fff000;
+} 
+
+.scandit.scandit-container {
+    width: 96%;
+    height: 96%;
+    padding: 2%;
+   /* border: 1px solid #fff000;*/
+}
+
+/*.scandit.scandit-container:after {
+    display: block;
+    content: "";
+    width: 5%;
+    height: 5%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-top: 1px solid #fff000;
+    border-right: 1px solid #fff000;
+} */
+
+
+.sapMInputBase {
+    background: #737043;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.sapMInputBaseInner {
+    background: #413f37;
+    color: #fff000;
+} 
+
+.sapMLabel {
+    /*background: #737043;*/
+    color: #FFF000;
+    font-size: 1rem;
+}
