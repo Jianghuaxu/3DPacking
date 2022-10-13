@@ -5,20 +5,26 @@ sap.ui.define([
     "project1/modelHelper/PackProductsHelper",
     "sap/ui/vk/ContentResource",
     "sap/ui/vk/ContentConnector",
-    "sap/ui/vk/thirdparty/three",
+    // "sap/ui/vk/thirdparty/three",
     "sap/ui/vk/Camera",
     "../utils/Util",
+    "../three/Three",
+    "../three/math/ConvexHull",
+    "../three/geometries/ConvexGeometry",
+    "../three/controls/OrbitControls",
+    "../three/utils/BufferGeometryUtils",
     "../libs/scandit-sdk/build/browser/index", // include the WebSDK as dependency,
     //"../libs/scandit-sdk/build", // include the WebSDK as dependencyhttps://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast, JSONModel, PackProductsHelper, ContentResource, ContentConnector, threejs, Camera, Util) {
+    function (Controller, MessageToast, JSONModel, PackProductsHelper, ContentResource, ContentConnector, Camera, Util) {
         "use strict";
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
             root: new THREE.Group(),
+            scene: new THREE.Scene(),
             font: undefined,
             ratio: 20,
             _scanListModel: new JSONModel([]),
@@ -27,14 +33,204 @@ sap.ui.define([
             _nrOfProducts: 4, // TODO: this shall be read from the ODO number
             _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
-                this.initThreejsModel();
-                this.fontLoader();
+                // this.initThreejsModel();
+                // this.fontLoader();
                 this.initScan();
+                // this.scene = new THREE.Scene();
 
                 this._audioBtn = this.getView().byId("voice");
                 this._audioWave = this.getView().byId("voice_wave");
             },
-
+            onAfterRendering : function () {
+                this.initThreejsModel2();
+            },
+            initThreejsModel2: function () {
+                // let group, camera, scene, renderer;
+                let group, camera, renderer;
+    
+                const can = this.getView().byId("myCanvas2");
+                const canDom = can.getId();
+                const canElm = document.getElementById(canDom);
+                renderer = new THREE.WebGLRenderer({ canvas: canElm, antialias: true  });
+                // renderer.setPixelRatio( window.devicePixelRatio );
+                renderer.setSize( canElm.width, canElm.height );
+    
+                // scene = new THREE.Scene();
+                this.scene.background = new THREE.Color( 0x949494 );
+                // camera
+    
+                camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+                camera.position.set( 60, 80, 120 );
+                this.scene.add( camera );
+    
+                // controls
+    
+                const controls = new THREE.OrbitControls( camera, renderer.domElement );
+                controls.minDistance = 20;
+                controls.maxDistance = 50;
+                controls.maxPolarAngle = Math.PI / 2;
+    
+                // ambient light
+    
+                this.scene.add( new THREE.AmbientLight( 0x222222 ) );
+    
+                // point light
+    
+                const light = new THREE.PointLight( 0xffffff, 1 );
+                camera.add( light );
+    
+                // helper
+    
+                this.scene.add( new THREE.AxesHelper( 20 ) );
+    
+                // textures
+    
+                const loader = new THREE.TextureLoader();
+                const texture = loader.load( 'textures/sprites/disc.png' );
+    
+                group = new THREE.Group();
+                this.scene.add( group );
+    
+                // points
+    
+                let dodecahedronGeometry = new THREE.BoxBufferGeometry( 8,8,8 );
+    
+                // if normal and uv attributes are not removed, mergeVertices() can't consolidate indentical vertices with different normal/uv data
+    
+                dodecahedronGeometry.deleteAttribute( 'normal' );
+                dodecahedronGeometry.deleteAttribute( 'uv' );
+    
+                dodecahedronGeometry = THREE.BufferGeometryUtils.mergeVertices( dodecahedronGeometry );
+    
+                const vertices = [];
+                const positionAttribute = dodecahedronGeometry.getAttribute( 'position' );
+    
+                for ( let i = 0; i < positionAttribute.count; i ++ ) {
+    
+                    const vertex = new THREE.Vector3();
+                    vertex.fromBufferAttribute( positionAttribute, i );
+                    vertices.push( vertex );
+    
+                }
+    
+                const pointsMaterial = new THREE.PointsMaterial( {
+    
+                    color: 0x0080ff,
+                    map: texture,
+                    size: 1,
+                    alphaTest: 0.5
+    
+                } );
+    
+                const pointsGeometry = new THREE.BufferGeometry().setFromPoints( vertices );
+    
+                const points = new THREE.Points( pointsGeometry, pointsMaterial );
+                group.add( points );
+    
+                // convex hull
+    
+                const meshMaterial = new THREE.MeshStandardMaterial( {
+                    color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
+                    opacity: 0.5,
+                    roughness:0.5,
+                    metalness: 0,
+                    flatshading: 0,
+                    transparent: true
+                } );
+    
+                const meshGeometry = new THREE.ConvexGeometry( vertices );
+    
+                const mesh1 = new THREE.Mesh( meshGeometry, meshMaterial );
+                mesh1.material.side = THREE.BackSide; // back faces
+                mesh1.renderOrder = 0;
+                group.add( mesh1 );
+    
+                const mesh2 = new THREE.Mesh( meshGeometry, meshMaterial.clone() );
+                mesh2.material.side = THREE.FrontSide; // front faces
+                mesh2.renderOrder = 1;
+                group.add( mesh2 );
+    
+                // change color based on status
+                //here is the funcion defined and attached to the  object
+                // meshMaterial.color.set("blue");
+    
+                // load material
+                const Prodloader = new THREE.ObjectLoader();
+                // const Prod = Prodloader.load( 'model/PackProducts.js' );
+    
+                // create material from prod
+    
+                var onKeyDown = function(event) {
+                    // create obj
+                    if (event.keyCode == 67) { // when 'c' is pressed
+                      meshMaterial.color.setHex(0xff0000); // there is also setHSV and setRGB
+                      Prodloader.load(
+                        // resource URL
+                        "model/model.three.json",
+                    
+                        // onLoad callback
+                        // Here the loaded data is assumed to be an object
+                        function ( obj ) {
+                            // Add the loaded object to the scene
+                            obj.name = "prod1";
+                            group.add( obj );
+                            this.scene.add( obj );
+                        }
+                        )
+                      };
+                    // hide obj
+                    if (event.keyCode == 72) { // when 'h' is pressed
+                        // Alternatively, to parse a previously loaded JSON structure
+                        var object = this.scene.getObjectByName( "prod1", true );
+                        object.traverse ( function (child) {
+                            if (child instanceof THREE.Mesh) {
+                                child.visible = false;
+                            }
+                        });
+                    };
+                    // show obj
+                    if (event.keyCode == 83) { // when 's' is pressed
+                        // Alternatively, to parse a previously loaded JSON structure
+                        var object = this.scene.getObjectByName( "prod1", true );
+                        object.traverse ( function (child) {
+                            if (child instanceof THREE.Mesh) {
+                                child.visible = true;
+                            }
+                        });
+                    };
+                    // show pack hu
+                    if (event.keyCode == 80) { // when 's' is pressed
+                        // Alternatively, to parse a previously loaded JSON structure
+                        var object = this.scene.getObjectByName( "Box", true)
+                        object.traverse ( function (child) {
+                            if (child instanceof THREE.Mesh) {
+                                child.visible = true;
+                            }
+                        });
+                    };
+                };
+                document.addEventListener('keydown', onKeyDown, false);
+    
+                window.addEventListener( 'resize', onWindowResize );
+                function onWindowResize() {
+    
+                    camera.aspect = canElm.width / canElm.height;
+                    camera.updateProjectionMatrix();
+    
+                    renderer.setSize( canElm.width, canElm.height );
+    
+                }
+    
+                function animate() {
+                    requestAnimationFrame( animate );
+    
+                    // this.scene.rotation.y += 0.1;
+    
+                    renderer.render( this.scene, camera );
+                };
+    
+                animate();
+            },
             onSpeek: function () {
                 this._audioWave.setVisible(true);
                 this._audioBtn.setVisible(false);
@@ -561,11 +757,11 @@ sap.ui.define([
 
                 }
             },
-            fontLoader: function () {
-                new THREE.FontLoader().load('./Fonts/helvetiker_bold.typeface.json', function (text) {
-                    this.font = text;
-                }.bind(this));
-            },
+            // fontLoader: function () {
+            //     new THREE.FontLoader().load('./Fonts/helvetiker_bold.typeface.json', function (text) {
+            //         this.font = text;
+            //     }.bind(this));
+            // },
             initPosition: function (obj, name, posX, posY, posZ, id) {
                 obj.name = name;
                 obj.position.set(posX, posY, posZ);

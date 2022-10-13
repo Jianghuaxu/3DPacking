@@ -10,16 +10,22 @@
             height: 100%;
         }
     </style>
+    <script src="./three/Three.js"></script>
+    <script src="./three/controls/OrbitControls.js"></script>
+    <script src="./three/geometries/ConvexGeometry.js"></script>
+    <script src="./three/math/ConvexHull.js"></script>
+    <script src="./three/utils/BufferGeometryUtils.js"></script>
     <script
         id="sap-ui-bootstrap"
         src="resources/sap-ui-core.js"
         data-sap-ui-theme="sap_fiori_3"
-        data-sap-ui-resourceroots='{
-            "project1": "./"
-        }'
         data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
         data-sap-ui-compatVersion="edge"
         data-sap-ui-async="true"
+        data-sap-ui-resourceroots='{
+            "project1": "./"
+        }'
+        data-sap-ui-oninit="module:project1/index"
         data-sap-ui-frameOptions="trusted"
     ></script>
     </script>
@@ -34,7 +40,6 @@
         data-name="project1"
         data-id="container"
         data-settings='{"id" : "project1"}'
-        data-handle-validation="true"
     ></div>
 </body>
 </html>

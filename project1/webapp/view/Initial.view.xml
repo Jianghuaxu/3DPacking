@@ -98,11 +98,15 @@
                                     <Text id="handlingUnitText" text="{i18n>packHandlingUnit}" />
                                     <Text id="packagingMaterialText" text="{i18n>packagingMaterial}" />
                                 </HBox>
-                                <vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop">
+                                <!-- <vk:Viewer id="viewer" enableToolbar="false" enableSceneTree="false" height="500px" class="sapUiSmallMarginTop"> -->
                                     <!-- <vk:layoutData>
 									<l:GridData span="XL6 L6 M6 S6"></l:GridData>
 								</vk:layoutData> -->
-                                </vk:Viewer>
+                                <!-- </vk:Viewer> -->
+                                <VBox>
+                                    <html:canvas id="myCanvas2" width="800" height="600">
+                                    </html:canvas>
+                                </VBox>
                                 <HBox alignItems="Center" alignContent="SpaceAround">
                                     <!-- <l:Grid> -->
                                     <Button id="defaultViewButton" text="{i18n>default}" press="onDisplayDefaultView" />
