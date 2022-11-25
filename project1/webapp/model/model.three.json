@@ -119,7 +119,10 @@
 			"userData": {
 				"treeNode": {
 					"sid": "1"
-				}
+				},
+				"PackSequence": "1",
+				"ProductMovedInd": false,
+				"ProductToBeMovedInd": false
 			},
 			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -4, -7, 4, 1],
 			"geometry": "77A70369-0962-4CEE-B197-B98F2D740EB5",
@@ -131,7 +134,10 @@
 			"userData": {
 				"treeNode": {
 					"sid": "2"
-				}
+				},
+				"PackSequence": "2",
+				"ProductMovedInd": false,
+				"ProductToBeMovedInd": false
 			},
 			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 7, -4, 7, 1],
 			"geometry": "47A2B35D-1A71-4CDC-8CEA-1D1C409B4AD8",
@@ -143,7 +149,10 @@
 			"userData": {
 				"treeNode": {
 					"sid": "3"
-				}
+				},
+				"PackSequence": "3",
+				"ProductMovedInd": false,
+				"ProductToBeMovedInd": false
 			},
 			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5, -4, -12, 1],
 			"geometry": "F795CEE9-AB2E-4A5F-BDF1-0D337DFF8012",
@@ -155,7 +164,10 @@
 			"userData": {
 				"treeNode": {
 					"sid": "4"
-				}
+				},
+				"PackSequence": "4",
+				"ProductMovedInd": false,
+				"ProductToBeMovedInd": false
 			},
 			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -6, -3.5, -11, 1],
 			"geometry": "18208E0C-A640-40F4-BDD3-BD2292A530FE",
@@ -167,7 +179,10 @@
 			"userData": {
 				"treeNode": {
 					"sid": "5"
-				}
+				},
+				"PackSequence": "6",
+				"ProductMovedInd": false,
+				"ProductToBeMovedInd": false
 			},
 			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
 			"geometry": "D7094590-EC9C-479F-8C01-9D4728C9977D",
@@ -179,7 +194,10 @@
 			"userData": {
 				"treeNode": {
 					"sid": "6"
-				}
+				},
+				"PackSequence": "5",
+				"ProductMovedInd": false,
+				"ProductToBeMovedInd": false
 			},
 			"matrix": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -1, 2, 0, 1],
 			"geometry": "DBF6F1D7-B97E-4662-B922-0FB2D2E8E4E9",

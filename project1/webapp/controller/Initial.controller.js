@@ -19,8 +19,9 @@ sap.ui.define([
         "use strict";
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
-            root: new THREE.Group(),
-            // scene: new THREE.Scene(),
+            scene: new THREE.Scene(),
+            prod: new THREE.Object3D(),
+            group: new THREE.Group(),
             font: undefined,
             ratio: 20,
             _scanListModel: new JSONModel([]),
@@ -45,155 +46,129 @@ sap.ui.define([
             onAfterRendering : function () {
                 this.initThreejsModel2();
             },
-            initThreejsModel2: function () {
-                let group, camera, scene, renderer;
-                // let group, camera, renderer;
-    
+            addrenderer: function () {
                 const can = this.getView().byId("myCanvas2");
                 const canDom = can.getId();
                 const canElm = document.getElementById(canDom);
-                renderer = new THREE.WebGLRenderer({ canvas: canElm, antialias: true  });
-                // renderer.setPixelRatio( window.devicePixelRatio );
-                renderer.setSize( canElm.width, canElm.height );
-    
-                scene = new THREE.Scene();
-                scene.background = new THREE.Color( 0x949494 );
+
                 // camera
     
-                camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-                camera.position.set( 60, 80, 120 );
-                scene.add( camera );
+                this.camera = new THREE.PerspectiveCamera( 40, canElm.width / canElm.height, 1, 1000 );
+                this.camera.position.set( 60, 80, 120 );
+                this.scene.add( this.camera );
+                // renderer
+                this.renderer = new THREE.WebGLRenderer({ canvas: canElm, antialias: true  });
+                // renderer.setPixelRatio( window.devicePixelRatio );
+                this.renderer.setSize( canElm.width, canElm.height );
+                // resize
+                window.addEventListener( 'resize', onWindowResize.bind(this) );
+                function onWindowResize() {
     
+                    canElm.width = 0.4 * window.innerWidth;
+                    canElm.height = 0.4 * window.innerHeight;
+
+                    this.camera.aspect = canElm.width / canElm.height;
+                    this.camera.updateProjectionMatrix();
+    
+                    this.renderer.setSize( canElm.width, canElm.height );
+    
+                }
+            },
+            initThreejsModel2: function () {
+                
+                this.scene.background = new THREE.Color( 0x949494 );
+                // camera
+    
+                // this.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+                // this.camera.position.set( 60, 80, 120 );
+                // this.scene.add( this.camera );
+    
+                // renderer
+                this.addrenderer();
                 // controls
     
-                const controls = new THREE.OrbitControls( camera, renderer.domElement );
-                controls.minDistance = 20;
-                controls.maxDistance = 50;
-                controls.maxPolarAngle = Math.PI / 2;
+                this.controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+                this.controls.minDistance = 20;
+                this.controls.maxDistance = 50;
+                this.controls.maxPolarAngle = Math.PI / 2;
     
                 // ambient light
     
-                scene.add( new THREE.AmbientLight( 0x222222 ) );
+                this.scene.add( new THREE.AmbientLight( 0x222222 ) );
     
                 // point light
     
                 const light = new THREE.PointLight( 0xffffff, 1 );
-                camera.add( light );
+                this.camera.add( light );
     
                 // helper
     
-                scene.add( new THREE.AxesHelper( 20 ) );
+                this.scene.add( new THREE.AxesHelper( 20 ) );
     
                 // textures
     
                 const loader = new THREE.TextureLoader();
                 const texture = loader.load( 'textures/sprites/disc.png' );
     
-                group = new THREE.Group();
-                scene.add( group );
-    
-                // points
-    
-                let dodecahedronGeometry = new THREE.BoxBufferGeometry( 8,8,8 );
-    
-                // if normal and uv attributes are not removed, mergeVertices() can't consolidate indentical vertices with different normal/uv data
-    
-                dodecahedronGeometry.deleteAttribute( 'normal' );
-                dodecahedronGeometry.deleteAttribute( 'uv' );
-    
-                dodecahedronGeometry = THREE.BufferGeometryUtils.mergeVertices( dodecahedronGeometry );
-    
-                const vertices = [];
-                const positionAttribute = dodecahedronGeometry.getAttribute( 'position' );
-    
-                for ( let i = 0; i < positionAttribute.count; i ++ ) {
-    
-                    const vertex = new THREE.Vector3();
-                    vertex.fromBufferAttribute( positionAttribute, i );
-                    vertices.push( vertex );
-    
-                }
-    
-                const pointsMaterial = new THREE.PointsMaterial( {
-    
-                    color: 0x0080ff,
-                    map: texture,
-                    size: 1,
-                    alphaTest: 0.5
-    
-                } );
-    
-                const pointsGeometry = new THREE.BufferGeometry().setFromPoints( vertices );
-    
-                const points = new THREE.Points( pointsGeometry, pointsMaterial );
-                group.add( points );
-    
-                // convex hull
-    
-                const meshMaterial = new THREE.MeshStandardMaterial( {
-                    color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
-                    opacity: 0.5,
-                    roughness:0.5,
-                    metalness: 0,
-                    flatshading: 0,
-                    transparent: true
-                } );
-    
-                const meshGeometry = new THREE.ConvexGeometry( vertices );
-    
-                const mesh1 = new THREE.Mesh( meshGeometry, meshMaterial );
-                mesh1.material.side = THREE.BackSide; // back faces
-                mesh1.renderOrder = 0;
-                group.add( mesh1 );
-    
-                const mesh2 = new THREE.Mesh( meshGeometry, meshMaterial.clone() );
-                mesh2.material.side = THREE.FrontSide; // front faces
-                mesh2.renderOrder = 1;
-                group.add( mesh2 );
-    
-                // change color based on status
-                //here is the funcion defined and attached to the  object
-                // meshMaterial.color.set("blue");
-    
-                // load material
-                const Prodloader = new THREE.ObjectLoader();
-                // const Prod = Prodloader.load( 'model/PackProducts.js' );
-    
-                // create material from prod
-    
-                var onKeyDown = function(event) {
-                    // create obj
-                    if (event.keyCode == 67) { // when 'c' is pressed
-                      meshMaterial.color.setHex(0xff0000); // there is also setHSV and setRGB
-                      Prodloader.load(
-                        // resource URL
-                        "model/model.three.json",
+                this.scene.add( this.group );
+                
+                // object loader
+                this.readprod();
+
+                // pack
+                this.pack();
+
+                this.animate();
+            },
+            animate: function () {
+                requestAnimationFrame( this.animate.bind(this) );
+
+                this.group.rotation.y += 0.01;
+
+                this.renderer.render( this.scene, this.camera );
+            },
+            readprod: async function () {
+                this.Prodloader = new THREE.ObjectLoader();
+                this.prod = await this.Prodloader.loadAsync(
+                    // resource URL
+                    "../model/model.three.json",
+                
+                    // onLoad callback
+                    // Here the loaded data is assumed to be an object
+                    function ( obj ) {
+                        // Add the loaded object to the scene
+                        obj.name = "prod1";
+                    }
+                    );
+                this.group = this.prod;
+                this.scene.add(this.prod);
+            },
+            pack: function () {
+                // let products = PackProductsHelper.getModel().getData();
+                // let ind = products.ProductMovedInd;
+
+                let currentIndex = 0;
+                var onKeyDown = (event) => {
                     
-                        // onLoad callback
-                        // Here the loaded data is assumed to be an object
-                        function ( obj ) {
-                            // Add the loaded object to the scene
-                            obj.name = "prod1";
-                            group.add( obj );
-                            this.scene.add( obj );
-                        }
-                        )
-                      };
                     // hide obj
                     if (event.keyCode == 72) { // when 'h' is pressed
                         // Alternatively, to parse a previously loaded JSON structure
-                        var object = this.scene.getObjectByName( "prod1", true );
-                        object.traverse ( function (child) {
+                        // var object = this.scene.getObjectByName( "prod1", true );
+                        this.prod.traverse ( function (child) {
                             if (child instanceof THREE.Mesh) {
                                 child.visible = false;
+                                child.material.color.set( 0xffffff );
+                                child.userData.ProductMovedInd = false;
+                                child.userData.ProductToBeMovedInd = false;
                             }
                         });
+                        currentIndex = 0;
                     };
                     // show obj
                     if (event.keyCode == 83) { // when 's' is pressed
                         // Alternatively, to parse a previously loaded JSON structure
-                        var object = this.scene.getObjectByName( "prod1", true );
-                        object.traverse ( function (child) {
+                        // var object = this.scene.getObjectByName( "prod1", true );
+                        this.prod.traverse ( function (child) {
                             if (child instanceof THREE.Mesh) {
                                 child.visible = true;
                             }
@@ -209,30 +184,54 @@ sap.ui.define([
                             }
                         });
                     };
+
+                    // highlight with condition from userdata
+                    if (event.keyCode == 78) { // when 'n' is pressed
+                        // Alternatively, to parse a previously loaded JSON structure
+                        // var object = this.scene.getObjectByName( "prod1", true);
+                        //highlight object with indicator "ProductMovedInd = true" to red,
+                        //highlight object with indicator "ProductToBeMovedInd = ture" to pink,
+                        //set all other objects to grey
+
+                        //function read currect index
+
+                        //function set indicator according to index
+                        this.prod.traverse( function (child) {
+                            if (child instanceof THREE.Mesh) {
+                                if (child.userData.PackSequence == currentIndex ) {
+                                    child.userData.ProductMovedInd = true;
+                                } else if (child.userData.PackSequence == ( currentIndex + 1 ) ) {
+                                    child.userData.ProductToBeMovedInd = true;
+                                } else {
+                                    
+                                }
+                            }
+                        });
+                        currentIndex = currentIndex + 1;
+                        //function set color according to indicator
+                        const white = new THREE.Color( 0xffffff );
+                        const black = new THREE.Color( 0x000000 );
+                        const red = new THREE.Color( 0xff0000 );
+                        const green = new THREE.Color( 0x00ff00 );
+                        const blue = new THREE.Color( 0x0000ff );
+                        let MovedColor = green;
+                        let ToMoveColor = red;
+                        let OtherColor = white;
+                        this.prod.traverse( function (child) {
+                            if (child instanceof THREE.Mesh) {
+                                if (child.userData.ProductMovedInd == true ) {
+                                    child.material.color.set(MovedColor);
+                                } else if (child.userData.ProductToBeMovedInd == true ) {
+                                    child.material.color.set(ToMoveColor);
+                                } else {
+                                    child.material.color.set(OtherColor);
+                                }
+                            }
+                        });
+                    };
                 };
                 document.addEventListener('keydown', onKeyDown, false);
-    
-                window.addEventListener( 'resize', onWindowResize );
-                function onWindowResize() {
-    
-                    camera.aspect = canElm.width / canElm.height;
-                    camera.updateProjectionMatrix();
-    
-                    renderer.setSize( canElm.width, canElm.height );
-    
-                }
-    
-                function animate() {
-                    requestAnimationFrame( animate );
-    
-                    // this.scene.rotation.y += 0.1;
-    
-                    renderer.render( scene, camera );
-                };
-    
-                animate();
             },
-
             _detectSpeek: function () {
                 this._audioWave.setVisible(true);
                 this._audioBtn.setVisible(false);
