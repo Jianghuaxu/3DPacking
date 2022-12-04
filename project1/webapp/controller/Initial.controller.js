@@ -19,7 +19,7 @@ sap.ui.define([
         "use strict";
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
-            scene: new THREE.Scene(),
+            scene: new THREdrendererE.Scene(),
             prod: new THREE.Object3D(),
             group: new THREE.Group(),
             font: undefined,
@@ -45,7 +45,119 @@ sap.ui.define([
             },
             onAfterRendering : function () {
                 this.initThreejsModel2();
+                //this.componentDidMount();
             },
+
+            componentDidMount : function() {
+                //Add Light & nCamera
+                this.addScene();
+            
+                // // Add Box Mesh with shader as texture
+                //this.addModels();
+            
+                // Add Events
+                window.addEventListener("resize", this.onWindowResize, false);
+                document.addEventListener("keyup", this.onDocumentKeyUp, false);
+                document.addEventListener("keydown", this.onDocumentKeyDown, false);
+                document.addEventListener("mousemove", this.onDocumentMouseMove, false);
+            
+                //--------START ANIMATION-----------
+                this.renderScene();
+                this.start();
+              },
+
+              renderScene : function () {
+                if (this.renderer) {
+                  this.renderer.render(this.scene, camera);
+                }
+              },
+
+              start : function () {
+                if (!this.frameId) {
+                  this.frameId = requestAnimationFrame(this.animate);
+                }
+              },
+
+              /**
+             * Boilder plate to add LIGHTS, Renderer, Axis, Grid,
+             */
+            addScene : function () {
+                const width = this.mount.clientWidth;
+                const height = this.mount.clientHeight;
+                this.scene = new THREE.Scene();
+
+                // ------- Add RENDERED ------
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.renderer.setClearColor("#263238");
+                this.renderer.setSize(width, height);
+                this.mount.appendChild(this.renderer.domElement);
+
+                // -------Add CAMERA ------
+                camera = new THREE.PerspectiveCamera(80, width / height, 0.1, 100000);
+                camera.position.z = -50;
+                camera.position.y = 50;
+                camera.position.x = -50;
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+                //------Add ORBIT CONTROLS--------
+                controls = new OrbitControls(camera, this.renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.25;
+                controls.enableZoom = true;
+                controls.autoRotate = false;
+                controls.keys = {
+                LEFT: 37, //left arrow
+                UP: 38, // up arrow
+                RIGHT: 39, // right arrow
+                BOTTOM: 40 // down arrow
+                };
+
+                controls.addEventListener("change", () => {
+                if (this.renderer) this.renderer.render(this.scene, camera);
+                });
+
+                raycaster = new THREE.Raycaster();
+
+                var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                var directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.6);
+                var directionalLight2 = new THREE.DirectionalLight(0xFFFFFF, 0.8);
+                var directionalLight3 = new THREE.DirectionalLight(0xFFFFFF, 0.9);
+
+                // set directionalLights to random places
+                directionalLight1.position.set(3, 4, 5);
+                directionalLight2.position.set(-3, 4, -5);
+                directionalLight3.position.set(2, 5, 4);
+
+                // (0, 0, 0) to target directionalLights at
+                var origin = new THREE.Object3D();
+
+                // target directionalLights to origin
+                directionalLight1.target = origin;
+                directionalLight2.target = origin;
+                directionalLight3.target = origin;
+
+                this.scene.add(ambientLight);
+                this.scene.add(directionalLight1);
+                this.scene.add(directionalLight2);
+                this.scene.add(directionalLight3);
+
+                this.addHelper();
+            },
+
+            //-------------HELPER------------------
+            addHelper : function () {
+                // Add Grid
+                let gridXZ = new THREE.GridHelper(
+                GRID_SPACING * 10,
+                10,
+                0x18ffff, //center line color
+                0x42a5f5 //grid color,
+                );
+                this.scene.add(gridXZ);
+                gridXZ.position.y = 0;
+
+            },
+
             addrenderer: function () {
                 const can = this.getView().byId("myCanvas2");
                 const canDom = can.getId();
