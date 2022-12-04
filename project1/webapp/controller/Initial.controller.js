@@ -203,6 +203,7 @@ sap.ui.define([
                 this.controls.minDistance = 20;
                 this.controls.maxDistance = 50;
                 this.controls.maxPolarAngle = Math.PI / 2;
+                this.controls.update();
     
                 // ambient light
     
