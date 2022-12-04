@@ -19,7 +19,7 @@ sap.ui.define([
         "use strict";
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
-            scene: new THREdrendererE.Scene(),
+            scene: new THREE.Scene(),
             prod: new THREE.Object3D(),
             group: new THREE.Group(),
             font: undefined,
@@ -43,80 +43,78 @@ sap.ui.define([
 
                 this._initProdList();
             },
-            onAfterRendering : function () {
-                this.initThreejsModel2();
-                //this.componentDidMount();
+            onAfterRendering: function () {
+                //this.initThreejsModel2();
+                this.initThreejsModel3();
+            },
+           
+            addrenderer: function () {
+                const can = this.getView().byId("myCanvas2");
+                const canDom = can.getId();
+                const canElm = document.getElementById(canDom);
+
+                // camera
+    
+                this.camera = new THREE.PerspectiveCamera( 40, canElm.width / canElm.height, 1, 1000 );
+                this.camera.position.set( 60, 80, 120 );
+                //this.scene.add( this.camera );
+                // renderer
+                this.renderer = new THREE.WebGLRenderer({ canvas: canElm, antialias: true  });
+                // renderer.setPixelRatio( window.devicePixelRatio );
+                this.renderer.setSize( canElm.width, canElm.height );
+                // resize
+                window.addEventListener( 'resize', onWindowResize.bind(this) );
+                function onWindowResize() {
+    
+                    canElm.width = 0.4 * window.innerWidth;
+                    canElm.height = 0.4 * window.innerHeight;
+
+                    this.camera.aspect = canElm.width / canElm.height;
+                    this.camera.updateProjectionMatrix();
+    
+                    this.renderer.setSize( canElm.width, canElm.height );
+    
+                }
             },
 
-            componentDidMount : function() {
-                //Add Light & nCamera
-                this.addScene();
-            
-                // // Add Box Mesh with shader as texture
-                //this.addModels();
-            
-                // Add Events
-                window.addEventListener("resize", this.onWindowResize, false);
-                document.addEventListener("keyup", this.onDocumentKeyUp, false);
-                document.addEventListener("keydown", this.onDocumentKeyDown, false);
-                document.addEventListener("mousemove", this.onDocumentMouseMove, false);
-            
-                //--------START ANIMATION-----------
-                this.renderScene();
-                this.start();
-              },
+            addrenderer2: function () {
+                const can = this.getView().byId("myCanvas2");
+                const canDom = can.getId();
+                const canElm = document.getElementById(canDom);
+                const GRID_SPACING = 10;
 
-              renderScene : function () {
-                if (this.renderer) {
-                  this.renderer.render(this.scene, camera);
-                }
-              },
-
-              start : function () {
-                if (!this.frameId) {
-                  this.frameId = requestAnimationFrame(this.animate);
-                }
-              },
-
-              /**
-             * Boilder plate to add LIGHTS, Renderer, Axis, Grid,
-             */
-            addScene : function () {
-                const width = this.mount.clientWidth;
-                const height = this.mount.clientHeight;
-                this.scene = new THREE.Scene();
-
-                // ------- Add RENDERED ------
-                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                // render
+                this.renderer = new THREE.WebGLRenderer({ canvas: canElm, antialias: true  });
                 this.renderer.setClearColor("#263238");
-                this.renderer.setSize(width, height);
-                this.mount.appendChild(this.renderer.domElement);
+                this.renderer.setSize( canElm.width, canElm.height );
 
-                // -------Add CAMERA ------
-                camera = new THREE.PerspectiveCamera(80, width / height, 0.1, 100000);
-                camera.position.z = -50;
-                camera.position.y = 50;
-                camera.position.x = -50;
-                camera.lookAt(new THREE.Vector3(0, 0, 0));
+                // camera
+                //this.camera = new THREE.PerspectiveCamera( 40, canElm.width / canElm.height, 1, 1000 );
+                //this.camera.position.set( 60, 80, 120 );
+                this.camera = new THREE.PerspectiveCamera( 80, canElm.width / canElm.height, 0.1, 100000 );
+                this.camera.position.z = -50;
+                this.camera.position.y = 50;
+                this.camera.position.x = -50;
+                this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
                 //------Add ORBIT CONTROLS--------
-                controls = new OrbitControls(camera, this.renderer.domElement);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.25;
-                controls.enableZoom = true;
-                controls.autoRotate = false;
-                controls.keys = {
-                LEFT: 37, //left arrow
-                UP: 38, // up arrow
-                RIGHT: 39, // right arrow
-                BOTTOM: 40 // down arrow
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.25;
+                this.controls.enableZoom = true;
+                this.controls.autoRotate = false;
+                this.controls.keys = {
+                    LEFT: 37, //left arrow
+                    UP: 38, // up arrow
+                    RIGHT: 39, // right arrow
+                    BOTTOM: 40 // down arrow
                 };
 
-                controls.addEventListener("change", () => {
-                if (this.renderer) this.renderer.render(this.scene, camera);
+                this.controls.addEventListener("change", () => {
+                    if (this.renderer) this.renderer.render(this.scene, this.camera);
                 });
 
-                raycaster = new THREE.Raycaster();
+                //raycaster = new THREE.Raycaster();
 
                 var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
                 var directionalLight1 = new THREE.DirectionalLight(0xFFFFFF, 0.6);
@@ -141,37 +139,16 @@ sap.ui.define([
                 this.scene.add(directionalLight2);
                 this.scene.add(directionalLight3);
 
-                this.addHelper();
-            },
-
-            //-------------HELPER------------------
-            addHelper : function () {
                 // Add Grid
                 let gridXZ = new THREE.GridHelper(
-                GRID_SPACING * 10,
-                10,
-                0x18ffff, //center line color
-                0x42a5f5 //grid color,
+                    GRID_SPACING * 10,
+                    10,
+                    0x18ffff, //center line color
+                    0x42a5f5 //grid color,
                 );
                 this.scene.add(gridXZ);
                 gridXZ.position.y = 0;
 
-            },
-
-            addrenderer: function () {
-                const can = this.getView().byId("myCanvas2");
-                const canDom = can.getId();
-                const canElm = document.getElementById(canDom);
-
-                // camera
-    
-                this.camera = new THREE.PerspectiveCamera( 40, canElm.width / canElm.height, 1, 1000 );
-                this.camera.position.set( 60, 80, 120 );
-                this.scene.add( this.camera );
-                // renderer
-                this.renderer = new THREE.WebGLRenderer({ canvas: canElm, antialias: true  });
-                // renderer.setPixelRatio( window.devicePixelRatio );
-                this.renderer.setSize( canElm.width, canElm.height );
                 // resize
                 window.addEventListener( 'resize', onWindowResize.bind(this) );
                 function onWindowResize() {
@@ -181,10 +158,24 @@ sap.ui.define([
 
                     this.camera.aspect = canElm.width / canElm.height;
                     this.camera.updateProjectionMatrix();
-    
                     this.renderer.setSize( canElm.width, canElm.height );
     
                 }
+            },
+            initThreejsModel3: function () {
+                // renderer
+                this.addrenderer2();
+
+                this.scene.add( this.group );
+                
+                // object loader
+                this.readprod();
+
+                // pack
+                this.pack();
+
+                this.animate();
+
             },
             initThreejsModel2: function () {
                 
@@ -240,6 +231,88 @@ sap.ui.define([
 
                 this.renderer.render( this.scene, this.camera );
             },
+            animate2: function (){
+                const ANGULAR_VELOCITY = 0.01;
+                 //update Orbit Of Camera
+                this.controls.update();
+                var orbit;
+                var delta = 0;
+
+                //Animate rotation of light
+                if (orbit) orbit.rotation.z += ANGULAR_VELOCITY;
+
+                // Update Uniform of shader
+                delta += 0.01;
+                //Direct manipulation
+                //shaderMaterial.uniforms.delta.value = 0.5 + Math.sin(delta) * 0.0005;
+                //shaderMesh.material.uniforms.u_time.value = delta;
+
+                this.handleIntersection();
+                this.handleStepNumber();
+
+                //Redraw scene
+                this.renderScene();
+                this.frameId = window.requestAnimationFrame(this.animate);
+            },
+            handleIntersection: function () {
+                var raycaster;
+                var visibleContainers;
+                raycaster = new THREE.Raycaster();
+                raycaster.setFromCamera( pointer, camera );
+                
+                var target = null;
+                for(var i = 0; i < visibleContainers.length; i++) {
+                  for(var k = 0; k < visibleContainers[i].children.length; k++) {
+                    var intersects = raycaster.intersectObjects(visibleContainers[i].children[k].children );
+                    if ( intersects.length > 0 ) {
+                      target = intersects[ 0 ].object;
+                    }
+                  }
+                }
+            
+                if(target) {
+                  if ( INTERSECTED != target) {
+                    if ( INTERSECTED ) {
+                      INTERSECTED.material.emissive = new Color("#000000");
+            
+                    }
+                    INTERSECTED = target
+                    INTERSECTED.myColor = INTERSECTED.material.color;
+                    INTERSECTED.material.emissive = new Color("#FF0000") 
+                  }
+                } else {
+                  if ( INTERSECTED ) {
+                    INTERSECTED.material.emissive = new Color("#000000") ;
+                    INTERSECTED = null;
+                  }
+                }
+              },
+            
+              handleStepNumber: function()  {
+                if(stepNumber != renderedStepNumber) {
+                  console.log("Show step number " + stepNumber);
+                  for(var i = 0; i < visibleContainers.length; i++) {
+                    var visibleContainer = visibleContainers[i];
+                    var visibleContainerUserData = visibleContainer.userData;
+                    visibleContainer.visible = visibleContainerUserData.step < stepNumber;
+                    
+                    for(var k = 0; k < visibleContainers[i].children.length; k++) {
+            
+                      var container = visibleContainers[i].children[k];
+                      var containerUserData = container.userData;
+                      
+                      container.visible = containerUserData.step < stepNumber;
+                      
+                      var stackables = container.children;
+                      for(var j = 0; j < stackables.length; j++) {
+                        var userData = stackables[j].userData;
+                        stackables[j].visible = userData.step < stepNumber;
+                      }
+                    }          
+                  }
+                  renderedStepNumber = stepNumber;
+                }
+              },
             readprod: async function () {
                 this.Prodloader = new THREE.ObjectLoader();
                 this.prod = await this.Prodloader.loadAsync(
