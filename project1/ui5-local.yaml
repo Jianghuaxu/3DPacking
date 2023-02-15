@@ -31,9 +31,9 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: http://ldcier9.wdf.sap.corp:44300
-            client: '003'
-            destination: ER9_CLONING
+            url: http://uytclnt700:443
+            client: '700'
+            destination: UYTCLNT700
     - name: sap-fe-mockserver
       beforeMiddleware: fiori-tools-proxy
       configuration:
