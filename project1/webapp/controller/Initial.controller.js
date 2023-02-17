@@ -44,7 +44,8 @@ sap.ui.define([
                 this._audioBtn = this.getView().byId("voice");
                 this._audioWave = this.getView().byId("voice_wave");
 
-                this._initProdList();
+                //this._initProdList();
+                this.getView().setModel(this._odoProdModel, "odoProd");
             },
             onAfterRendering: function () {
                 //this.initThreejsModel2();
@@ -829,13 +830,20 @@ sap.ui.define([
 
             //retrieve ODO Items 
             onODOInput: function (oEvent) {
+                //for test: 310001688392
                 var vODONumber = oEvent.getSource().getValue();
                 var oFilters = [];
+                if(!vODONumber) {
+                    return;
+                }
+                var oResultTable = this.getView().byId("scanResultVBox");
+                oResultTable.setBusy(true);
                 oFilters.push(new Filter(
                     "OutboundDelivery",
                     FilterOperator.EQ,
 					vODONumber
-                ))
+                ));
+                var that = this;
                 var oModel = this.getView().getModel();
                 oModel.read("/DLVItemSet", {
                     filters: oFilters,
@@ -845,8 +853,12 @@ sap.ui.define([
                     success: function (odata) {
                         //odata.results
                         ODOModelHelper.setModel(odata.results);
+                        that._odoProdModel.setData(ODOModelHelper.getModel().getData());
+                        oResultTable.setBusy(false);
                     }, 
-                    error: function (err) {}
+                    error: function (err) {
+                        oResultTable.setBusy(false);
+                    }
                 } )
             },
 
