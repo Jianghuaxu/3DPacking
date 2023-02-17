@@ -25,6 +25,14 @@
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
         }
+      },
+      "SIMPLE_OUTB_DLV_SRV": {
+        "uri": "/sap/opu/odata/scwm/SIMPLE_OUTB_DLV_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
       }
     },
     "crossNavigation": {
@@ -82,7 +90,7 @@
         }
       },
       "": {
-        "dataSource": "ZEWM_PBO_SRV",
+        "dataSource": "SIMPLE_OUTB_DLV_SRV",
         "preload": true,
         "settings": {
           "defaultBindingMode": "TwoWay",

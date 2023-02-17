@@ -5,6 +5,12 @@
     {
       "authenticationType": "xsuaa",
       "csrfProtection": false,
+      "source": "^/sap/opu/odata/scwm/SIMPLE_OUTB_DLV_SRV/",
+      "destination": "UYTCLNT700"
+    },
+    {
+      "authenticationType": "xsuaa",
+      "csrfProtection": false,
       "source": "^/sap/opu/odata/sap/ZEWM_PBO_SRV/",
       "destination": "UYTCLNT700"
     },

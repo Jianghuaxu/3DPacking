@@ -3,6 +3,9 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/ui/model/json/JSONModel",
     "project1/modelHelper/PackProductsHelper",
+    "project1/modelHelper/ODOModelHelper",
+    "sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
     "../utils/Util",
     "../three/Three",
     "../three/math/ConvexHull",
@@ -15,7 +18,7 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast, JSONModel, PackProductsHelper, Util) {
+    function (Controller, MessageToast, JSONModel, PackProductsHelper, ODOModelHelper, Filter, FilterOperator, Util) {
         "use strict";
         return Controller.extend("project1.controller.Initial", {
             bcalculate: true,
@@ -822,6 +825,29 @@ sap.ui.define([
                 this._scanListModel.setData([]);
                 this._nrOfProducts = 10;
                 this._reScanFlag = false;
+            },
+
+            //retrieve ODO Items 
+            onODOInput: function (oEvent) {
+                var vODONumber = oEvent.getSource().getValue();
+                var oFilters = [];
+                oFilters.push(new Filter(
+                    "OutboundDelivery",
+                    FilterOperator.EQ,
+					vODONumber
+                ))
+                var oModel = this.getView().getModel();
+                oModel.read("/DLVItemSet", {
+                    filters: oFilters,
+                    /*parameters: {
+                        select: "Batch,Product,OutboundDelivery,OutboundDeliveryItem,Entitled,ItemDeliveryQuantity,ItemDeliveryQuantityUnit"
+                    },*/ //still not working with the select parameters 
+                    success: function (odata) {
+                        //odata.results
+                        ODOModelHelper.setModel(odata.results);
+                    }, 
+                    error: function (err) {}
+                } )
             },
 
             /********** End of Left side Screen for Scanning Logic *********************/
