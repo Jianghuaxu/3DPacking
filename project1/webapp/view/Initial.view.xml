@@ -22,35 +22,47 @@
                                 <l:GridData span="XL6 L6 M6 S6" />
                             </layoutData>
                             <!--<html:div id="scandit-barcode-picker" style="max-width: 40%; max-height: 40%;"></html:div>  -->
-                            <html:div id="scandit-barcode-picker" >
-                                <VBox id="recordDetail.layoutVBox">
-								<forms:Form id="recordDetail.layoutForm" editable="true">
-									<forms:layout>
-										<forms:ResponsiveGridLayout id="recordDetail.layoutGridLayout" labelSpanL="4" labelSpanM="6" labelSpanS="4" adjustLabelSpan="true"
-											emptySpanL="0" emptySpanM="0" emptySpanS="4" columnsXL="1" columnsL="1" columnsM="1" columnsS="2" singleContainerFullSize="false"/>
-									</forms:layout>
-									<forms:formContainers>
-										<forms:FormContainer >
-											<forms:formElements>
-												<forms:FormElement >
-													<forms:label class = "refNrlabel">
-														<Label  text="{i18n>refNrLabel}" labelFor="odoRefNrInput"/>
-													</forms:label>
-													<forms:fields>
-														<Input id="odoRefNrInput" change="onODOInput" required="true" placeholder = "80000001"/>
-													</forms:fields>
-												</forms:FormElement>
-											</forms:formElements>
-										</forms:FormContainer>
-									</forms:formContainers>
-								</forms:Form>
-							</VBox>
-                            </html:div>
-                            <VBox id='canvasContainer' visible="false" >
-                                <html:canvas id="myCanvas1" width="512" height="288"/>
+                            <VBox id="recordDetail.layoutVBox">
+                                <forms:Form id="recordDetail.layoutForm" editable="true">
+                                    <forms:layout>
+                                        <forms:ResponsiveGridLayout
+                                            id="recordDetail.layoutGridLayout"
+                                            labelSpanL="4"
+                                            labelSpanM="6"
+                                            labelSpanS="4"
+                                            adjustLabelSpan="true"
+                                            emptySpanL="0"
+                                            emptySpanM="0"
+                                            emptySpanS="4"
+                                            columnsXL="1"
+                                            columnsL="1"
+                                            columnsM="1"
+                                            columnsS="2"
+                                            singleContainerFullSize="false"
+                                        />
+                                    </forms:layout>
+                                    <forms:formContainers>
+                                        <forms:FormContainer>
+                                            <forms:formElements>
+                                                <forms:FormElement>
+                                                    <forms:label class="refNrlabel">
+                                                        <Label text="{i18n>refNrLabel}" labelFor="odoRefNrInput" />
+                                                    </forms:label>
+                                                    <forms:fields>
+                                                        <Input id="odoRefNrInput" change="onODOInput" required="true" placeholder="80000001" />
+                                                    </forms:fields>
+                                                </forms:FormElement>
+                                            </forms:formElements>
+                                        </forms:FormContainer>
+                                    </forms:formContainers>
+                                </forms:Form>
                             </VBox>
-                            <Button id="triggerScanInputButton" icon="sap-icon://bar-code" press=".onScanInputButton" text="Scan product" width="90%" class="scanBtn"/>
-                            <HBox visible = "false">
+                            <html:div id="scandit-barcode-picker" />
+                            <VBox id='canvasContainer' visible="false">
+                                <html:canvas id="myCanvas1" width="512" height="288" />
+                            </VBox>
+                            <Button id="triggerScanInputButton" icon="sap-icon://bar-code" press=".onScanInputButton" text="Scan product" width="90%" class="scanBtn" />
+                            <HBox>
                                 <Button id="voice" icon="sap-icon://microphone" press="onSpeek" type="Emphasized" />
                                 <svg id="voice_wave" width="auto" height="25" xmlns="http://www.w3.org/2000/svg" version="1.1">
                                     <rect x='0' y='0' width='4' height='20' fill='#ff6700'>
@@ -72,26 +84,21 @@
                             </HBox>
                             <!--第二个小图标 设置高度-->
 
-                            <VBox id = "scanResultVBox" class =  "scanResultVBox">
-                                <Table id="scanResultTable"  backgroundDesign = "Transparent" inset="false" items="{
+                            <VBox id="scanResultVBox" class="scanResultVBox">
+                                <Table id="scanResultTable" backgroundDesign="Transparent" inset="false" items="{
                                     path: 'odoProd>/'
                                 }">
-                                <columns>
-                                            <Column minScreenWidth="Tablet" demandPopin="true">
-                                            </Column>
+                                    <columns>
+                                        <Column minScreenWidth="Tablet" demandPopin="true" />
 
-                                            <Column minScreenWidth="Tablet" demandPopin="true">
-                                            </Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true" />
 
-                                            <Column minScreenWidth="Tablet" demandPopin="true">
-                                            </Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true" />
 
-                                            <Column minScreenWidth="Tablet" demandPopin="true">
-                                            </Column>
+                                        <Column minScreenWidth="Tablet" demandPopin="true" />
 
-                                            <Column minScreenWidth="Tablet" demandPopin="true">
-                                            </Column>
-                                        </columns>
+                                        <Column minScreenWidth="Tablet" demandPopin="true" />
+                                    </columns>
                                     <items>
                                         <ColumnListItem>
                                             <cells>
@@ -110,14 +117,13 @@
                             <layoutData>
                                 <l:GridData span="XL6 L6 M6 S6" />
                             </layoutData>
-                            <html:div id="threejsviewer" >
-                                <HBox visible="false" >
+                            <html:div id="threejsviewer">
+                                <HBox visible="false">
                                     <Text id="handlingUnitText" text="{i18n>packHandlingUnit}" />
                                     <Text id="packagingMaterialText" text="{i18n>packagingMaterial}" />
                                 </HBox>
                                 <VBox>
-                                    <html:canvas id="myCanvas2" class="canvas2" width= "1160" height="654">
-                                    </html:canvas>
+                                    <html:canvas id="myCanvas2" class="canvas2" width="1160" height="654" />
                                 </VBox>
                                 <HBox alignItems="Center" alignContent="SpaceAround" visible="false">
                                     <!-- <l:Grid> -->
@@ -129,7 +135,7 @@
                                     <Button id="showAllButton" text="{i18n>showAll}" press="onDisplayAllView" />
                                 </HBox>
                                 <!-- </l:Grid> -->
-                                <Button visible = "false" id="closeButton" text="{i18n>closePackHandlingUnit}" press="onCloseHU" />
+                                <Button visible="false" id="closeButton" text="{i18n>closePackHandlingUnit}" press="onCloseHU" />
                             </html:div>
                         </VBox>
                     </l:Grid>

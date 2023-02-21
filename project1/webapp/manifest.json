@@ -97,6 +97,15 @@
           "defaultCountMode": "Inline",
           "refreshAfterChange": false
         }
+      },
+      "ZEWM_PBO_SRV": {
+        "dataSource": "ZEWM_PBO_SRV",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
       }
     },
     "resources": {

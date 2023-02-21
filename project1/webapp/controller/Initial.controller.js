@@ -31,7 +31,7 @@ sap.ui.define([
             _odoProdModel: new JSONModel([]),
             _scannedProd: [],
             _OldScannedProd: [],
-            _nrOfProducts: 10, // TODO: this shall be read from the ODO number
+            _nrOfProducts: 4, // TODO: this shall be read from the ODO number
             _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
                 this._odoInput = this.getView().byId("odoRefNrInput");
@@ -479,7 +479,7 @@ sap.ui.define([
 
                 //https://ssl.scandit.com/dashboard/sdk/projects: for creating a license key
                 //var licenseKey = "AelhPGK0Q/QqARqoEztBkSsu6zcXPYf4cHWg1ysy9Q+kZ7oFpSMvK8NfRsWQJV/FYXLjnBcOZEdyHdejuXmAcgF1GcAGJYRq+ldYsHFrGCk9XP5mnG0wVy9b1c0ReclZdDR0iq8Y7xQHJ7cKwAWdGotEhAG+T0EsV3u81M/zRXWNfd41QLz2hYu0Ie/Bl+SkFPd1rA4wI3hOaT3ob9ZWuul0J+KBb++BMV2+kPmyUOK0yahOQeR6rBage01m0FTcDyQSa5GRBoO0aOdb8IN4nikGTvS1in/8RwNlq1e4AiV6MvN/xsT38lNT5jnr83iWPz4Yt8u0WiDrUC5umOl74vW5Nbd4s0x7MINfN15oslgOO7kDfI2EH76xltFIGYYmjFeVquQ+cXa6tcw9JuyAZav3m1hMdICBFOwJheGDlBNNdzyiuBAWc6rzOmzWb4MAJT1fLdRZ5ImWleUFgx3KVA0xD+kCT5Sy/Pl6TpS5vpIJvjJXtA8xgMHHv1Xno/yyPsqNINKOABzyVgTwgqP4lo6eIyJA6Al61tjWIWUgpDp5f1viAGJU8WYX/ub7F5W16JDIhlIX07+C0P+AFNkgyYjzG7QyWXEuQjbLTwUV4iAnWkS2wuhplWb8G0zAREOwGmNzpxTYnaK/blwHlsG30WzfbbvxcuOmLMvAzHoYJj+utoaG1AiQ7d2j/QUATTidJadOD4QIswIIYNZG9i6O5JIC99kPwwXrNKtXvLMm9VAeSDbjMNrB3R5DW0vdUVRMbVm1v3GDZwHhSSyrkhamcbF8vcV81XZgLg62+os7QMtiPUT9dKkCbSlwBKGMivrgiM1ncTao8WW4S2Xc";
-                var licenseKey = "Ad8BtWIeQHr8EvzGlhmkYKc2d4cODT7sH1+/mIs2Zcm1C6uilxRtyZVzUAj6V2rkLGQgOl5lZlvrV5YKo35JMehg+CXGDPROfGnezFthkvaGTSU971dzkZVNn3HGTt57vQDtRwwiHGrBEoGXdmo1ioNnQMCLeeICZ2kRmwNprY05b7aqYTqPw5VFk7HHYG4FMD5AyKBX8ODtYTylOxv5k4JwBn3AXqUWi1cIYSNzpufLQPnxfgjduVNhjrZ/RDJcWElfkrpNI4nOQ8lLekbpvSVQlEbEOebgK2cGRANarYMmLOqOWU9T//h7Rz+cRM0ItX1BmlN+lwbefb1jH0VzBG9v13hSaDE9gUcwwhtWjiISaITDtliEks9dOYHKSGsH43EZJootmqNrRyaVtQdYagl09f8Sbpk2NgEi0PdTKIBhGhHVggv/tHR5ffp8ICoy2Uve7s9+Iig+EmICsyJj98526igLRnQbyHyPIQCnlJEYn+KeFHOSoubeOqaAozmwbalE8MgvI+m0AZqZzOyOr4M3TSRETfgtKbWTDpSvyo4erppSQcQ2iDqDi4oDAyzV3eis5eVcp5xvjBfgq92Z91K1ggNpgHPafaSTtrWb/TcD/9PI7p5lhhZJ+9+WuOCrkUvd19PkPFgOpjtXCsLh97GDJb+NwJ9OR2Ko0WtdPhFkcHdFC9VFQ+96o5OFJXRizNso3G9Viklj8iJX5yCA+nLTYeluuo/jH+cLTzYcF+op1KZ/YXjeTHkVoLkux3siAa7xco4HivWZicjzkoNETChpKOfaZOmQPxNgC9fLDRD9CPdYixwNwFl+aU99Q3l/qrIApiHFX0ysXEFMuoMy8CcrMP08hxZc0vEBhUC3tmaVhDhlYQ3UkinUNTGH+5amAsviGDKxyFVJ+FtNKO6KxZ2g+lD2GCUlUNXkYsLHO9xGAwgmkj6fTqTKdIww04Kqfn9L5VX8iYMZ5gQHK2PCwleiWiLH3edMBJkGE26RawFLijHCXQAYOs+59iyVJ+JjGfBauntzLZyX7F2TxZ+cvvdfy8TQNr10pQi1rzg8wSOItP7EdRa4B03QPZO6sTwB+NBafGN0xvPhBAqeZw9mEsv9/8TTJnEYFY2R4MldtF8so/Ios7XE8b7LqpDHmDPK+W8dco1oNfvdIjYptQ==";
+                var licenseKey = "AT7yuDbGFMGEA8TRzjw8LJ057dQ1G0VzUEAgasBpXusPQyET/h3kCipln7u0KkMsditlIQJwJCvRfofhZm+uoFx+oWmEFCbDIX6jd9pPA6ijZ/CChEiI2YIZOAscX3S6+yALzC8zn/gKOboQGzMoCyVCdlkaWtPKtkuQVA8icdvVUpo+KwU/SRwyRUB/SGj/1X/USw9kmRcRO5s1cQlB7GBmbSPYf+D+lnHEjv0D9hqaCIxullN0CEN5AekWbc6yKFDR8tEmnVuHQ08qsWjE++hRRh1IW8h2J3yk1QtdnVHMQ++OKUr5ElsxZZKtXCO0fxCeQ+l67tkXTHw2szbmj1Nay+vWXHglSwy2+utW14mmHXh++nPlaIFn31ZOJYHPWkLaqMF5N6VIYS3yUW71fE9CK9MTXVsJcX3RvmZmAM8Sa35PpW+ola1pfPCWDbA6IX4n7IhUY65MZuSZnUNtAIBLREdicv0pzmh5loJsls3IdFtEM3pssls5PIcjPlNnzi3nUECvTd7a/V/7GinYUSyrFBMwb3GtQ0GPcmzGBHBXo143/cJ0ph2V57Z0u8rGSADaI3F1PSyUXTiYAyY1lG95hZKBbeg6Nhf6KcM624Y9cMZREDc9hjlFF+uKRxHfZoRy/CavTXlvVJqxIrToO7W+YKUOiyIkTMDCWGwdFrjEin8FQAqIhuNKhLlDAXd6p0z5h9jiRlsSzAi2YRp4HTLn21cuRzAQGhm8o/MGj+d0q3Ca6v2bcyW1iJF4wdGvza8Ny86bBOQApeYPaXc8VZ0G8MHjZGxpXSC6FCaVGwRPyhgBC26Cl5nRPLGwwkBZzUN32f8ienBrY+1IzM87oc5lwxq4i9ixhcQcwOIP9JqzA3YFPXiksqZkubOEc5k9xtecFemC7IaKx+YkXQOWaevuTrjTZwaM7SNxM+peVvVTrShlJL54xsC142LNVusXsIUq8/VebsF4VDNjecrjvRH6tI2CaSqBsZsgyBoya34rLvwsPEhYfhCaZVc/3VcJ069p/MV7wMBamNKHwVGRwLNC6zUaJU95GIR6d3NuhbSBd2+RCRQ/+A8tXU8PmGGwspCfjgm8hr/RtyX6Q4A2cpTEQ5tuSKmQKlc0tcoaW/cNSFaxeSrlCqle61BnlhSybfT6UR1YnTZUQxLG7A==";
                 //var licenseKey = "AVZx5Tu0GhkhLUEh8A7SdiIJ0uLtD41dZ0R3fNtvNbAESdrUaATie5l1DED0KWsxJ0p6Tr9KTF7EVb02tnbtFDtkL93lM+ed6lS1tFtpVOB0WF8DCUnsKWh9qWU0SElsCF7H8flkAjLERbF5GnmrR00KpP++C/7GNkaW6Kc2hzlFMiJiuGMhKJh7bsWzITocORec3uCyPhV/9NYApXlg/Y8zy1dla6IDtX8s/35szIm0UKRS0rXhyn1scHFS35NeHCni1ULmhJGkYfHYPRRGtqJY+n2ei3ZW8mStkFhuQHULZxsm7MXoOojoF5C/H7PQNOuVVPfdm21wEhqgW7uecELDjEH/xLjp2BPoFINaF/ayjQEbd2SUAnCDZ6Qr8ojlqH/vLEyK6fONkXbTTXMwaHEIAocaU9r4ramWB8t2eUerkyPH8Y06Vb8yhDJBRShK/pCML9wUqVYf60wUFTJ7LeGAvYhjXiI9DhRBFOf2e0ZCcJ+oiIAg8CCy81pslnNIjUA7arDqUw4WwVbn64ZP8q7mDdwP5T8BET63pKkC3YSFWwI0r+6w5S51UhAjqraRvEG0XklOUVxT+8WnJQ9mz0Qx1ZW0ds0RIekjQzRpn1gROTtcmwb1DyQ3MCkNjKv6RqC8Cb59jeBKwgdj2+8hZWsmzAeCj2hVxQ3/r3vZq9zaappFd4qed91dmxG1vp/TjkTbLvel9tm8kZZasljj1b6ciC/FH259SmjNiVAvydVea4XkoeBxTwZBdKrbGJDTPRt8qF5AAtCHeNbYFHc76ZxDjLu48OweW0SQsyvlgW14W36ekKpY9Xf+LD3i4D+i+uYhKw0Pvhd2T3VjEml7eRSeCbdwRily1oiotKqA";
                 await ScanditSDK.configure(licenseKey,
                     {
@@ -615,7 +615,9 @@ sap.ui.define([
                     if (!this._reScanFlag) {
                         this._callPBO();
                     } else {
+                        //after initial call PBO, then we shall rely on voice detection to trigger redraw and we expect for each scan, the total number of products shall be decreased by 1. 
                         this._redrawAfterScanResume(this._OldScannedProd);
+                        //this._detectSpeek();
                     }
                 } else if (this._scannedProd.length > this._nrOfProducts) {
                     this._scannedProd = []; //clear buffer once the scanned product doesn't match to the expected 
@@ -623,7 +625,7 @@ sap.ui.define([
             },
 
             _callPBO: function () {
-                var oModel = this.getView().getModel();
+                var oModel = this.getView().getModel("ZEWM_PBO_SRV");
                 oModel.setDeferredGroups(["myGroupId"]);
                 oModel.setChangeGroups({
                     "*": {
@@ -739,6 +741,7 @@ sap.ui.define([
                 //PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
                 this._drawPackSequence(); // trigger redraw again. 
+                this._detectSpeek();
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
@@ -824,7 +827,7 @@ sap.ui.define([
                 //reset model 
                 this._scannedProd = [];
                 this._scanListModel.setData([]);
-                this._nrOfProducts = 10;
+                this._nrOfProducts = 4;
                 this._reScanFlag = false;
             },
 
