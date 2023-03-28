@@ -31,7 +31,7 @@ sap.ui.define([
             _odoProdModel: new JSONModel([]),
             _scannedProd: [],
             _OldScannedProd: [],
-            _nrOfProducts: 4, // TODO: this shall be read from the ODO number
+            _nrOfProducts: 3, // TODO: this shall be read from the ODO number
             _reScanFlag: false, // flag to indicator if this scan is purely on UI part
             onInit: function () {
                 this._odoInput = this.getView().byId("odoRefNrInput");
@@ -479,7 +479,7 @@ sap.ui.define([
 
                 //https://ssl.scandit.com/dashboard/sdk/projects: for creating a license key
                 //var licenseKey = "AelhPGK0Q/QqARqoEztBkSsu6zcXPYf4cHWg1ysy9Q+kZ7oFpSMvK8NfRsWQJV/FYXLjnBcOZEdyHdejuXmAcgF1GcAGJYRq+ldYsHFrGCk9XP5mnG0wVy9b1c0ReclZdDR0iq8Y7xQHJ7cKwAWdGotEhAG+T0EsV3u81M/zRXWNfd41QLz2hYu0Ie/Bl+SkFPd1rA4wI3hOaT3ob9ZWuul0J+KBb++BMV2+kPmyUOK0yahOQeR6rBage01m0FTcDyQSa5GRBoO0aOdb8IN4nikGTvS1in/8RwNlq1e4AiV6MvN/xsT38lNT5jnr83iWPz4Yt8u0WiDrUC5umOl74vW5Nbd4s0x7MINfN15oslgOO7kDfI2EH76xltFIGYYmjFeVquQ+cXa6tcw9JuyAZav3m1hMdICBFOwJheGDlBNNdzyiuBAWc6rzOmzWb4MAJT1fLdRZ5ImWleUFgx3KVA0xD+kCT5Sy/Pl6TpS5vpIJvjJXtA8xgMHHv1Xno/yyPsqNINKOABzyVgTwgqP4lo6eIyJA6Al61tjWIWUgpDp5f1viAGJU8WYX/ub7F5W16JDIhlIX07+C0P+AFNkgyYjzG7QyWXEuQjbLTwUV4iAnWkS2wuhplWb8G0zAREOwGmNzpxTYnaK/blwHlsG30WzfbbvxcuOmLMvAzHoYJj+utoaG1AiQ7d2j/QUATTidJadOD4QIswIIYNZG9i6O5JIC99kPwwXrNKtXvLMm9VAeSDbjMNrB3R5DW0vdUVRMbVm1v3GDZwHhSSyrkhamcbF8vcV81XZgLg62+os7QMtiPUT9dKkCbSlwBKGMivrgiM1ncTao8WW4S2Xc";
-                var licenseKey = "AT7yuDbGFMGEA8TRzjw8LJ057dQ1G0VzUEAgasBpXusPQyET/h3kCipln7u0KkMsditlIQJwJCvRfofhZm+uoFx+oWmEFCbDIX6jd9pPA6ijZ/CChEiI2YIZOAscX3S6+yALzC8zn/gKOboQGzMoCyVCdlkaWtPKtkuQVA8icdvVUpo+KwU/SRwyRUB/SGj/1X/USw9kmRcRO5s1cQlB7GBmbSPYf+D+lnHEjv0D9hqaCIxullN0CEN5AekWbc6yKFDR8tEmnVuHQ08qsWjE++hRRh1IW8h2J3yk1QtdnVHMQ++OKUr5ElsxZZKtXCO0fxCeQ+l67tkXTHw2szbmj1Nay+vWXHglSwy2+utW14mmHXh++nPlaIFn31ZOJYHPWkLaqMF5N6VIYS3yUW71fE9CK9MTXVsJcX3RvmZmAM8Sa35PpW+ola1pfPCWDbA6IX4n7IhUY65MZuSZnUNtAIBLREdicv0pzmh5loJsls3IdFtEM3pssls5PIcjPlNnzi3nUECvTd7a/V/7GinYUSyrFBMwb3GtQ0GPcmzGBHBXo143/cJ0ph2V57Z0u8rGSADaI3F1PSyUXTiYAyY1lG95hZKBbeg6Nhf6KcM624Y9cMZREDc9hjlFF+uKRxHfZoRy/CavTXlvVJqxIrToO7W+YKUOiyIkTMDCWGwdFrjEin8FQAqIhuNKhLlDAXd6p0z5h9jiRlsSzAi2YRp4HTLn21cuRzAQGhm8o/MGj+d0q3Ca6v2bcyW1iJF4wdGvza8Ny86bBOQApeYPaXc8VZ0G8MHjZGxpXSC6FCaVGwRPyhgBC26Cl5nRPLGwwkBZzUN32f8ienBrY+1IzM87oc5lwxq4i9ixhcQcwOIP9JqzA3YFPXiksqZkubOEc5k9xtecFemC7IaKx+YkXQOWaevuTrjTZwaM7SNxM+peVvVTrShlJL54xsC142LNVusXsIUq8/VebsF4VDNjecrjvRH6tI2CaSqBsZsgyBoya34rLvwsPEhYfhCaZVc/3VcJ069p/MV7wMBamNKHwVGRwLNC6zUaJU95GIR6d3NuhbSBd2+RCRQ/+A8tXU8PmGGwspCfjgm8hr/RtyX6Q4A2cpTEQ5tuSKmQKlc0tcoaW/cNSFaxeSrlCqle61BnlhSybfT6UR1YnTZUQxLG7A==";
+                var licenseKey = "AWwScwNaIP8dMB2rVzx1G7kuOZoqF/reMU05WQhy/gcgYvsRcmc5fKEpz5CadTIK2GfHPT92gOf3VWNBmFAzm1VR9DHHE9Uqh241mNtEIuycIj8DCFl07ZN+SX6mWd6DrgPeyj4knj24Nhjevmct+ct2CBLNfKRjz1fZH+dwCXBOQ6Hkyzdfv9gL2Q5DcZF6dETcj4F+8cSNcMWsRXMW5opmsoaCS3l3p3/JPekj3Y3gef5yEVlfxnBaEQVxfE/Bn3+/OE9VmUhcMuamWlPNFZBVWxp6WJtYuHSWucham1V0DpZk9Sbo0i9eMQXPW4nHMl/pTe0bXIisUBLB1XWOaIdn5L6NXhfI4x15MTZ3lbUrKed/NHQKxHxOgl94Y4TDT3ipDUIU4tTaYEd0SnVGBsI2DmykfS8cAWEgSyNc/7TiX6hS+gGwHc9JAH6STLL6EUYmeHgbuqJKTVANNjpGF1xzSBb5TaaKRn6hW0IwFHqT29ihgC+SwgxJPHE8ZowgNuRfAvf0btmbkMXyElBfK6LNuiJFcnWJZ+p9uVUZLgLHAjihxD4iSfvMWLF5XuaqTv+d4yFeGRRuKi28ZlfAOMvsvetvWtiS5M7J6g0ZLR6XLlpv3fgXoi6bBPSSnVdGJlij6SUUPyTtft9CEK4rTqbNEzDX0id4YWX92lIDQY0YiCpoQNROZQxP8rKHmI80kuwbnHZH9Rb7Qk5EyIJIxKeV6AK03J2GrG7z/xlHJ+bwIBOUKk38TisSU615asN4+KYPRYNW2Zf4SxgNKJLzOd7zv3RT0Ac08vopzWEal27e++FgsuNKVG3hYWbLl/SuZ6h9BdG+HxyZxn9I6Rzr9PrEIFuxLoeCbUgTnS8EEIQ9/v2aPtxVlrUevMCeD6iCtt/jq8VsYn3rtcwRudY2qQ46jxfMl4wwx6f/Jx4y0mSUGvfjadK3VfAObsNBe0u7uAikyCIwZzRuZtzldxmzBPklDYhfqBfuV9u4x4g+amrlOdaqjCfwqC+2rZWW4heGA9q7rolXu8CPlKM8fSjjmSarL/fTPSYdf4Y8H2P/wwdjYSxlG6gp2+AKsl+lNSBZZhPjRUFnIWJxBSLTbYv+DSI+a3yZXphp3R7+AYZvFtCHfMLOKkSsMYRwi7iRfqG/Hw9W/51li3WVEztozg==";
                 //var licenseKey = "AVZx5Tu0GhkhLUEh8A7SdiIJ0uLtD41dZ0R3fNtvNbAESdrUaATie5l1DED0KWsxJ0p6Tr9KTF7EVb02tnbtFDtkL93lM+ed6lS1tFtpVOB0WF8DCUnsKWh9qWU0SElsCF7H8flkAjLERbF5GnmrR00KpP++C/7GNkaW6Kc2hzlFMiJiuGMhKJh7bsWzITocORec3uCyPhV/9NYApXlg/Y8zy1dla6IDtX8s/35szIm0UKRS0rXhyn1scHFS35NeHCni1ULmhJGkYfHYPRRGtqJY+n2ei3ZW8mStkFhuQHULZxsm7MXoOojoF5C/H7PQNOuVVPfdm21wEhqgW7uecELDjEH/xLjp2BPoFINaF/ayjQEbd2SUAnCDZ6Qr8ojlqH/vLEyK6fONkXbTTXMwaHEIAocaU9r4ramWB8t2eUerkyPH8Y06Vb8yhDJBRShK/pCML9wUqVYf60wUFTJ7LeGAvYhjXiI9DhRBFOf2e0ZCcJ+oiIAg8CCy81pslnNIjUA7arDqUw4WwVbn64ZP8q7mDdwP5T8BET63pKkC3YSFWwI0r+6w5S51UhAjqraRvEG0XklOUVxT+8WnJQ9mz0Qx1ZW0ds0RIekjQzRpn1gROTtcmwb1DyQ3MCkNjKv6RqC8Cb59jeBKwgdj2+8hZWsmzAeCj2hVxQ3/r3vZq9zaappFd4qed91dmxG1vp/TjkTbLvel9tm8kZZasljj1b6ciC/FH259SmjNiVAvydVea4XkoeBxTwZBdKrbGJDTPRt8qF5AAtCHeNbYFHc76ZxDjLu48OweW0SQsyvlgW14W36ekKpY9Xf+LD3i4D+i+uYhKw0Pvhd2T3VjEml7eRSeCbdwRily1oiotKqA";
                 await ScanditSDK.configure(licenseKey,
                     {
@@ -613,7 +613,9 @@ sap.ui.define([
                     //start to call backend oData service for calculation: ZEWM_PBO_SRV
                     // this is to be done by using local JSON Model: _scannedProd
                     if (!this._reScanFlag) {
-                        this._callPBO();
+                        //this._callPBO();
+                        //TODO: UPB is currently blocked, use mock data instead 
+                        this._callPBOMock();
                     } else {
                         //after initial call PBO, then we shall rely on voice detection to trigger redraw and we expect for each scan, the total number of products shall be decreased by 1. 
                         this._redrawAfterScanResume(this._OldScannedProd);
@@ -693,6 +695,35 @@ sap.ui.define([
                 });
             },
 
+            _callPBOMock: function () {
+                PackProductsHelper.setPackProductsModelDataMock();
+                var res = PackProductsHelper.getModel().getData();
+                for (var i = 0; i < res.length; i++) {
+                    // find the array index by matching the product number via pack_sequence & prod
+                     var ind = this._scannedProd.findIndex(v => v.prod == res[i].Product);
+                     if (ind > -1) {
+                         this._scannedProd[ind].pack_sequence = res[i].PackSequence;
+                     }
+
+                     //initialize two JSON model property ProductMovedInd & ProductToBeMovedInd
+                     if (res[i].PackSequence == 1) {
+                         res[i].ProductToBeMovedInd = true;
+                         if (ind > -1) {
+                             this._scannedProd[ind].toBePackedInd = true;
+                         }
+
+                     } else {
+                         res[i].ProductToBeMovedInd = false;
+                     }
+                     res[i].ProductMovedInd = false;
+
+                 }
+                //modify the result
+                // draw the packing instruction on UI with results returned from oData
+                this._drawPackSequence();
+                this._detectSpeek();
+            },
+
             onNextProduct: function (oEvent) {
                 //decrease the target number of products once we receive the 'Next' voice command
                 this._nrOfProducts--;
@@ -726,19 +757,19 @@ sap.ui.define([
                 var aMissingProd = this._OldScannedProd.filter(prod => {
                     return that._scannedProd.findIndex(item => item.prod == prod.prod) < 0;
                 });
-                //for missing product we shall mark moveIndicator as true; and insert it to the refreshed _scannedProd
+                //for missing product we shall mark movedIndicator as true; and insert it to the refreshed _scannedProd
                 aMissingProd.every(a => {
                     a.movedIndicator = true;
                     a.toBePackedInd = false;
                     //TODO: update PackProducts JSON Model
-                    //PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
+                    PackProductsHelper.updateToBeMovedIndicator(a.prod, false);
                 });
                 //PackProductsHelper.updateMovedIndicator('PROD-3D-PACKING-1', true);
                 //also we shall update the PackProducts model for ProductMovedInd as well as ProductToBeMovedInd
                 //then find the next product which shall mark as red for packing 
                 this._scannedProd = this._scannedProd.sort((a, b) => a.pack_sequence - b.pack_sequence);
                 this._scannedProd[0].toBePackedInd = true;
-                //PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
+                PackProductsHelper.updateToBeMovedIndicator(this._scannedProd[0].prod, true);
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
                 this._drawPackSequence(); // trigger redraw again. 
                 this._detectSpeek();
@@ -827,7 +858,7 @@ sap.ui.define([
                 //reset model 
                 this._scannedProd = [];
                 this._scanListModel.setData([]);
-                this._nrOfProducts = 4;
+                this._nrOfProducts = 3;
                 this._reScanFlag = false;
             },
 
