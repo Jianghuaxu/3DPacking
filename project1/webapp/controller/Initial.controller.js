@@ -176,7 +176,7 @@ sap.ui.define([
                 this.readprod();
 
                 // pack
-                this.pack();
+                // this.pack();
 
                 this.animate();
 
@@ -224,7 +224,7 @@ sap.ui.define([
                 this.readprod();
 
                 // pack
-                this.pack();
+                // this.pack();
 
                 this.animate();
             },
@@ -318,18 +318,49 @@ sap.ui.define([
                 }
               },
             readprod: async function () {
-                this.Prodloader = new THREE.ObjectLoader();
-                this.prod = await this.Prodloader.loadAsync(
-                    // resource URL
-                    "../model/model.three.json",
+                //load multiple products from local file
+                // this.Prodloader = new THREE.ObjectLoader();
+                // this.prod = await this.Prodloader.loadAsync(
+                //     // resource URL
+                //     "../model/model.three.json",
                 
-                    // onLoad callback
-                    // Here the loaded data is assumed to be an object
-                    function ( obj ) {
-                        // Add the loaded object to the scene
-                        obj.name = "prod1";
-                    }
-                    );
+                //     // onLoad callback
+                //     // Here the loaded data is assumed to be an object
+                //     function ( obj ) {
+                //         // Add the loaded object to the scene
+                //         obj.name = "prod1";
+                //     }
+                //     );
+
+                //load products from producthelper
+                let products = PackProductsHelper.getModel().getData();
+                //draw product 1
+                //Height length width 
+                const geometry = new THREE.BoxGeometry( products[0].ProductHeight, products[0].ProductLength, products[0].ProductWidth );
+                const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+                //XYZ
+                const cube = new THREE.Mesh( geometry, material );
+                cube.position.x = products[0].Xposition;
+                cube.position.y = products[0].Yposition;
+                cube.position.z = products[0].Zposition;                
+                //Pack Indicator -> change color
+                //function set color according to indicator
+                const white = new THREE.Color( 0xffffff );
+                const black = new THREE.Color( 0x000000 );
+                const red = new THREE.Color( 0xff0000 );
+                const green = new THREE.Color( 0x00ff00 );
+                const blue = new THREE.Color( 0x0000ff );
+                let MovedColor = green;
+                let ToMoveColor = red;
+                let OtherColor = white;
+                if (products[0].ProductMovedInd == true) {
+                    cube.material.color.set(MovedColor);
+                } else if (child.userData.ProductToBeMovedInd == true ) {
+                    cube.material.color.set(ToMoveColor);
+                } else {
+                    cube.material.color.set(OtherColor);
+                }
+                this.prod = cube;
                 this.group = this.prod;
                 this.scene.add(this.prod);
             },
@@ -774,6 +805,7 @@ sap.ui.define([
                 this._scannedProd = this._scannedProd.concat(aMissingProd)
                 this._drawPackSequence(); // trigger redraw again. 
                 this._detectSpeek();
+                //update object in 3d viewer
             },
 
             _checkNewScannedProduct: function (scannedProduct, pos_x, pos_y, len, hei) {
