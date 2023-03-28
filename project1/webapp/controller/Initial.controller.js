@@ -697,7 +697,7 @@ sap.ui.define([
 
             _callPBOMock: function () {
                 PackProductsHelper.setPackProductsModelDataMock();
-                var res = PackProductsHelper.getModel().getData();
+                var res = Object.assign(PackProductsHelper.getModel().getData(), []);
                 for (var i = 0; i < res.length; i++) {
                     // find the array index by matching the product number via pack_sequence & prod
                      var ind = this._scannedProd.findIndex(v => v.prod == res[i].Product);
@@ -718,6 +718,7 @@ sap.ui.define([
                      res[i].ProductMovedInd = false;
 
                  }
+                 PackProductsHelper.setModel(res);
                 //modify the result
                 // draw the packing instruction on UI with results returned from oData
                 this._drawPackSequence();
@@ -816,7 +817,7 @@ sap.ui.define([
                 var _drawedProd = [];
                 for (let index = this._scannedProd.length - 1; index > -1; index--) {
                     if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
-                        ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
+                        //ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "green";
                         } else if (this._scannedProd[index].toBePackedInd) {
