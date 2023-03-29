@@ -173,7 +173,7 @@ sap.ui.define([
                 this.scene.add( this.group );
                 
                 // object loader
-                this.readprod();
+                //this.readprod();
 
                 // pack
                 // this.pack();
@@ -221,7 +221,7 @@ sap.ui.define([
                 this.scene.add( this.group );
                 
                 // object loader
-                this.readprod();
+                //this.readprod();
 
                 // pack
                 // this.pack();
@@ -317,7 +317,7 @@ sap.ui.define([
                   renderedStepNumber = stepNumber;
                 }
               },
-            readprod: async function () {
+            readprod: function () {
                 //load multiple products from local file
                 // this.Prodloader = new THREE.ObjectLoader();
                 // this.prod = await this.Prodloader.loadAsync(
@@ -340,9 +340,9 @@ sap.ui.define([
                 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
                 //XYZ
                 const cube = new THREE.Mesh( geometry, material );
-                cube.position.x = products[0].Xposition;
-                cube.position.y = products[0].Yposition;
-                cube.position.z = products[0].Zposition;                
+                cube.position.x = products[0].XPosition;
+                cube.position.y = products[0].YPosition;
+                cube.position.z = products[0].ZPosition;                
                 //Pack Indicator -> change color
                 //function set color according to indicator
                 const white = new THREE.Color( 0xffffff );
@@ -355,7 +355,7 @@ sap.ui.define([
                 let OtherColor = white;
                 if (products[0].ProductMovedInd == true) {
                     cube.material.color.set(MovedColor);
-                } else if (child.userData.ProductToBeMovedInd == true ) {
+                } else if (products[0].ProductToBeMovedInd == true ) {
                     cube.material.color.set(ToMoveColor);
                 } else {
                     cube.material.color.set(OtherColor);
@@ -754,6 +754,7 @@ sap.ui.define([
                 // draw the packing instruction on UI with results returned from oData
                 this._drawPackSequence();
                 this._detectSpeek();
+                this.readprod();
             },
 
             onNextProduct: function (oEvent) {
@@ -846,27 +847,52 @@ sap.ui.define([
 
                 //TODO: need to consider the case that barcode is not placed in horizontal or vertical -> /\/\
                 //add Packing instructions for each scanned product & draw each scanned product in canvas video
-                var _drawedProd = [];
+                var _drawedProd = [], rectX, rectY, radius, circleCenterX, circleCenterY;
                 for (let index = this._scannedProd.length - 1; index > -1; index--) {
                     if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
                         //ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
+                        rectX = this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40;
+                        rectY = this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720;
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "green";
                         } else if (this._scannedProd[index].toBePackedInd) {
                             ctx.fillStyle = "red";
+                            radius = 20; 
+                            circleCenterX = rectX + 2*radius;
+                            circleCenterY = rectY - 1.75*radius;
+                            ctx.strokeStyle = 'red';
+                            ctx.strokeRect(rectX -2, rectY - 2.75*radius-2, 84, 84);
+
+                            ctx.beginPath();
+                            ctx.arc(circleCenterX, circleCenterY, radius, 0, 2 * Math.PI, false);
+                            ctx.fillStyle = '#FDB8A2';
+                            ctx.fill();
+
+                            ctx.beginPath();
+                            ctx.arc(circleCenterX, circleCenterY, 14, 0, 2 * Math.PI, false);
+                            ctx.fillStyle = '#FC7147';
+                            ctx.fill();
+
+                            ctx.beginPath();
+                            ctx.arc(circleCenterX, circleCenterY, 7, 0, 2 * Math.PI, false);
+                            ctx.fillStyle = '#FE4C14';
+                            ctx.fill();
+
+                            ctx.beginPath();
+                            ctx.arc(circleCenterX, circleCenterY, 3, 0, 2 * Math.PI, false);
+                            ctx.fillStyle = 'yellow';
+                            ctx.fill();
                         } else {
                             ctx.fillStyle = "yellow";
                         }
-
-                       ctx.fillRect(this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40, this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720, 80, 26)
+                        
+                        ctx.fillRect(rectX, rectY, 80, 26);
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "white";
-                        } else if (this._scannedProd[index].toBePackedInd) {
-                            ctx.fillStyle = "white";
-                        } else {
+                        }else {
                             ctx.fillStyle = "black";
                         }
-                        ctx.font = "20px Georgia";
+                        ctx.font = "20px Calibri";
                         ctx.fillText(this._scannedProd[index].pack_sequence, this._scannedProd[index].x + this._scannedProd[index].len / 2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
                     }
                     _drawedProd.push(this._scannedProd[index].prod)
