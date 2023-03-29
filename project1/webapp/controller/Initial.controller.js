@@ -535,6 +535,7 @@ sap.ui.define([
                     visible: true, // hide the BarcodePicker initially (hidden initialization saves startup time when its used later on)
                 });
 
+
                 //test scanning: 
                 this._beginTime = performance.now()
 
@@ -574,6 +575,10 @@ sap.ui.define([
             },
 
             _scan: function (scanResult) {
+                var oBarcodePicker =  this.getView().byId("application-project1-display-component---Initial--scandit-barcode-picker");
+                this._vCameraHeight = oBarcodePicker.$().height();
+                this._vCameraWidth = oBarcodePicker.$().width();
+                
                 //this happens when Camera initialization or Resume scanning 
                 for (var i = 0; i < scanResult.barcodes.length; i++) {
                     var scanRes = scanResult.barcodes[i].data;
@@ -594,12 +599,12 @@ sap.ui.define([
                     // insert scanned value into searchField
                     this._scanListModel.setData(aScanResultList);
 
-                    var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * 512 / 1280;
-                    var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * 288 / 720;
+                    var tmpLen = (scanResultLoc.topRight.x - scanResultLoc.topLeft.x) * this._vCameraWidth / 1280;
+                    var tmpHei = (scanResultLoc.bottomLeft.y - scanResultLoc.topLeft.y) * this._vCameraHeight / 720;
 
                     //in _scannedProd, we use x and y to represent the topleft point, from this we will draw a highlight around the barcode, and by calculating the bottom left point, we shall draw a yellow rect with the packing sequence
                     // check if the new scanned product is to be added into the list: we shall compare if the "new product" is the previous scanned one
-                    var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * 512 / 1280, scanResultLoc.topLeft.y * 288 / 720, tmpLen, tmpHei);
+                    var isNewProduct = this._checkNewScannedProduct(scanRes, scanResultLoc.topLeft.x * this._vCameraWidth / 1280, scanResultLoc.topLeft.y * this._vCameraHeight / 720, tmpLen, tmpHei);
                     if (isNewProduct) {
                         var vPackSequence = 0;
                         if (this._reScanFlag) {
@@ -615,8 +620,8 @@ sap.ui.define([
                                     v = c === "x" ? r : (r & 0x3 | 0x8);
                                 return v.toString(16);
                             }),
-                            "x": scanResultLoc.topLeft.x * 512 / 1280,
-                            "y": scanResultLoc.topLeft.y * 288 / 720,
+                            "x": scanResultLoc.topLeft.x * this._vCameraWidth / 1280,
+                            "y": scanResultLoc.topLeft.y * this._vCameraHeight / 720,
                             "len": tmpLen,
                             "hei": tmpHei,
                             "pack_sequence": vPackSequence,
@@ -635,7 +640,7 @@ sap.ui.define([
                     this.barcodePicker.pauseScanning();
                     this.barcodePicker.setVisible(false);
                     //set camera invisible and canvas visible 
-                    this._canvas.setVisible(true);
+                    this._canvasContainer.setVisible(true);
 
                     var endTime = performance.now()
 
@@ -770,7 +775,7 @@ sap.ui.define([
 
                 /* ********* Scanning re-trigger *******************************************/
                 this._reScanFlag = true;
-                this._canvas.setVisible(false);
+                this._canvasContainer.setVisible(false);
                 this.barcodePicker.resumeScanning();
                 this.barcodePicker.setVisible(true);
 
@@ -833,35 +838,42 @@ sap.ui.define([
 
             _drawPackSequence: function () {
                 //set camera invisible and canvas visible 
-                this._canvas.setVisible(true);
+                this._canvasContainer.setVisible(true);
                 //this is called when API return results from oData
                 //image modifications
                 var vid = document.getElementsByTagName("video")[0];
                 var canvas = document.getElementById("application-project1-display-component---Initial--myCanvas1");
+                
+                //set dimension of the canvas
+                canvas.height = this._vCameraHeight;
+                canvas.width = this._vCameraWidth;
+
+                var vScaleRatio = this._vCameraWidth/850;
+
                 var ctx = canvas.getContext("2d");
 
 
-                ctx.drawImage(vid, 0, 0, 512, 288);
+                ctx.drawImage(vid, 0, 0, this._vCameraWidth, this._vCameraHeight);
                 ctx.strokeStyle = "green";
 
 
                 //TODO: need to consider the case that barcode is not placed in horizontal or vertical -> /\/\
                 //add Packing instructions for each scanned product & draw each scanned product in canvas video
-                var _drawedProd = [], rectX, rectY, radius, circleCenterX, circleCenterY;
+                var _drawedProd = [], rectX, rectY, radius, circleCenterX, circleCenterY, vTextOffset;
                 for (let index = this._scannedProd.length - 1; index > -1; index--) {
                     if (_drawedProd.indexOf(this._scannedProd[index].prod) == -1) {
                         //ctx.strokeRect(this._scannedProd[index].x, this._scannedProd[index].y, this._scannedProd[index].len, this._scannedProd[index].hei); // draw barcode highlight with green rect
-                        rectX = this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40;
-                        rectY = this._scannedProd[index].y + this._scannedProd[index].hei + 20 * 288 / 720;
+                        rectX = this._scannedProd[index].x + this._scannedProd[index].len / 2 - 40 * vScaleRatio;
+                        rectY = this._scannedProd[index].y + this._scannedProd[index].hei + 20 * vScaleRatio * this._vCameraHeight / 720;
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "green";
                         } else if (this._scannedProd[index].toBePackedInd) {
                             ctx.fillStyle = "red";
-                            radius = 20; 
+                            radius = 20 * vScaleRatio; 
                             circleCenterX = rectX + 2*radius;
                             circleCenterY = rectY - 1.75*radius;
                             ctx.strokeStyle = 'red';
-                            ctx.strokeRect(rectX -2, rectY - 2.75*radius-2, 84, 84);
+                            ctx.strokeRect(rectX -2, rectY - 2.75*radius-2, vScaleRatio * 84, vScaleRatio * 84);
 
                             ctx.beginPath();
                             ctx.arc(circleCenterX, circleCenterY, radius, 0, 2 * Math.PI, false);
@@ -886,14 +898,15 @@ sap.ui.define([
                             ctx.fillStyle = "yellow";
                         }
                         
-                        ctx.fillRect(rectX, rectY, 80, 26);
+                        ctx.fillRect(rectX, rectY, vScaleRatio*80, vScaleRatio*26);
                         if (this._scannedProd[index].movedIndicator) {
                             ctx.fillStyle = "white";
                         }else {
                             ctx.fillStyle = "black";
                         }
-                        ctx.font = "20px Calibri";
-                        ctx.fillText(this._scannedProd[index].pack_sequence, this._scannedProd[index].x + this._scannedProd[index].len / 2 - 10 * 288 / 720, this._scannedProd[index].y + 20 * 288 / 720 + this._scannedProd[index].hei + 13 + 10 * 288 / 720); //draw yellow rect below with the packing sequence 
+                        ctx.font = 20 * vScaleRatio + "px Calibri";
+                        vTextOffset = 10 * 288 * vScaleRatio / 720;
+                        ctx.fillText(this._scannedProd[index].pack_sequence, rectX + vScaleRatio * 40 - vTextOffset, rectY + vScaleRatio * 13 + vTextOffset); //draw yellow rect below with the packing sequence 
                     }
                     _drawedProd.push(this._scannedProd[index].prod)
 
@@ -907,8 +920,8 @@ sap.ui.define([
                 2, Turn on camera for scanning 
                 3, reset local JSON model, and reset the target to be scanned products from ODO 
                 */
-                this._canvas = this.getView().byId("canvasContainer");
-                this._canvas.setVisible(false);
+                this._canvasContainer = this.getView().byId("canvasContainer");
+                this._canvasContainer.setVisible(false);
 
                 this.barcodePicker.resumeScanning();
                 this.barcodePicker.setVisible(true);

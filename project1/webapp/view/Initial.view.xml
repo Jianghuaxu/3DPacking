@@ -59,7 +59,7 @@
                             </VBox>
                             <html:div id="scandit-barcode-picker" />
                             <VBox id='canvasContainer' visible="false">
-                                <html:canvas id="myCanvas1" width="512" height="288" />
+                                <html:canvas id="myCanvas1" width = "100%" height = "100%"/>
                             </VBox>
                             <Button id="triggerScanInputButton" icon="sap-icon://bar-code" press=".onScanInputButton" text="Scan product" width="90%" class="scanBtn" />
                             <HBox>
